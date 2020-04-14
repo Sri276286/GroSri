@@ -10,6 +10,12 @@
 # dependencies
 /node_modules
 
+# custom ignore content
+package-lock.json
+src/abc.html
+api/node_modules
+api/package-lock.json
+
 # profiling files
 chrome-profiler-events*.json
 speed-measure-plugin*.json

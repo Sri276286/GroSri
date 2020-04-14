@@ -1,0 +1,365 @@
+<!-- <div *ngFor="let item of items">
+  <h4>{{ item.name }}</h4>
+  <button (click)="removeItems(item)" [disabled]="item.quantity===0">-</button>
+  <span>{{ item.quantity }}</span>
+  <button (click)="addItems(item)">+</button>
+</div> -->
+
+<!-- <input class="form-control" style="text-align: center; border: 0px solid; background-color: #F8F9F9 ; font-weight: 600;"
+    type="text" placeholder="Catergory" readonly>
+
+<div class="serviceCatergory serviceCatergory--card ">
+    <a class="serviceCatergory__wrapper" data-test-id="plp-serviceCatergory">
+        <div class="plp-serviceCatergory">
+            <div class="plp-serviceCatergory__img">
+                <div class="img-loader__wrapper__wrapper">
+                    <div class="img-loader__wrapper">
+                        <img class="img-loader__img img-loader__img--shown img-loader__img--plp"
+                            style="max-width: 60%; max-height:60%;" alt="Tata Salt"
+                            src="/assets/images/image1.jfif" /><span
+                            class="img-loader__placeholder img-loader__placeholder--circle img-loader__img img-loader__img--hidden img-loader__placeholder--plp"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="serviceCatergory_name" style="margin-left: 10px; text-align: center;">
+                <h6 style="font-size: x-small;">Rice</h6>
+
+            </div>
+
+
+        </div>
+    </a>
+
+    <a class="serviceCatergory__wrapper" data-test-id="plp-serviceCatergory">
+        <div class="plp-serviceCatergory">
+            <div class="plp-serviceCatergory__img">
+                <div class="img-loader__wrapper__wrapper">
+                    <div class="img-loader__wrapper">
+                        <img class="img-loader__img img-loader__img--shown img-loader__img--plp"
+                            style="max-width: 60%; max-height:60%;" alt="Tata Salt"
+                            src="/assets/images/image2.jfif" /><span
+                            class="img-loader__placeholder img-loader__placeholder--circle img-loader__img img-loader__img--hidden img-loader__placeholder--plp"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="serviceCatergory_name" style="margin-left: 10px; text-align: center;">
+                <h6 style="font-size: x-small;">Personal care</h6>
+
+            </div>
+
+
+        </div>
+    </a>
+
+    <a class="serviceCatergory__wrapper" data-test-id="plp-serviceCatergory">
+        <div class="plp-serviceCatergory">
+            <div class="plp-serviceCatergory__img">
+                <div class="img-loader__wrapper__wrapper">
+                    <div class="img-loader__wrapper">
+                        <img class="img-loader__img img-loader__img--shown img-loader__img--plp"
+                            style="max-width: 60%; max-height:60%;" alt="Tata Salt"
+                            src="/assets/images/image2.jfif" /><span
+                            class="img-loader__placeholder img-loader__placeholder--circle img-loader__img img-loader__img--hidden img-loader__placeholder--plp"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="serviceCatergory_name" style="margin-left: 10px; text-align: center;">
+                <h6 style="font-size: x-small;">cleaning & Household</h6>
+
+            </div>
+
+
+        </div>
+    </a>
+    <a class="serviceCatergory__wrapper" data-test-id="plp-serviceCatergory">
+        <div class="plp-serviceCatergory">
+            <div class="plp-serviceCatergory__img">
+                <div class="img-loader__wrapper__wrapper">
+                    <div class="img-loader__wrapper">
+                        <img class="img-loader__img img-loader__img--shown img-loader__img--plp"
+                            style="max-width: 60%; max-height:60%;" alt="Tata Salt"
+                            src="/assets/images/image1.jfif" /><span
+                            class="img-loader__placeholder img-loader__placeholder--circle img-loader__img img-loader__img--hidden img-loader__placeholder--plp"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="serviceCatergory_name" style="margin-left: 10px; text-align: center; ">
+                <h6 style="font-size: x-small;">Foodgrains & oil</h6>
+            </div>
+
+
+        </div>
+    </a>
+    <a class="serviceCatergory__wrapper" data-test-id="plp-serviceCatergory">
+        <div class="plp-serviceCatergory">
+            <div class="plp-serviceCatergory__img">
+                <div class="img-loader__wrapper__wrapper">
+                    <div class="img-loader__wrapper">
+                        <img class="img-loader__img img-loader__img--shown img-loader__img--plp"
+                            style="max-width: 60%; max-height:60%;" alt="Tata Salt"
+                            src="/assets/images/image1.jfif" /><span
+                            class="img-loader__placeholder img-loader__placeholder--circle img-loader__img img-loader__img--hidden img-loader__placeholder--plp"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="serviceCatergory_name" style="margin-left: 10px; text-align: center;">
+                <h6 style="font-size: x-small;">Snacks</h6>
+
+            </div>
+
+
+        </div>
+    </a>
+    <a class="serviceCatergory__wrapper" data-test-id="plp-serviceCatergory">
+        <div class="plp-serviceCatergory">
+            <div class="plp-serviceCatergory__img">
+                <div class="img-loader__wrapper__wrapper">
+                    <div class="img-loader__wrapper">
+                        <img class="img-loader__img img-loader__img--shown img-loader__img--plp"
+                            style="max-width: 60%; max-height:60%;" alt="Tata Salt"
+                            src="/assets/images/image1.jfif" /><span
+                            class="img-loader__placeholder img-loader__placeholder--circle img-loader__img img-loader__img--hidden img-loader__placeholder--plp"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="serviceCatergory_name" style="margin-left: 10px; text-align: center;">
+                <h6 style="font-size: x-small;">Beverages</h6>
+
+            </div>
+
+
+        </div>
+    </a>
+</div> -->
+
+<div class="my-2">
+  <input
+    class="form-control"
+    style="
+      text-align: center;
+      border: 0px solid;
+      background-color: #f8f9f9;
+      font-weight: 600;
+    "
+    type="text"
+    placeholder="Catergory"
+    readonly
+  />
+
+  <ul class="_1bQ4u">
+    <li class="_35h7b">
+      <a
+        class="_34WAd B-aO0 rippleEffect"
+        context=""
+        href="/sp/2004230_foodgrains-oils/"
+        params=""
+      >
+        <span class="_3xjP6"> <!-- -->All</span></a
+      >
+    </li>
+    <li class="_35h7b">
+      <a
+        class="_34WAd B-aO0 rippleEffect"
+        context=""
+        href="/sp/2004230_foodgrains-oils/?filter_on=%5B%7B%22filter_slug%22%3A%22categories%22%2C%22values%22%3A%5B446%5D%7D%5D&amp;q_f_index=1"
+        params=""
+        ><span class="_3xjP6"> <!-- -->Hair Care</span></a
+      >
+    </li>
+    <li class="_35h7b">
+      <a
+        class="_34WAd B-aO0 rippleEffect"
+        context=""
+        href="/sp/2004230_foodgrains-oils/?filter_on=%5B%7B%22filter_slug%22%3A%22categories%22%2C%22values%22%3A%5B360%5D%7D%5D&amp;q_f_index=2"
+        params=""
+        ><span class="_3xjP6"> Tea</span></a
+      >
+    </li>
+    <li class="_35h7b">
+      <a
+        class="_34WAd B-aO0 rippleEffect"
+        context=""
+        href="/sp/2004230_foodgrains-oils/?filter_on=%5B%7B%22filter_slug%22%3A%22categories%22%2C%22values%22%3A%5B1447%5D%7D%5D&amp;q_f_index=3"
+        params=""
+        ><span class="_3xjP6"> Atta, Flours &amp; Sooji</span></a
+      >
+    </li>
+    <li class="_35h7b">
+      <a
+        class="_34WAd B-aO0 rippleEffect"
+        context=""
+        href="/sp/2004230_foodgrains-oils/?filter_on=%5B%7B%22filter_slug%22%3A%22categories%22%2C%22values%22%3A%5B500%5D%7D%5D&amp;q_f_index=4"
+        params=""
+        ><span class="_3xjP6"> Dals &amp; Pulses</span></a
+      >
+    </li>
+  </ul>
+</div>
+
+<div class="store-details">
+  <div class="h4">
+    Store1
+  </div>
+  <div class="p-2 h6">
+    Grocery
+  </div>
+</div>
+<hr />
+<!--Product List-->
+<div class="store-product-list">
+  <div class="accordion" id="productAccordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button
+            type="button"
+            class="btn btn-link"
+            data-toggle="collapse"
+            data-target="#collapseOne"
+          >
+            Grocery
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseOne"
+        class="collapse show"
+        aria-labelledby="headingOne"
+        data-parent="#productAccordion"
+      >
+        <div class="card-body">
+          <ng-container
+            *ngTemplateOutlet="displayItemsForCategory"
+          ></ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button
+            type="button"
+            class="btn btn-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+          >
+            Vegetables
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseTwo"
+        class="collapse"
+        aria-labelledby="headingTwo"
+        data-parent="#productAccordion"
+      >
+        <div class="card-body">
+          <ng-container
+            *ngTemplateOutlet="displayItemsForCategory"
+          ></ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <button
+            type="button"
+            class="btn btn-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseThree"
+          >
+            Fruits
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseThree"
+        class="collapse"
+        aria-labelledby="headingThree"
+        data-parent="#productAccordion"
+      >
+        <div class="card-body">
+          <ng-container
+            *ngTemplateOutlet="displayItemsForCategory"
+          ></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product List Ends Here-->
+
+<!--Items displayed-->
+<ng-template #displayItemsForCategory>
+  <div *ngFor="let item of items">
+    <div class="card">
+      <div class="row no-gutters">
+        <div class="col-4">
+          <img
+            src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
+            class="card-img"
+            alt="..."
+          />
+        </div>
+        <div class="col-8">
+          <div class="card-body">
+            <div>
+              <span class="card-title">Fresho</span> |
+              <span class="card-title">{{ item.name }}</span>
+            </div>
+            <div style="margin: 5px;">
+              <select
+                name="item-select"
+                id="item-select"
+                [ngModel]="item.weight"
+                (ngModelChange)="onWeightChange($event, item)"
+                [compareWith]="compareObjects"
+              >
+                <option
+                  [ngValue]="val.weight"
+                  *ngFor="let val of item.weights"
+                  >{{ val.weight }}</option
+                >
+              </select>
+            </div>
+            <div style="display: flex;">
+              <div style="flex-grow: 50%; margin-right: 1.5em;">
+                <span class="h6" name="item-price" [(ngModel)]="item.price" ngDefaultControl
+                  >Rs. {{ item.price }}</span
+                >
+              </div>
+              <div style="flex-grow: 50%;">
+                <div *ngIf="!item.quantity">
+                  <button
+                    class="btn btn-secondary btn-info"
+                    (click)="addItems(item)"
+                  >
+                    ADD+
+                  </button>
+                </div>
+                <div *ngIf="item.quantity">
+                  <button
+                    class="btn btn-secondary btn-info"
+                    (click)="removeItems(item)"
+                  >
+                    -
+                  </button>
+                  <span style="border: 1px solid grey; padding: 5px 6px;">{{
+                    item.quantity
+                  }}</span>
+                  <button
+                    class="btn btn-secondary btn-info"
+                    (click)="addItems(item)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
