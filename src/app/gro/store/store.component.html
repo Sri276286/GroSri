@@ -293,68 +293,75 @@
 <!--Items displayed-->
 <ng-template #displayItemsForCategory>
   <div *ngFor="let item of items">
-    <div class="card">
-      <div class="row no-gutters">
-        <div class="col-4">
+    <div class="card" style="margin-top: 10px;">
+      <div class="row" style="padding: 10px;">
+        <div class="col-3 no-right-padding">
           <img
             src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
-            class="card-img"
-            alt="..."
+            class="img-fluid"
+            alt="Sample image"
           />
         </div>
-        <div class="col-8">
-          <div class="card-body">
-            <div>
-              <span class="card-title">Fresho</span> |
-              <span class="card-title">{{ item.name }}</span>
+        <div class="col-9">
+          <div>
+            <h6>
+              {{ item.name }}
+            </h6>
+            <h6 style="font-size: small; font-weight: 400;">
+              Brand Name with grams
+            </h6>
+          </div>
+          <div style="margin: 5px;">
+            <select
+              name="item-select"
+              id="item-select"
+              [ngModel]="item.weight"
+              (ngModelChange)="onWeightChange($event, item)"
+              [compareWith]="compareObjects"
+            >
+              <option [ngValue]="val.weight" *ngFor="let val of item.weights">{{
+                val.weight
+              }}</option>
+            </select>
+          </div>
+          <div style="display: flex;">
+            <div class="item_li_price">
+              <h5 name="item-price" [(ngModel)]="item.price" ngDefaultControl>
+                Rs.{{item.price}}
+              </h5>
             </div>
-            <div style="margin: 5px;">
-              <select
-                name="item-select"
-                id="item-select"
-                [ngModel]="item.weight"
-                (ngModelChange)="onWeightChange($event, item)"
-                [compareWith]="compareObjects"
-              >
-                <option
-                  [ngValue]="val.weight"
-                  *ngFor="let val of item.weights"
-                  >{{ val.weight }}</option
+            <div style="flex-grow: 50%;">
+              <div *ngIf="!item.quantity">
+                <button
+                  class="btn btn-secondary btn-info"
+                  (click)="addItems(item)"
                 >
-              </select>
-            </div>
-            <div style="display: flex;">
-              <div style="flex-grow: 50%; margin-right: 1.5em;">
-                <span class="h6" name="item-price" [(ngModel)]="item.price" ngDefaultControl
-                  >Rs. {{ item.price }}</span
-                >
+                  ADD+
+                </button>
               </div>
-              <div style="flex-grow: 50%;">
-                <div *ngIf="!item.quantity">
-                  <button
-                    class="btn btn-secondary btn-info"
-                    (click)="addItems(item)"
-                  >
-                    ADD+
-                  </button>
-                </div>
-                <div *ngIf="item.quantity">
-                  <button
-                    class="btn btn-secondary btn-info"
-                    (click)="removeItems(item)"
-                  >
-                    -
-                  </button>
-                  <span style="border: 1px solid grey; padding: 5px 6px;">{{
-                    item.quantity
-                  }}</span>
-                  <button
-                    class="btn btn-secondary btn-info"
-                    (click)="addItems(item)"
-                  >
-                    +
-                  </button>
-                </div>
+              <div *ngIf="item.quantity">
+                <button
+                  class="minus_plus_but border border-danger rounded"
+                  style="color: darkred;"
+                  (click)="removeItems(item)"
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  class="miuns_plus_input"
+                  placeholder="1"
+                  id="p_10000097"
+                  [value]="item.quantity"
+                  maxlength="2"
+                />
+                <button
+                  class="minus_plus_but border border-success rounded"
+                  style="color: rgb(7, 119, 7);"
+                  (click)="addItems(item)"
+                >
+                  +
+                </button>
               </div>
             </div>
           </div>

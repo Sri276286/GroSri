@@ -1,35 +1,70 @@
 <div *ngIf="_cartService.cartItems.length">
-  <div *ngFor="let item of _cartService.cartItems">
-    <div class="card">
-      <div class="row no-gutters">
-        <div class="col-4">
-          <img
-            src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
-            class="card-img"
-            alt="..."
-          />
-        </div>
-        <div class="col-8">
-          <div class="card-body">
+  <div style="background-color: #f8f9f9; padding: 10px; padding-top: 0px;">
+    <input
+      class="form-control item_li_input"
+      type="text"
+      placeholder="Vegetables"
+    />
+    <div *ngFor="let item of _cartService.cartItems">
+      <div class="card" style="margin-top: 10px;">
+        <div class="row" style="padding: 10px;">
+          <div class="col-3 no-right-padding">
+            <img
+              src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
+              class="img-fluid"
+              alt="Sample image"
+            />
+          </div>
+          <div class="col-9">
             <div>
-              <span class="card-title">Fresho</span> |
-              <span class="card-title">{{item.name}}</span>
+              <h6>
+                {{ item.name }}
+              </h6>
+              <h6 style="font-size: small; font-weight: 400;">
+                Brand Name with grams
+              </h6>
             </div>
-            <div style="margin:5px;">
-              <span>{{item.weight}}</span>
+            <div style="margin: 5px;">
+              <span>{{ item.weight }}</span>
             </div>
             <div style="display: flex;">
-              <div style="flex-grow: 50%; margin-right: 1.5em;">
-                <span class="h6">Rs. {{item.price}}</span>
+              <div class="item_li_price">
+                <h5 name="item-price" [(ngModel)]="item.price" ngDefaultControl>
+                  Rs.{{ item.price }}
+                </h5>
               </div>
-              <div style="flex-grow: 50%">
+              <div style="flex-grow: 50%;">
                 <div *ngIf="!item.quantity">
-                  <button class="btn btn-secondary btn-info" (click)="addItems(item)">ADD+</button>
+                  <button
+                    class="btn btn-secondary btn-info"
+                    (click)="addItems(item)"
+                  >
+                    ADD+
+                  </button>
                 </div>
                 <div *ngIf="item.quantity">
-                  <button class="btn btn-secondary btn-info" (click)="removeItems(item)">-</button>
-                  <span style="border: 1px solid grey; padding: 5px 6px;">{{item.quantity}}</span>
-                  <button class="btn btn-secondary btn-info" (click)="addItems(item)">+</button>
+                  <button
+                    class="minus_plus_but border border-danger rounded"
+                    style="color: darkred;"
+                    (click)="removeItems(item)"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    class="miuns_plus_input"
+                    placeholder="1"
+                    id="p_10000097"
+                    [value]="item.quantity"
+                    maxlength="2"
+                  />
+                  <button
+                    class="minus_plus_but border border-success rounded"
+                    style="color: rgb(7, 119, 7);"
+                    (click)="addItems(item)"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
@@ -38,5 +73,20 @@
       </div>
     </div>
   </div>
+  <!-- footer -->
+  <footer
+    id="footer-checkout"
+    class="footer-checkout"
+    style="border-top: 1px solid #777;"
+  >
+    <div class="footer-flex-container-checkout">
+      <div class="flex-item-checkout">
+        <span> Rs 2261 </span>
+        <!-- <span style="color: rgb(132, 194, 37);">Saved Rs 331.5</span> -->
+      </div>
+      <div class="flex-item-checkout-button">
+        <span>CHECKOUT</span>
+      </div>
+    </div>
+  </footer>
 </div>
-
