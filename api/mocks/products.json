@@ -1,0 +1,49 @@
+[
+  {
+    "_id": "5e9565bacc8ff931e4929429",
+    "id": "1",
+    "name": "Item1",
+    "quantity": 0,
+    "price": 55,
+    "__v": 0,
+    "weights": [
+      { "weight": "1 kg", "price": "50" },
+      { "weight": "2 kg", "price": "99" },
+      { "weight": "5 kg", "price": "245" },
+      { "weight": "25 kg", "price": "1230" }
+    ],
+    "weight": "1 kg"
+  },
+  {
+    "_id": "5e957e0feec6ed1130155acb",
+    "id": "2",
+    "name": "Item2",
+    "quantity": 0,
+    "price": 55,
+    "__v": 0
+  },
+  {
+    "_id": "5e957e15eec6ed1130155acc",
+    "id": "3",
+    "name": "Item3",
+    "quantity": 0,
+    "price": 55,
+    "__v": 0
+  },
+  {
+    "_id": "5e957e1ceec6ed1130155acd",
+    "id": "4",
+    "name": "Item4",
+    "quantity": 0,
+    "price": 55,
+    "__v": 0
+  },
+  {
+    "_id": "5e957e27eec6ed1130155ace",
+    "id": "5",
+    "name": "Item5",
+    "quantity": 0,
+    "price": 55,
+    "__v": 0
+  }
+]

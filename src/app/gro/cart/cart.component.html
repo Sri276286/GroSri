@@ -30,7 +30,7 @@
             <div style="display: flex;">
               <div class="item_li_price">
                 <h5 name="item-price" [(ngModel)]="item.price" ngDefaultControl>
-                  Rs.{{ item.price }}
+                  Rs.{{ item.price * item.quantity }}
                 </h5>
               </div>
               <div style="flex-grow: 50%;">
@@ -81,11 +81,11 @@
   >
     <div class="footer-flex-container-checkout">
       <div class="flex-item-checkout">
-        <span> Rs 2261 </span>
+        <span> Rs. {{ _cartService.cartTotal }}</span>
         <!-- <span style="color: rgb(132, 194, 37);">Saved Rs 331.5</span> -->
       </div>
       <div class="flex-item-checkout-button">
-        <span>CHECKOUT</span>
+        <span (click)="placeOrder()">CHECKOUT</span>
       </div>
     </div>
   </footer>

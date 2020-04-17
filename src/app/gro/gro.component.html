@@ -77,7 +77,12 @@
       <div class="modal-body">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link">My Orders</a>
+            <a
+              class="nav-link"
+              [routerLink]="['order']"
+              data-dismiss="modal"
+              >My Orders</a
+            >
           </li>
           <li class="nav-item active">
             <a class="nav-link">My Addresses</a>
@@ -111,7 +116,7 @@
           <div class="col-10">
             <div style="width: 100%;">
               <form class="form-inline my-1 my-lg-0">
-                <div style="width:100%">
+                <div style="width: 100%;">
                   <input
                     class="form-control"
                     type="search"

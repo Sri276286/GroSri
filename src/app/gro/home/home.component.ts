@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'gro-home',
@@ -10,10 +8,7 @@ import { CartService } from '../services/cart.service';
 export class GroHomeComponent {
   title = 'grosri';
 
-  constructor(private _cartService: CartService) {
-    this._cartService.getItems().subscribe((items) => {
-      console.log('items ', items);
-    });
+  constructor() {
   }
 
   detect() {

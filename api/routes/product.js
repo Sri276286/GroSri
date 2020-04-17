@@ -4,6 +4,8 @@ const router = express.Router();
 
 const Product = require('../models/product');
 
+const mockProducts = require('../mocks/products.json');
+
 // const itemOne = Product({
 //   "id": "1",
 //   "name": "Item1",
@@ -20,10 +22,11 @@ const json = bodyParser.json();
 
 
 router.get('/products', (req, res) => {
-  Product.find({}, (err, data) => {
-    if (err) throw err;
-    res.json(data);
-  });
+  // Product.find({}, (err, data) => {
+  //   if (err) throw err;
+  //   res.json(data);
+  // });
+  res.json(mockProducts);
 });
 
 router.post('/products', urlEncodedParser, json, (req, res) => {

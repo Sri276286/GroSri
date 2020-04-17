@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../services/cart.service';
 import { Subscription } from 'rxjs';
+import { StoreItemsService } from '../services/store-items.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'gro-store',
@@ -11,13 +12,15 @@ export class GroStoreComponent implements OnInit {
   items = [];
   // selectedWeight: string = '1 kg';
   private _subscriptions: Subscription[] = [];
-  constructor(private _cartService: CartService) {
+  constructor(private _storeItemsService: StoreItemsService,
+    private _cartService: CartService) {
   }
 
   ngOnInit() {
     this._subscriptions.push(
-      this._cartService.getItems()
+      this._storeItemsService.getItems()
         .subscribe((items: any) => {
+          console.log('items ', items)
           this.items = items;
         })
     );

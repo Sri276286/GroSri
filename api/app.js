@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
 const productRouter = require('./routes/product');
+const orderRouter = require('./routes/order');
 const app = express();
 
 // connect to database
@@ -27,4 +28,5 @@ app.listen(3000, () => {
 });
 
 app.use('/api', productRouter);
+app.use('/api', orderRouter);
 module.exports = app;

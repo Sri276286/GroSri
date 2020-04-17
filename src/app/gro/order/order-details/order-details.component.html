@@ -1,0 +1,43 @@
+<div style="background-color: #f8f9f9; padding: 10px; padding-top: 0px;">
+  <input
+    class="form-control item_li_input"
+    type="text"
+    placeholder="Vegetables"
+  />
+  <div *ngFor="let item of items">
+    <div class="card" style="margin-top: 10px;">
+      <div class="row" style="padding: 10px;">
+        <div class="col-3 no-right-padding">
+          <img
+            src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
+            class="img-fluid"
+            alt="Sample image"
+          />
+        </div>
+        <div class="col-9">
+          <div>
+            <h6>
+              {{ item.name }}
+            </h6>
+            <h6 style="font-size: small; font-weight: 400;">
+              Brand Name with grams
+            </h6>
+          </div>
+          <div style="margin: 5px;">
+            <span>{{ item.weight }}</span>
+          </div>
+          <div style="display: flex;">
+            <div>
+              <h5 name="item-price">Rs.{{ item.price }}</h5>
+            </div>
+          </div>
+          <div style="display: flex;">
+            <div>
+              <h5 name="item-quantity">Quantity.{{ item.quantity }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

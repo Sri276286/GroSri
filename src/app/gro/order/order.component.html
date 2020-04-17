@@ -1,0 +1,8 @@
+<h1>Order Page</h1>
+<ng-container *ngFor="let order of _service.ordersPlaced">
+  <div style="border: 1px solid grey;" [routerLink]="['/order',order.orderId]">
+    <div>{{order.orderId}}</div>
+    <div>{{order.totalPrice}}</div>
+  </div>
+</ng-container>
+

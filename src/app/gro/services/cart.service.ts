@@ -2,18 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class CartService {
   cartItems = [];
   cartQuantity = 0;
+  cartTotal = 0;
 
   constructor(private _http: HttpClient) {
 
-  }
-
-  getItems() {
-    return this._http.get('/api/products');
   }
 
   addItems(item) {
@@ -45,8 +42,17 @@ export class CartService {
         this.cartQuantity--;
       }
     }
+    this.cartTotal += item.price;
     this.cartItems = items;
     console.log('cart items ', this.cartItems);
+  }
+
+  getOrders() {
+    return this._http.get('/api/orders');
+  }
+
+  placeOrder(order) {
+    return this._http.post('/api/order', order);
   }
 
 }

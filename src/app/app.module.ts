@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { GroHomeComponent } from './gro/home/home.component';
 import { GroStoreComponent } from './gro/store/store.component';
 import { GroCartComponent } from './gro/cart/cart.component';
+import { GroOrderComponent } from './gro/order/order.component';
+import { GroOrderDetailsComponent } from './gro/order/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { GroCartComponent } from './gro/cart/cart.component';
     GroComponent,
     GroHomeComponent,
     GroStoreComponent,
-    GroCartComponent
+    GroCartComponent,
+    GroOrderComponent,
+    GroOrderDetailsComponent
   ],
   imports: [
     BrowserModule,
