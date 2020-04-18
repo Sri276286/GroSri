@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GroHomeComponent } from './gro/home/home.component';
-import { GroStoreComponent } from './gro/store/store.component';
-import { GroCartComponent } from './gro/cart/cart.component';
-import { GroOrderComponent } from './gro/order/order.component';
-import { GroOrderDetailsComponent } from './gro/order/order-details/order-details.component';
+import { GroHomeComponent } from './gro/components/home/home.component';
+import { GroStoreComponent } from './gro/components/store/store.component';
+import { GroCartComponent } from './gro/components/cart/cart.component';
+import { GroOrderComponent } from './gro/components/order/order.component';
+import { GroOrderDetailsComponent } from './gro/components/order/order-details/order-details.component';
 
 const routes: Routes = [
   { path: 'home', component: GroHomeComponent },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { StoreItemsService } from '../services/store-items.service';
-import { CartService } from '../services/cart.service';
+import { StoreItemsService } from '../../services/store-items.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'gro-store',

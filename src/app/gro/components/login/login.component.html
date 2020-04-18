@@ -1,0 +1,120 @@
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="loginModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content login_card">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalTitle">Log In</h5>
+        <button
+          type="button"
+          class="close login_close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form [formGroup]="myLoginForm">
+            <span
+              class="error_text"
+              *ngIf="
+                myLoginForm.get('username').errors?.required &&
+                (myLoginForm.get('username').touched ||
+                  myLoginForm.get('username').dirty)
+              "
+            >
+              Mobile number is required
+            </span>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text loginspan"
+                  ><i class="fa fa-user fa"></i
+                ></span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                type="text"
+                formControlName="username"
+                placeholder="Mobile Num. / Email"
+                [ngClass]="{
+                  'is-invalid':
+                    (myLoginForm.get('username').touched ||
+                      myLoginForm.get('username').dirty) &&
+                    myLoginForm.get('username').errors
+                }"
+              />
+            </div>
+            <span
+              class="error_text"
+              *ngIf="
+                myLoginForm.get('lpassword').errors?.required &&
+                (myLoginForm.get('lpassword').touched ||
+                  myLoginForm.get('lpassword').dirty)
+              "
+            >
+              Password is required
+            </span>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text loginspan"
+                  ><i class="fa fa-lock"></i
+                ></span>
+              </div>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="lpassword"
+                placeholder="password"
+                [ngClass]="{
+                  'is-invalid':
+                    (myLoginForm.get('lpassword').touched ||
+                      myLoginForm.get('lpassword').dirty) &&
+                    myLoginForm.get('lpassword').errors
+                }"
+              />
+            </div>
+            <!-- <div class="row align-items-center remember">
+              <input type="checkbox" />Remember Me
+            </div> -->
+            <div class="form-group">
+              <input
+                type="submit"
+                value="Login"
+                [disabled]="myLoginForm.pristine || myLoginForm.invalid"
+                class="btn float-right login_btn"
+                data-dismiss="modal"
+                (click)="checkLogin()"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Don't have an account?
+            <button
+              type="button"
+              class="btn btn-link"
+              style="padding-left: 10px;"
+              data-dismiss="modal"
+              data-toggle="modal"
+              data-target="#signupModal"
+            >
+              Sign Up
+            </button>
+          </div>
+          <div class="d-flex justify-content-center">
+            <a href="#">Forgot your password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

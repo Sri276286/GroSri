@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OrderService } from '../../services/order.service';
+import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'gro-order-details',
