@@ -1,0 +1,20 @@
+[
+  {
+    "userId": "123",
+    "name": "Nanba",
+    "username": "9876543210",
+    "mobile": "9876543210",
+    "email": "abc@gmail.com",
+    "password": "Test@123",
+    "role": "user"
+  },
+  {
+    "userId": "456",
+    "name": "Nanba S",
+    "username": "9765432108",
+    "mobile": "9765432108",
+    "email": "def@gmail.com",
+    "password": "Test@456",
+    "role": "seller"
+  }
+]

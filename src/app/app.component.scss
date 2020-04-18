@@ -1,6 +1,31 @@
 .container {
-  margin: 0;
+  margin-bottom: 20%;
   padding: 0;
   max-width: 100%;
   background-color: whitesmoke;
+}
+
+.footer-grid {
+  display: flex;
+  position: fixed;
+  background: white;
+  padding: 10px;
+  bottom: 0%;
+  width: 100%;
+}
+
+.footer-home {
+  flex: 1 1 auto;
+  color: grey;
+  border-right: 1px solid grey;
+}
+
+.footer-search {
+  flex: 1 1 auto;
+  color: grey;
+  border-right: 1px solid grey;
+}
+.footer-cart {
+  flex: 1 1 auto;
+  color: grey;
 }

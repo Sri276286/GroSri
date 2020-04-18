@@ -3,6 +3,7 @@ const config = require('config');
 const mongoose = require('mongoose');
 const productRouter = require('./routes/product');
 const orderRouter = require('./routes/order');
+const userRouter = require('./routes/user');
 const app = express();
 
 // connect to database
@@ -29,4 +30,5 @@ app.listen(3000, () => {
 
 app.use('/api', productRouter);
 app.use('/api', orderRouter);
+app.use('/api', userRouter);
 module.exports = app;

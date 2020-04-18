@@ -13,10 +13,12 @@ import { LocationComponent } from './components/location/location.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     GroComponent,
+    HeaderComponent,
     GroHomeComponent,
     GroStoreComponent,
     GroCartComponent,

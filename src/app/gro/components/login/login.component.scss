@@ -1,28 +1,10 @@
-.login_card {
-  height: 370px;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 400px;
-  background-color: #150f23;
-  color: white;
+.login_container {
+  background: black;
+  margin: auto;
+  padding-top: 40%;
+  padding-bottom: 30%;
 }
 
-.login_close {
-  color: white;
-  opacity: unset;
-}
-
-// .remember{
-//   color: white;
-//   }
-
-//   .remember input
-//   {
-//   width: 20px;
-//   height: 20px;
-//   margin-left: 15px;
-//   margin-right: 5px;
-//   }
 
 .login_btn {
   color: black;
@@ -38,7 +20,7 @@
 }
 
 .links {
-  color: white;
+  color: black;
 }
 
 .links a {

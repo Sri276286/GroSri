@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'gro-menu',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['menu.component.scss']
 })
 export class MenuComponent {
+  user;
+  constructor(private _loginService: LoginService) {
+    this.user = _loginService.currentUserValue;
+  }
 
+  logout() {
+    localStorage.clear();
+  }
 }

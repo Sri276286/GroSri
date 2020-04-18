@@ -9,48 +9,43 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="menuModalLabel">Hello User</h5>
+        <h5 class="modal-title" id="menuModalLabel" *ngIf="user">Hello {{user.name}}</h5>
         <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+        type="button"
+        class="btn btn-primary"
+        data-dismiss="modal"
+        [routerLink]="['/login']"
+        *ngIf="!user"
+      >
+        Login
+      </button>
+      <button
+      type="button"
+      class="btn btn-primary"
+      data-dismiss="modal"
+      [routerLink]="['/signup']"
+      *ngIf="!user"
+    >
+      SignUp
+    </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="user">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['order']" data-dismiss="modal"
+            <a class="nav-link" [routerLink]="['/order']" data-dismiss="modal"
               >My Orders</a
             >
           </li>
           <li class="nav-item active">
-            <a class="nav-link">My Addresses</a>
+            <a class="nav-link" [routerLink]="['/cart']" data-dismiss="modal">My Cart</a>
           </li>
         </ul>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" *ngIf="user">
         <button
           type="button"
           class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#loginModal"
-          data-dismiss="modal"
-          data-backdrop="static"
-          data-keyboard="false"
-        >
-          Login
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#signupModal"
-          data-dismiss="modal"
-          data-backdrop="static"
-          data-keyboard="false"
+          (click)="logout()"
         >
           Logout
         </button>
@@ -59,10 +54,3 @@
   </div>
 </div>
 
-<!-- Login Modal -->
-<gro-login></gro-login>
-<!-- Login Modal Ends Here -->
-
-<!-- Signup Modal -->
-<gro-signup></gro-signup>
-<!-- Signup Modal Ends Here -->

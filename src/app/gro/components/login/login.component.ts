@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gro-login',
@@ -12,13 +13,14 @@ export class LoginComponent implements OnInit {
   myLoginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private _loginService: LoginService) {
+    private _loginService: LoginService,
+    private route: Router) {
   }
 
   ngOnInit() {
     this.myLoginForm = this.fb.group({
       username: ["", Validators.required],
-      lpassword: ["", Validators.required]
+      password: ["", Validators.required]
     });
   }
 
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
       this._loginService.doLogin(this.myLoginForm).subscribe(
         res => {
           console.error("success!!")
-          // this.route.navigate(['/profile']);
+          this.route.navigate(['/home']);
         },
         error => {
           console.log(error);

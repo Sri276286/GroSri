@@ -1,0 +1,21 @@
+.gro-title,
+.gro-location,
+.gro-login,
+.gro-cart {
+  padding: 1em;
+}
+
+.gro-search {
+  padding: 1em;
+  flex-grow: 2;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.location-div .location-content {
+  white-space: nowrap;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

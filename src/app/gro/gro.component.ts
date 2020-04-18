@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { CartService } from './services/cart.service';
-import { getLocaleDirection } from '@angular/common';
 
 @Component({
-  selector: 'gro-header',
+  selector: 'gro-base',
   templateUrl: './gro.component.html',
   styleUrls: ['./gro.component.scss']
 })
 export class GroComponent {
-  cartQuantity = 0;
   location: string;
 
-  constructor(public _cartService: CartService) {
+  constructor() {
     // this.getLocation();
   }
 
