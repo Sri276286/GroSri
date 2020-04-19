@@ -4,13 +4,15 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class StoreItemsService {
+export class StoreService {
 
+  storesListed = [];
   constructor(private _http: HttpClient) {
 
   }
 
-  getItems(id) {
-    return this._http.get(`/api/products/${id}`);
+  getStores() {
+    return this._http.get('/api/stores');
   }
+
 }

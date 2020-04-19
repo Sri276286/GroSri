@@ -1,61 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <div class="row">
-      <div class="menu-div col-3">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="modal"
-          data-target="#menuModal"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="location-div col-6">
-        <div
-          class="location-content"
-          data-toggle="modal"
-          data-target="#locationModal"
-        >
-          <i class="fas fa-map-marker-alt"></i>
-          {{ "Select Location" }}
-        </div>
-      </div>
-      <div class="cart-div col-3">
-        <button
-          class="btn btn-primary float-right"
-          type="button"
-          [routerLink]="['/cart']"
-        >
-          <i class="fas fa-shopping-cart">
-            <span *ngIf="_cartService.cartQuantity">{{
-              _cartService.cartQuantity
-            }}</span></i
-          >
-          <!-- Cart -->
-        </button>
-      </div>
-    </div>
-
-    <div style="width: 100%;">
-      <form class="form-inline my-1 my-lg-0">
-        <div style="width: 100%;">
-          <input
-            class="form-control"
-            type="search"
-            placeholder="Search for Stores Or Products"
-            aria-label="Search"
-          />
-        </div>
-      </form>
-    </div>
+<div class="header-grid">
+  <div class="menu-grid" data-toggle="modal" data-target="#menuModal">
+    <i class="fas fa-bars"></i>
   </div>
-</nav>
+  <div class="location-grid" data-toggle="modal" data-target="#locationModal">
+    <i class="fas fa-map-marker-alt"></i><span>Select Location</span>
+  </div>
+  <div class="account-grid" data-toggle="modal" data-target="#accountModal">
+    <i class="far fa-user-circle"></i>
+  </div>
+</div>
 
 <!-- Menu Modal -->
 <gro-menu></gro-menu>
 <!-- Menu Modal Ends Here -->
 
 <!-- Location Modal -->
-  <gro-location></gro-location>
-<!-- Menu Modal Ends Here -->
+<gro-location></gro-location>
+<!-- Location Modal Ends Here -->

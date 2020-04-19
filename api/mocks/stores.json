@@ -1,0 +1,74 @@
+{
+  "Store_list": [
+    {
+      "id": "s1233",
+      "storeName": "Pibean Shop",
+      "storeImg": "aws_path",
+      "storeType": "grocery",
+      "storeArea": "perungudi",
+      "storeCity": "Chennai",
+      "storeState": "TamilNadu",
+      "kms": "1km",
+      "expectedDeliveryTime": "90mins",
+      "Review": "4",
+      "deliveryMethod": "YES",
+      "supplies": "Grocery - Rice, Dal and others"
+    },
+    {
+      "id": "s1234",
+      "storeName": "Pibean Shop1",
+      "storeImg": "aws_path",
+      "storeType": "grocery",
+      "storeArea": "perungudi",
+      "storeCity": "Chennai",
+      "storeState": "TamilNadu",
+      "kms": "1km",
+      "expectedDeliveryTime": "90mins",
+      "Review": "4",
+      "deliveryMethod": "YES",
+      "supplies": "Grocery - Rice, Dal and others"
+    },
+    {
+      "id": "s1235",
+      "storeName": "Pibean Shop2",
+      "storeImg": "aws_path",
+      "storeType": "vegetables",
+      "storeArea": "perungudi",
+      "storeCity": "Chennai",
+      "storeState": "TamilNadu",
+      "kms": "1km",
+      "expectedDeliveryTime": "90mins",
+      "Review": "4",
+      "deliveryMethod": "YES",
+      "supplies": "Vegetables - Tomato, Onions, Beans"
+    },
+    {
+      "id": "s1236",
+      "storeName": "Pibean Shop3",
+      "storeImg": "aws_path",
+      "storeType": "vegetables",
+      "storeArea": "perungudi",
+      "storeCity": "Chennai",
+      "storeState": "TamilNadu",
+      "kms": "1km",
+      "expectedDeliveryTime": "90mins",
+      "Review": "4",
+      "deliveryMethod": "YES",
+      "supplies": "Vegetables - Tomato, Onions, Beans"
+    },
+    {
+      "id": "s1237",
+      "storeName": "Pibean Shop4",
+      "storeImg": "aws_path",
+      "storeType": "vegetables",
+      "storeArea": "perungudi",
+      "storeCity": "Chennai",
+      "storeState": "TamilNadu",
+      "kms": "1km",
+      "expectedDeliveryTime": "90mins",
+      "Review": "4",
+      "deliveryMethod": "YES",
+      "supplies": "Vegetables - Tomato, Onions, Beans"
+    }
+  ]
+}

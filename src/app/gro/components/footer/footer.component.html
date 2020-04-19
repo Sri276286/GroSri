@@ -1,0 +1,26 @@
+<div class="btn-group footer-grid" role="group" aria-label="Button Group">
+  <button
+    type="button"
+    class="btn btn-link footer-home"
+    [routerLink]="['/home']"
+  >
+    Home
+  </button>
+  <button
+    type="button"
+    class="btn btn-link footer-search"
+    data-toggle="modal"
+    data-target="#searchModal"
+  >
+    Search
+  </button>
+  <button
+    type="button"
+    class="btn btn-link footer-cart"
+    [routerLink]="['/cart']"
+  >
+    Cart
+  </button>
+</div>
+
+<gro-search></gro-search>

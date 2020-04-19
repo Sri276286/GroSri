@@ -14,6 +14,10 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { GroStoreDetailComponent } from './components/store/store-details/store-detail.component';
+import { CategoryComponent } from './components/category/category.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +25,17 @@ import { HeaderComponent } from './components/header/header.component';
     HeaderComponent,
     GroHomeComponent,
     GroStoreComponent,
+    GroStoreDetailComponent,
     GroCartComponent,
     GroOrderComponent,
     GroOrderDetailsComponent,
     LoginComponent,
     SignupComponent,
     LocationComponent,
-    MenuComponent
+    MenuComponent,
+    CategoryComponent,
+    FooterComponent,
+    SearchComponent
   ],
   exports: [
     GroComponent,

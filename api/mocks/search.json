@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "storeId": "s1233",
+    "name": "Pibean Shop"
+  },
+  {
+    "id": 2,
+    "storeId": "s1234",
+    "name": "Pibean Shop1"
+  },
+  {
+    "id": 3,
+    "storeId": "s1235",
+    "name": "Pibean Shop2"
+  },
+  {
+    "id": 4,
+    "storeId": "s1236",
+    "name": "Pibean Shop3"
+  },
+  {
+    "id": 5,
+    "storeId": "s1237",
+    "name": "Pibean Shop4"
+  },
+  {
+    "id": 6,
+    "categoryId": "s9999",
+    "name": "Rice"
+  },
+  {
+    "id": 7,
+    "categoryId": "s9998",
+    "name": "Dal & Pulses"
+  },
+  {
+    "id": 8,
+    "categoryId": "s9997",
+    "name": "Vegetables"
+  },
+  {
+    "id": 9,
+    "categoryId": "s9996",
+    "name": "Fruits"
+  }
+]

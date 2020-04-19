@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'gro-header',
@@ -8,5 +7,5 @@ import { CartService } from '../../services/cart.service';
 })
 export class HeaderComponent {
 
-  constructor(public _cartService: CartService) {}
+  constructor() {}
 }
