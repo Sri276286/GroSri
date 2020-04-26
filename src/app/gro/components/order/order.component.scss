@@ -1,0 +1,32 @@
+.shop_location_date {
+  font-weight: 400;
+  font-size: small;
+  line-height: 1;
+}
+
+/* Dotted red border */
+
+.hr_dashed {
+  margin-top: 5px;
+  border-top: 1px dashed;
+}
+
+.report_a {
+  background: #ee3962;
+  color: #fff;
+}
+
+.reorder_report_a {
+  width: 120px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 20px;
+  line-height: 40px;
+  height: 40px;
+  color: #ee3962;
+  border: 1px solid #ee3962;
+  padding: 0 15px;
+}

@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class GroStoreDetailComponent implements OnInit {
   items = [];
   storeProduct;
+  toggle = false;
   // selectedWeight: string = '1 kg';
   private _subscriptions: Subscription[] = [];
   constructor(private _storeItemsService: StoreItemsService,
@@ -34,7 +35,6 @@ export class GroStoreDetailComponent implements OnInit {
             console.log('value ', storeItemsEntity[category]);
             for (let sub in storeItemsEntity[category]) {
               this.items = [...this.items, ...storeItemsEntity[category][sub]];
-
             }
           }
           console.log('items after', this.items)

@@ -209,75 +209,29 @@
 <!--Product List-->
 <div class="store-product-list">
   <div class="accordion" id="productAccordion">
-    <div class="card">
+    <div
+      class="card"
+      *ngFor="let item of storeProduct | keyvalue; let j = index"
+    >
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
           <button
             type="button"
             class="btn btn-link"
+            [ngClass]="{ collapsed: toggle }"
             data-toggle="collapse"
-            data-target="#collapseOne"
+            [attr.data-target]="'#' + j"
+            (click)="toggle = !toggle"
           >
-            Grocery
+            {{ item.key }}
           </button>
         </h2>
       </div>
       <div
-        id="collapseOne"
+        [attr.id]="j"
         class="collapse show"
+        [ngClass]="{ show: !toggle }"
         aria-labelledby="headingOne"
-        data-parent="#productAccordion"
-      >
-        <div class="card-body">
-          <ng-container
-            *ngTemplateOutlet="displayItemsForCategory"
-          ></ng-container>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h2 class="mb-0">
-          <button
-            type="button"
-            class="btn btn-link collapsed"
-            data-toggle="collapse"
-            data-target="#collapseTwo"
-          >
-            Vegetables
-          </button>
-        </h2>
-      </div>
-      <div
-        id="collapseTwo"
-        class="collapse"
-        aria-labelledby="headingTwo"
-        data-parent="#productAccordion"
-      >
-        <div class="card-body">
-          <ng-container
-            *ngTemplateOutlet="displayItemsForCategory"
-          ></ng-container>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingThree">
-        <h2 class="mb-0">
-          <button
-            type="button"
-            class="btn btn-link collapsed"
-            data-toggle="collapse"
-            data-target="#collapseThree"
-          >
-            Fruits
-          </button>
-        </h2>
-      </div>
-      <div
-        id="collapseThree"
-        class="collapse"
-        aria-labelledby="headingThree"
         data-parent="#productAccordion"
       >
         <div class="card-body">
