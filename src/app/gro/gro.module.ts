@@ -18,6 +18,7 @@ import { GroStoreDetailComponent } from './components/store/store-details/store-
 import { CategoryComponent } from './components/category/category.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
+import { LocationOnLoadComponent } from './components/location/location-on-load/location-on-load.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SearchComponent } from './components/search/search.component';
     LoginComponent,
     SignupComponent,
     LocationComponent,
+    LocationOnLoadComponent,
     MenuComponent,
     CategoryComponent,
     FooterComponent,

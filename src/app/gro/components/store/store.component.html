@@ -2,21 +2,20 @@
   <div class="card" style="padding-bottom: 10px;">
     <div class="row" [routerLink]="['/store', store.id]">
       <div class="col-3 no-right-padding">
-        <img
-          src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
-          class="img-fluid"
-          alt="Sample image"
-        />
+        <img [src]="store.storeImgUrl" class="img-fluid" alt="Store image" />
       </div>
       <div class="col-9">
         <h6>
-          {{store.storeName}}
+          {{ store.storeName }} | {{ store.storeCategory | titlecase }}
         </h6>
         <h6 style="font-size: small; line-height: 1; font-weight: 400;">
-          {{store.storeType | titlecase}}
+          {{ store.supplyItems | titlecase }}
         </h6>
         <h6 style="font-size: small; line-height: 1; font-weight: 400;">
-          {{store.storeArea | titlecase}} | {{store.kms}}
+          {{ store.area | titlecase }}
+        </h6>
+        <h6>
+          {{ store.deliveryMethod }}
         </h6>
       </div>
     </div>

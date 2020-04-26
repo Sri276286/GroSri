@@ -1,3 +1,8 @@
+<!-- Show popup if location not present -->
+<button #openModal type="button" (click)="openModal()" data-target="#locationOnLoadModal" data-toggle="modal" hidden data-backdrop="static" data-keyboard="false"></button>
+<gro-location-on-load (search)="loadStores($event)"></gro-location-on-load>
+<!---->
+
 <gro-header></gro-header>
 <div>
   <span style="font-size: 20px;">CATEGORIES</span>
@@ -6,6 +11,8 @@
 
 <div style="margin-top: 10px;">
   <span style="font-size: 20px;">PARTNER STORES NEAR YOU</span>
-  <gro-store></gro-store>
+  <gro-store [stores]="stores"></gro-store>
 </div>
 <gro-footer></gro-footer>
+
+

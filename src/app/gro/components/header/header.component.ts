@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'gro-header',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  constructor() {}
+  constructor(public _commonService: CommonService) {}
 }

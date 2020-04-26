@@ -1,14 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { CommonService } from '../../services/common.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'gro-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class GroHomeComponent {
-  title = 'grosri';
+export class GroHomeComponent implements AfterViewInit {
+  stores = [];
+  user = localStorage.getItem('currentUser');
+  @ViewChild('openModal') myModal;
 
-  constructor() {
+  constructor(private _commonService: CommonService,
+    private _storeService: StoreService) {
+  }
+
+  ngAfterViewInit() {
+    const profile = JSON.parse(this.user);
+    console.log('on load location ', this._commonService.userLocation, profile);
+    const location = profile && profile.location || localStorage.getItem('userLocation');
+    if (!location) {
+      this.myModal.nativeElement.click();
+    } else {
+      this._commonService.userLocation = location;
+      this.loadStores(location);
+    }
+  }
+
+  loadStores(searchKey: string) {
+    console.log('location search ', searchKey);
+    this._storeService.getStores(searchKey).subscribe((result: any) => {
+      console.log('result ', result, JSON.parse(this.user));
+      this._commonService.userLocation = searchKey;
+      if (this.user) {
+        this._commonService.handleUserStorage('location', searchKey);
+      }
+      localStorage.setItem('userLocation', searchKey);
+      this.stores = result && result.storeDetails ? result.storeDetails : [];
+      this.closeModal();
+    });
+  }
+
+  openModal() {
+    console.log('open modal');
+    this.myModal.nativeElement.className = 'modal fade show';
+  }
+  closeModal() {
+    console.log('close modal');
+    this.myModal.nativeElement.className = 'modal hide';
   }
 
   detect() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 
 @Component({
@@ -7,13 +7,12 @@ import { StoreService } from '../../services/store.service';
   styleUrls: ['store.component.scss']
 })
 export class GroStoreComponent implements OnInit {
-  storesListed = [];
 
-  constructor(private _storeService: StoreService) { }
+  @Input('stores') storesListed;
+
+  constructor() { }
 
   ngOnInit() {
-    this._storeService.getStores().subscribe((result: any) => {
-      this.storesListed = result.Store_list;
-    });
+    // this.storesListed = result.Store_list;
   }
 }
