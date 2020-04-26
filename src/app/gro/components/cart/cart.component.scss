@@ -1,3 +1,15 @@
+.cart-header-grid {
+  display: flex;
+  width: 100%;
+  background: black;
+  padding: 15px;
+  span {
+    padding-left: 20px;
+    font-size: 20px;
+    color: white;
+  }
+}
+
 .item_li_input{
   text-align: center;
   margin-bottom: 2px;
@@ -43,7 +55,7 @@
   position: fixed;
   width: 100%;
   border: medium none;
-  bottom: 0;
+  bottom: 60px;
   z-index: 5;
   padding: .5rem ;
   font-size: 2.8vw;

@@ -2,7 +2,7 @@
   display: flex;
   position: fixed;
   background: white;
-  padding: 10px;
+  padding: 0 10px;
   bottom: 0%;
   width: 100%;
   border-top: 1px groove lightgrey;
@@ -12,14 +12,47 @@
   flex: 1 1 auto;
   color: grey;
   border-right: 1px solid lightgrey;
+  .fas.fa-home {
+    color: grey;
+    font-size: 24px;
+    display: block;
+  }
+  span {
+    font-size: 14px;
+  }
 }
 
 .footer-search {
   flex: 1 1 auto;
   color: grey;
   border-right: 1px solid lightgrey;
+  .fas.fa-search {
+    color: grey;
+    font-size: 24px;
+    display: block;
+  }
+  span {
+    font-size: 14px;
+  }
 }
 .footer-cart {
   flex: 1 1 auto;
   color: grey;
+  .cart-button {
+    display: block;
+    justify-content: space-between;
+  }
+  .fab.fa-opencart {
+    color: grey;
+    font-size: 24px;
+  }
+  span {
+    font-size: 14px;
+  }
+  span.cart_number {
+    padding: 5px 8px;
+    background-color: rosybrown;
+    color: white;
+    border-radius: 60%;
+  }
 }

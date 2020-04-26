@@ -4,7 +4,8 @@
     class="btn btn-link footer-home"
     [routerLink]="['/home']"
   >
-    Home
+    <i class="fas fa-home"></i>
+    <span>Home</span>
   </button>
   <button
     type="button"
@@ -12,14 +13,21 @@
     data-toggle="modal"
     data-target="#searchModal"
   >
-    Search
+    <i class="fas fa-search"></i>
+    <span>Search</span>
   </button>
   <button
     type="button"
     class="btn btn-link footer-cart"
     [routerLink]="['/cart']"
   >
-    Cart
+    <div class="cart_button">
+      <i class="fab fa-opencart"></i>
+      <span class="cart_number" *ngIf="_cartService.cartQuantity">{{
+        _cartService.cartQuantity
+      }}</span>
+    </div>
+    <span>Cart</span>
   </button>
 </div>
 
