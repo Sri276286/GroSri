@@ -10,7 +10,6 @@ export class LocationOnLoadComponent {
   searchKey: string = '';
 
   triggerSearch() {
-    console.log('saerch key ', this.searchKey);
     this.search.emit(this.searchKey);
   }
 }

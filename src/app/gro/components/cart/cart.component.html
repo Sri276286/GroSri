@@ -1,14 +1,17 @@
 <div class="cart-header-grid">
   <span>Review Basket</span>
 </div>
-<div *ngIf="_cartService.cartItems.length">
+<div *ngIf="items.length">
   <div style="background-color: #f8f9f9; padding: 10px; padding-top: 0px;">
-    <input
+    <!-- <input
       class="form-control item_li_input"
       type="text"
       placeholder="Vegetables"
-    />
-    <div *ngFor="let item of _cartService.cartItems">
+    /> -->
+    <button class="btn btn-danger text-center" (click)="emptyCart()">
+      Empty Cart
+    </button>
+    <div *ngFor="let item of items">
       <div class="card" style="margin-top: 10px;">
         <div class="row" style="padding: 10px;">
           <div class="col-3 no-right-padding">
@@ -28,12 +31,14 @@
               </h6>
             </div>
             <div style="margin: 5px;">
-              <span>{{ item.weight }}</span>
+              <span>{{ item.weight }}{{ item.unit }}</span>
             </div>
             <div style="display: flex;">
               <div class="item_li_price">
                 <h5 name="item-price" [(ngModel)]="item.price" ngDefaultControl>
-                  Rs.{{ item.price * item.quantity }}
+                  Rs.{{
+                    item.quantity ? item.price * item.quantity : item.price
+                  }}
                 </h5>
               </div>
               <div style="flex-grow: 50%;">
@@ -84,7 +89,7 @@
   >
     <div class="footer-flex-container-checkout">
       <div class="flex-item-checkout">
-        <span> Rs. {{ _cartService.cartTotal }}</span>
+        <span> Rs. {{ cartTotal }}</span>
         <!-- <span style="color: rgb(132, 194, 37);">Saved Rs 331.5</span> -->
       </div>
       <div class="flex-item-checkout-button">
@@ -93,5 +98,10 @@
     </div>
   </footer>
 </div>
-
+<div *ngIf="!items.length" style="height: 80vh;">
+  <gro-page-error
+    [message]="'There are no items in the cart. Add some.'"
+    [actiontext]="'Start Shopping'"
+  ></gro-page-error>
+</div>
 <gro-footer></gro-footer>

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { GroModule } from './gro/gro.module';
+import { StoreModule } from './store/store.module';
+import { GrosriCommonModule } from './common/common.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { GroModule } from './gro/gro.module';
   imports: [
     BrowserModule,
     HttpClientModule,
+    GrosriCommonModule,
     GroModule,
+    StoreModule,
     AppRoutingModule
   ],
   providers: [],

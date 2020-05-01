@@ -18,11 +18,9 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.queryField.valueChanges
       .subscribe((result) => {
-        console.log(result);
         if (result && result.length) {
           this._searchService.search(result)
             .subscribe((response: any[]) => {
-              console.log('res ', response);
               this.results = response;
             })
         } else {

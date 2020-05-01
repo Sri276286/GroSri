@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../../common/services/login.service';
 
 @Component({
   selector: 'gro-menu',
@@ -9,7 +9,7 @@ import { LoginService } from '../../services/login.service';
 export class MenuComponent {
   user;
   constructor(private _loginService: LoginService) {
-    this.user = _loginService.currentUserValue;
+    this.user = this._loginService.currentUserValue;
   }
 
   logout() {

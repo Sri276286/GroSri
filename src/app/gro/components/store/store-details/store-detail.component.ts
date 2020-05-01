@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StoreItemsService } from '../../../services/store-items.service';
 import { CartService } from '../../../services/cart.service';
@@ -11,11 +11,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GroStoreDetailComponent implements OnInit {
   items = [];
-  storeProduct;
-  toggle = false;
-  // selectedWeight: string = '1 kg';
+  categories = [];
+  storeProductCatalog;
+  toggle = {
+    step: 0,
+    trigger: false
+  };
+  @ViewChild('itemslist') itemslist;
   private _subscriptions: Subscription[] = [];
-  constructor(private _storeItemsService: StoreItemsService,
+  constructor(public _storeItemsService: StoreItemsService,
     private _cartService: CartService,
     private _route: ActivatedRoute) {
 
@@ -23,21 +27,14 @@ export class GroStoreDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this._route.snapshot.params.id;
-    console.log('id ', id);
     this._subscriptions.push(
       this._storeItemsService.getItems(id)
-        .subscribe((storeItemsEntity: any) => {
-          console.log('items ', storeItemsEntity)
-          this.storeProduct = storeItemsEntity;
-          // this.items = items;
-          for (let category in storeItemsEntity) {
-            console.log('obj ', category);
-            console.log('value ', storeItemsEntity[category]);
-            for (let sub in storeItemsEntity[category]) {
-              this.items = [...this.items, ...storeItemsEntity[category][sub]];
-            }
+        .subscribe((itemsPresent: boolean) => {
+          if (itemsPresent) {
+            this.categories = this._storeItemsService.categories;
+            const category = this.categories[0];
+            this.getProductsWithCategory(category);
           }
-          console.log('items after', this.items)
         })
     );
   }
@@ -47,22 +44,30 @@ export class GroStoreDetailComponent implements OnInit {
   }
 
   onWeightChange(val, item) {
-    console.log('val ', val, item);
     let weightEntity = item.weights.find(t => t.weight === val);
-    console.log('weight ', weightEntity);
     item.weight = weightEntity.weight;
     item.price = weightEntity.price;
   }
 
   addItems(item) {
-    // item.weight = this.selectedWeight;
-    console.log('item in add ', item);
     this._cartService.addItems(item);
   }
 
   removeItems(item) {
-    console.log('item in remove ', item);
     this._cartService.removeItems(item);
+  }
+
+  toggleCategory(step) {
+    console.log('step ', step, this.itemslist.nativeElement);
+    this.toggle.step = step;
+    this.toggle.trigger = !this.toggle.trigger;
+  }
+
+  getProductsWithCategory(category) {
+    console.log('category ', category);
+    this._storeItemsService.getProductsWithCategory(category).subscribe((entity) => {
+      this.storeProductCatalog = entity;
+    });
   }
 
 }

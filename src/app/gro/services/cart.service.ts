@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +15,24 @@ export class CartService {
   }
 
   addItems(item) {
-    console.log('item in add ', item);
     item.quantity++;
     this.updateCart(item);
   }
 
   removeItems(item) {
-    console.log('item in remove ', item);
     item.quantity--;
     this.updateCart(item);
   }
 
   updateCart(item) {
-    console.log('item in update cart ', item);
+    console.log('item ', item);
+    let itemRequired = this.getRequiredItem(item);
     let items = this.cartItems;
     let itemIndex = items.indexOf(item);
     if (itemIndex === -1) {
-      console.log('first time');
       items = [...items, item];
       this.cartQuantity++;
     } else {
-      console.log('repeating ');
       if (item && item.quantity) {
         items[itemIndex] = item;
       } else {
@@ -44,15 +42,66 @@ export class CartService {
     }
     this.cartTotal += item.price;
     this.cartItems = items;
-    console.log('cart items ', this.cartItems);
+    // set in local storage
+    this.setInLocalStorage();
   }
 
-  getOrders() {
-    return this._http.get('/api/orders');
+  private getRequiredItem(item) {
+    return {
+      "storeInventoryProductId": item.id,
+      "quantity": item.quantity || 0,
+      "mrp": item.storeInventoryProductUnit[0].mrp,
+      "price": item.storeInventoryProductUnit[0].price,
+      "weight": item.storeInventoryProductUnit[0].weight,
+      "unit": item.storeInventoryProductUnit[0].unit
+    };
   }
 
   placeOrder(order) {
     return this._http.post('/api/order', order);
+  }
+
+  postCartItems(cart) {
+    console.log('cart ', cart);
+    return this._http.post('/api/cart', cart);
+  }
+
+  getItems() {
+    return new Observable((observer) => {
+      this.getCartItems().subscribe((res: any) => {
+        if (res && res.total && res.items) {
+          observer.next(res);
+        } else {
+          let cart = this.getCart();
+          observer.next(cart);
+        }
+      }, () => {
+        let cart = this.getCart();
+        observer.next(cart);
+      });
+    });
+  }
+
+  getCartItems() {
+    return this._http.get('/api/cart');
+  }
+
+  setInLocalStorage() {
+    let cartEntity: any = {};
+    cartEntity.total = this.cartTotal;
+    cartEntity.items = this.cartItems;
+    localStorage.setItem('cartEntity', JSON.stringify(cartEntity));
+  }
+
+  getCart() {
+    let cartEntity = localStorage.getItem('cartEntity');
+    let cart = cartEntity ? JSON.parse(cartEntity) : null;
+    return cart;
+  }
+
+  getFromLocalStorage() {
+    let cart = this.getCart();
+    this.postCartItems(cart).subscribe();
   }
 
 }

@@ -9,25 +9,30 @@ import { CartService } from '../../services/cart.service';
 export class GroCartComponent implements OnInit {
 
   items = [];
+  cartTotal = 0;
   constructor(public _cartService: CartService) {
   }
 
   ngOnInit() {
-    this.items = this._cartService.cartItems;
+    this._cartService.getItems().subscribe((res: any) => {
+      this.cartTotal = res.total;
+      this.items = res.items;
+    });
   }
 
   addItems(item) {
-    console.log('item in add ', item);
     this._cartService.addItems(item);
   }
 
   removeItems(item) {
-    console.log('item in remove ', item);
     this._cartService.removeItems(item);
   }
 
+  emptyCart() {
+    this._cartService.cartItems = [];
+  }
+
   placeOrder() {
-    console.log('place order');
     let order = {
       orderId: 123,
       totalPrice: this._cartService.cartTotal,
@@ -35,7 +40,7 @@ export class GroCartComponent implements OnInit {
       orderType: 1
     };
     this._cartService.placeOrder(order).subscribe(() => {
-      console.log('message ');
+      // console.log('message ');
     });
   }
 

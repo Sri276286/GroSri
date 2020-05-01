@@ -21,12 +21,3 @@ export class StoreService {
   }
 
 }
-
-// List the Store -> based on the pincode :  600078, 600096, 600116
-
-// http://aruceryapiphase1-env.eba-xvk4wrjm.us-east-2.elasticbeanstalk.com/stores/findByPincode/600078
-
-
-// List the products based on the store Id : 1,9,2,8
-
-// http://aruceryapiphase1-env.eba-xvk4wrjm.us-east-2.elasticbeanstalk.com/products/findByStoreId/9

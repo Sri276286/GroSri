@@ -18,7 +18,6 @@ export class GroHomeComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const profile = JSON.parse(this.user);
-    console.log('on load location ', this._commonService.userLocation, profile);
     const location = profile && profile.location || localStorage.getItem('userLocation');
     if (!location) {
       this.myModal.nativeElement.click();
@@ -29,9 +28,7 @@ export class GroHomeComponent implements AfterViewInit {
   }
 
   loadStores(searchKey: string) {
-    console.log('location search ', searchKey);
     this._storeService.getStores(searchKey).subscribe((result: any) => {
-      console.log('result ', result, JSON.parse(this.user));
       this._commonService.userLocation = searchKey;
       if (this.user) {
         this._commonService.handleUserStorage('location', searchKey);
@@ -43,18 +40,15 @@ export class GroHomeComponent implements AfterViewInit {
   }
 
   openModal() {
-    console.log('open modal');
     this.myModal.nativeElement.className = 'modal fade show';
   }
   closeModal() {
-    console.log('close modal');
     this.myModal.nativeElement.className = 'modal hide';
   }
 
   detect() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        console.log('pos ', pos);
       });
     } else {
     }
@@ -62,8 +56,6 @@ export class GroHomeComponent implements AfterViewInit {
 
   getGeolocation() {
     navigator.geolocation.getCurrentPosition((pos) => {
-      console.log('pos ', pos.coords.latitude, pos.coords.longitude);
-      console.log('url ', 'https://api.opencagedata.com/geocode/v1/json?q=' + pos.coords.latitude + '+' + pos.coords.longitude + '&key=f391d83cebb04862a10911d13ef190f5');
       // reverse geocoding
       const apiByLatLon = 'https://api.opencagedata.com/geocode/v1/json?q=' + pos.coords.latitude + '+' + pos.coords.longitude + '&key=f391d83cebb04862a10911d13ef190f5';
       // forward geocoding
@@ -71,7 +63,6 @@ export class GroHomeComponent implements AfterViewInit {
       fetch(apiByPlace).then((res) => {
         return res.json();
       }).then((data) => {
-        console.log('data ', data);
       });
     });
   }
@@ -97,7 +88,6 @@ export class GroHomeComponent implements AfterViewInit {
   // console.log('dis ', getDistanceFromLatLonInKm(16.2422735, 80.64024549999999, 16.3, 80.45));
 
   selectStore() {
-    console.log('store');
     // this._router.navigate(['store'], {})
   }
 }

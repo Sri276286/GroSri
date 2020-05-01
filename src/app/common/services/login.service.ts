@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class LoginService {
 
-  private loginUrl = "http://localhost:9090/login";
+  private loginUrl = "/api/login";
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
@@ -38,7 +38,7 @@ export class LoginService {
       headers: httpHeaders
     };
     return this._http.post(
-      '/api/login',
+      this.loginUrl,
       JSON.stringify(loginform.value),
       options
     ).pipe(map((user: any) => {
@@ -50,7 +50,7 @@ export class LoginService {
       }
 
       return user;
-    }));;
+    }));
   }
 
 }
