@@ -13,8 +13,8 @@ export class GroOrderDetailsComponent implements OnInit {
   constructor(public _service: OrderService,
     private _route: ActivatedRoute) {
     const id = this._route.snapshot.params.id;
-    const order = this._service.getOrderById(id);
-    this.items = order.items;
+    // const order = this._service.getOrderById(id);
+    // this.items = order.items;
   }
 
   ngOnInit() {

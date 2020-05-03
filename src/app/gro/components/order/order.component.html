@@ -6,148 +6,50 @@
   </div>
 </ng-container>
  -->
- <div class="card" style="padding: 10px; margin-bottom: 10px;">
-  <div >
+<ng-container [ngTemplateOutlet]="orderHeader"></ng-container>
+<ng-container *ngFor="let item of [].constructor(5)">
+  <div
+    class="card"
+    style="padding: 10px; margin-bottom: 10px;"
+    [routerLink]="['/order', 1]"
+  >
+    <div>
       <div class="row">
-          <div class="col-8 ">
-              <h6>CropBox shop</h6>
-          </div>
-          <div class="col-4">
-              <h6 style="color:seagreen;float: right; font-weight: 400;">Rs. 2349</h6>
-          </div>
+        <div class="col-8">
+          <h6>CropBox shop</h6>
+        </div>
+        <div class="col-4">
+          <h6 style="color: seagreen; float: right; font-weight: 400;">
+            Rs. 2349
+          </h6>
+        </div>
       </div>
-  </div>
+    </div>
 
-  <div class="row">
-      <div class="col-8 ">
-          <h6 class="shop_location_date">perungudi</h6>
+    <div class="row">
+      <div class="col-8">
+        <h6 class="shop_location_date">perungudi</h6>
       </div>
       <div class="col-4">
-          <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
-          <h6 class="shop_location_date" style="float: right;"> May-09</h6>
+        <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
+        <h6 class="shop_location_date" style="float: right;">May-09</h6>
       </div>
-  </div>
-  <hr class="hr_dashed">
-  <div class="row" style="align-items: center;">
+    </div>
+    <hr class="hr_dashed" />
+    <div class="row" style="align-items: center;">
       <div class="col" style="padding-left: 40px;">
-          <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
+        <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
       </div>
       <div class="col">
-          <a class="reorder_report_a">REORDER</a>
+        <a class="reorder_report_a">REORDER</a>
       </div>
+    </div>
   </div>
+</ng-container>
 
-</div>
-
-
-
-<div class="card" style="padding: 10px; margin-bottom: 10px;">
-  <div >
-      <div class="row">
-          <div class="col-8 ">
-              <h6>CropBox shop</h6>
-          </div>
-          <div class="col-4">
-              <h6 style="color:seagreen;float: right; font-weight: 400;">Rs. 2349</h6>
-          </div>
-      </div>
+<ng-template #orderHeader>
+  <div class="order-header-grid">
+    <i class="fas fa-chevron-left" [routerLink]="['/home']"></i>
+    <span>My Orders</span>
   </div>
-
-  <div class="row">
-      <div class="col-8 ">
-          <h6 class="shop_location_date">perungudi</h6>
-      </div>
-      <div class="col-4">
-          <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
-          <h6 class="shop_location_date" style="float: right;"> May-09</h6>
-      </div>
-  </div>
-  <hr class="hr_dashed">
-  <div class="row" style="align-items: center;">
-      <div class="col" style="padding-left: 40px;">
-          <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
-      </div>
-      <div class="col">
-          <a class="reorder_report_a">REORDER</a>
-      </div>
-  </div>
-
-</div>
-
-<div class="card" style="padding: 10px; margin-bottom: 10px;">
-  <div >
-      <div class="row">
-          <div class="col-8 ">
-              <h6>CropBox shop</h6>
-          </div>
-          <div class="col-4">
-              <h6 style="color:seagreen;float: right; font-weight: 400;">Rs. 2349</h6>
-          </div>
-      </div>
-  </div>
-
-  <div class="row">
-      <div class="col-8 ">
-          <h6 class="shop_location_date">perungudi</h6>
-      </div>
-      <div class="col-4">
-          <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
-          <h6 class="shop_location_date" style="float: right;"> May-09</h6>
-      </div>
-  </div>
-  <hr class="hr_dashed">
-  <div class="row" style="align-items: center;">
-      <div class="col" style="padding-left: 40px;">
-          <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
-      </div>
-      <div class="col">
-          <a class="reorder_report_a">REORDER</a>
-      </div>
-  </div>
-
-</div>
-
-
-
-<div class="card" style="padding: 10px; margin-bottom: 10px;">
-  <div >
-      <div class="row">
-          <div class="col-8 ">
-              <h6>CropBox shop</h6>
-          </div>
-          <div class="col-4">
-              <h6 style="color:seagreen;float: right; font-weight: 400;">Rs. 2349</h6>
-          </div>
-      </div>
-  </div>
-
-  <div class="row">
-      <div class="col-8 ">
-          <h6 class="shop_location_date">perungudi</h6>
-      </div>
-      <div class="col-4">
-          <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
-          <h6 class="shop_location_date" style="float: right;"> May-09</h6>
-      </div>
-  </div>
-  <hr class="hr_dashed">
-  <div class="row" style="align-items: center;">
-      <div class="col" style="padding-left: 40px;">
-          <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
-      </div>
-      <div class="col">
-          <a class="reorder_report_a">REORDER</a>
-      </div>
-  </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
+</ng-template>

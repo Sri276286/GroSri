@@ -6,6 +6,7 @@ const Product = require('../models/product');
 
 const mockProducts = require('../mocks/products.json');
 const mockProductsFromStore = require('../mocks/product.json');
+const mockItemsList = require('../mocks/saved/store-products-list.json');
 
 // const itemOne = Product({
 //   "id": "1",
@@ -37,6 +38,10 @@ router.get('/products/:id', (req, res) => {
   // });
   res.json(mockProductsFromStore);
 });
+
+router.get('/items-list/:id', (req, res) => {
+  res.json(mockItemsList);
+})
 
 router.post('/products', urlEncodedParser, json, (req, res) => {
   const pro = req.body;

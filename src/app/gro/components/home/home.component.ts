@@ -17,14 +17,17 @@ export class GroHomeComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const profile = JSON.parse(this.user);
-    const location = profile && profile.location || localStorage.getItem('userLocation');
-    if (!location) {
-      this.myModal.nativeElement.click();
-    } else {
-      this._commonService.userLocation = location;
-      this.loadStores(location);
-    }
+    setTimeout(() => {
+      const profile = JSON.parse(this.user);
+      const location = profile && profile.location || localStorage.getItem('userLocation');
+      console.log('location ', location);
+      if (!location) {
+        this.myModal.nativeElement.click();
+      } else {
+        this._commonService.userLocation = location;
+        this.loadStores(location);
+      }
+    }, 1000);
   }
 
   loadStores(searchKey: string) {
@@ -87,7 +90,4 @@ export class GroHomeComponent implements AfterViewInit {
 
   // console.log('dis ', getDistanceFromLatLonInKm(16.2422735, 80.64024549999999, 16.3, 80.45));
 
-  selectStore() {
-    // this._router.navigate(['store'], {})
-  }
 }

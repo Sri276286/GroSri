@@ -9,48 +9,50 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="menuModalLabel" *ngIf="user">Hello {{user.name}}</h5>
+        <h5 class="modal-title" id="menuModalLabel" *ngIf="user">
+          Hello {{ user.name }}
+        </h5>
         <button
-        type="button"
-        class="btn btn-primary"
-        data-dismiss="modal"
-        [routerLink]="['/login']"
-        *ngIf="!user"
-      >
-        Login
-      </button>
-      <button
-      type="button"
-      class="btn btn-primary"
-      data-dismiss="modal"
-      [routerLink]="['/signup']"
-      *ngIf="!user"
-    >
-      SignUp
-    </button>
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          [routerLink]="['/login']"
+          *ngIf="!user"
+        >
+          Login
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          [routerLink]="['/signup']"
+          *ngIf="!user"
+        >
+          SignUp
+        </button>
       </div>
       <div class="modal-body" *ngIf="user">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/order']" data-dismiss="modal"
-              >My Orders</a
+        <ul class="menu-list">
+          <li class="menu-list-item">
+            <span [routerLink]="['/home']" data-dismiss="modal"
+              >Home</span
             >
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/cart']" data-dismiss="modal">My Cart</a>
+          <li class="menu-list-item">
+            <span [routerLink]="['/order']" data-dismiss="modal"
+              >My Orders</span
+            >
+          </li>
+          <li class="menu-list-item">
+            <span [routerLink]="['/cart']" data-dismiss="modal">My Cart</span>
           </li>
         </ul>
       </div>
       <div class="modal-footer" *ngIf="user">
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="logout()"
-        >
+        <button type="button" class="btn btn-primary" (click)="logout()" data-dismiss="modal">
           Logout
         </button>
       </div>
     </div>
   </div>
 </div>
-

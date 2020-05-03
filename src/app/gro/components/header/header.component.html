@@ -3,10 +3,11 @@
     <i class="fas fa-bars"></i>
   </div>
   <div class="location-grid" data-toggle="modal" data-target="#locationModal">
-    <i class="fas fa-map-marker-alt"></i><span>You are in {{_commonService.userLocation}}</span>
+    <i class="fas fa-map-marker-alt"></i
+    ><span>You are in {{ _commonService.userLocation }}</span>
   </div>
-  <div class="account-grid" data-toggle="modal" data-target="#accountModal">
-    <i class="far fa-user-circle"></i>
+  <div class="contact-grid" data-toggle="modal" data-target="#contactModal">
+    <i class="fas fa-mobile-alt"></i>
   </div>
 </div>
 
@@ -17,3 +18,7 @@
 <!-- Location Modal -->
 <gro-location></gro-location>
 <!-- Location Modal Ends Here -->
+
+<!-- Contact Modal -->
+<gro-contact></gro-contact>
+<!-- Contact Modal Ends Here -->

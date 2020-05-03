@@ -2,7 +2,7 @@
   <div class="card" style="width: 18rem; margin: auto;">
     <div class="card-body">
       <p class="card-text">{{ displayMessage }}</p>
-      <a [routerLink]="['/home']" class="btn btn-primary text-center">{{ actiontext }}</a>
+      <a [routerLink]="['/home']" class="btn btn-primary text-center" *ngIf="actiontext">{{ actiontext }}</a>
     </div>
   </div>
 </div>

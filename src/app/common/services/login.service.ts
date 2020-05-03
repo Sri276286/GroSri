@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
 import { map } from 'rxjs/operators';
+import { ApiConfig } from 'src/app/config/api.config';
+import { CommonService } from '../../gro/services/common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private loginUrl = "/api/login";
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  public currentUser$: Observable<User>;
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient,
+    private _commonService: CommonService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUser$ = this.currentUserSubject.asObservable();
+  }
+
+  public getCurrentUser(): Observable<any> {
+    return this.currentUser$;
   }
 
   public get currentUserValue(): User {
@@ -38,19 +44,36 @@ export class LoginService {
       headers: httpHeaders
     };
     return this._http.post(
-      this.loginUrl,
+      ApiConfig.loginURL,
       JSON.stringify(loginform.value),
       options
-    ).pipe(map((user: any) => {
-      // login successful if there's a jwt token in the response
-      if (user && user.token) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
+    ).pipe(map((res: any) => {
+      if (res && res.accessToken) {
+        localStorage.setItem('auth_token', res.accessToken);
+        // get user details once login is successful
+        this.getUser().subscribe();
+        return res;
+      } else {
+        return throwError(`No access token received`);
       }
-
-      return user;
     }));
+  }
+
+  private getUser() {
+    return this._http.get(`${ApiConfig.userDetailsURL}/123`)
+      .pipe(map((user: any) => {
+        console.log('user ', user);
+        // login successful if there's a jwt token in the response
+        if (user) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          if (user && user.pincode) {
+            this._commonService.userLocation = user.pincode;
+            localStorage.setItem('userLocation', JSON.stringify(user.pincode));
+          }
+          this.currentUserSubject.next(user);
+        }
+      }));
   }
 
 }

@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
 import { LocationOnLoadComponent } from './components/location/location-on-load/location-on-load.component';
 import { PageErrorComponent } from './components/page-error/page-error.component';
+import { GroContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PageErrorComponent } from './components/page-error/page-error.component
     CategoryComponent,
     FooterComponent,
     SearchComponent,
-    PageErrorComponent
+    PageErrorComponent,
+    GroContactComponent
   ],
   exports: [
     GroComponent,
@@ -52,7 +54,8 @@ import { PageErrorComponent } from './components/page-error/page-error.component
     CategoryComponent,
     FooterComponent,
     SearchComponent,
-    PageErrorComponent
+    PageErrorComponent,
+    GroContactComponent
   ],
   imports: [
     CommonModule,

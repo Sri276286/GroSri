@@ -17,7 +17,7 @@ export class CommonService {
     return new Observable((observer) => {
       setTimeout(() => {
         observer.next(true);
-      }, 1 * 60 * 1000);
+      }, 30 * 60 * 1000);
     });
   }
 }

@@ -21,10 +21,7 @@
     <ng-container *ngFor="let category of categories">
       <li class="_35h7b">
         <a class="_34WAd B-aO0 rippleEffect">
-          <span
-            class="_3xjP6"
-            (click)="getProductsWithCategory(category)"
-          >
+          <span class="_3xjP6" (click)="getProductsWithCategory(category)">
             {{ category }}
           </span>
         </a>
@@ -84,7 +81,9 @@
                   <h6 style="font-size: small; font-weight: 400;">
                     {{ item.brandName }}
                   </h6>
-                  <div>
+                  <ng-container
+                    *ngIf="item.storeInventoryProductUnit.length > 1"
+                  >
                     <select
                       class="form-control form-control-sm card_item_view_sbox"
                       name="item-select"
@@ -95,11 +94,16 @@
                     >
                       <option
                         [ngValue]="val.weight"
-                        *ngFor="let val of item.weights"
-                        >{{ val.weight }}</option
+                        *ngFor="let val of item.storeInventoryProductUnit"
+                        >{{ val.weight }} {{ val.unit }}</option
                       >
                     </select>
-                  </div>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="item.storeInventoryProductUnit.length === 1"
+                  >
+                    {{ item.storeInventoryProductUnit[0].weight }} {{ item.storeInventoryProductUnit[0].unit }}
+                  </ng-container>
                   <div style="display: flex;">
                     <div style="padding-right: 20px;">
                       <h5

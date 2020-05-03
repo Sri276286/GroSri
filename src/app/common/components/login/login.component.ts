@@ -20,24 +20,25 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.myLoginForm = this.fb.group({
-      username: ["", Validators.required],
+      email: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
 
   checkLogin() {
     console.error(this.myLoginForm.value);
-      this._loginService.doLogin(this.myLoginForm).subscribe(
-        (res) => {
-          if (!Role.Seller) {
-            this.route.navigate(['/home']);
-          } else {
-            this.route.navigate(['/store-dashboard']);
-          }
-        },
-        error => {
-          console.log(error);
+    this._loginService.doLogin(this.myLoginForm).subscribe(
+      (res) => {
+        console.log('res ', res, Role.Seller);
+        if (res && res.storeKeeper) {
+          this.route.navigate(['/store-dashboard']);
+        } else {
+          this.route.navigate(['/home']);
         }
-      );
-    }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

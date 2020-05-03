@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { ApiConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignupService {
-
-  private signUpUrl = "http://localhost:9090/signup";
 
   constructor(private _http: HttpClient) { }
 
@@ -17,7 +16,7 @@ export class SignupService {
       headers: httpHeaders
     };
     return this._http.post(
-      this.signUpUrl,
+      ApiConfig.signupURL,
       JSON.stringify(signUpform.value),
       options
     );

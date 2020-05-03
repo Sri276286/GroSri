@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { ApiConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class StoreItemsService {
   }
 
   getItems(id) {
-    return this._http.get(`http://aruceryapiphase1-env.eba-xvk4wrjm.us-east-2.elasticbeanstalk.com/products/findByStoreId/${id}`)
+    return this._http.get(`${ApiConfig.storeProductsURL}/${id}`)
       .pipe(map((res: any) => {
         console.log('res ', res);
         if (res && res.products) {

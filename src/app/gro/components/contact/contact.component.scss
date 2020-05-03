@@ -1,0 +1,23 @@
+.modal.contact .modal-dialog {
+  position: fixed;
+  width: 100%;
+  height: 30%;
+  margin: 50% auto;
+}
+
+.modal.contact .modal-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.contact-body {
+  display: flex;
+  flex-direction: column;
+  span {
+    padding: 5px 0;
+  }
+}
+
+.fas.fa-times {
+  font-size: 24px;
+}

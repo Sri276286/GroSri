@@ -44,7 +44,7 @@ export class GroStoreDetailComponent implements OnInit {
   }
 
   onWeightChange(val, item) {
-    let weightEntity = item.weights.find(t => t.weight === val);
+    let weightEntity = item.storeInventoryProductUnit.find(t => t.weight === val);
     item.weight = weightEntity.weight;
     item.price = weightEntity.price;
   }

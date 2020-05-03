@@ -1,3 +1,20 @@
+.order-header-grid {
+  display: flex;
+  width: 100%;
+  background: black;
+  padding: 15px;
+  span {
+    padding-left: 20px;
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.fas.fa-chevron-left {
+  color: white;
+  font-size: 24px;
+}
+
 .shop_location_date {
   font-weight: 400;
   font-size: small;

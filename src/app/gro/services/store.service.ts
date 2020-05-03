@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ApiConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class StoreService {
    */
   getStores(locationKey: string) {
     // return this._http.get('/api/stores');
-    return this._http.get(`http://aruceryapiphase1-env.eba-xvk4wrjm.us-east-2.elasticbeanstalk.com/stores/findByPincode/${locationKey}`);
+    return this._http.get(`${ApiConfig.storeListURL}/${locationKey}`);
   }
 
 }

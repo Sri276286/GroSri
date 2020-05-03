@@ -11,13 +11,18 @@
       <h5>Sign Up</h5>
     </div>
     <div class="card-body">
-      <form [formGroup]="mySingnUpForm">
+      <form [formGroup]="mySignUpForm">
+        <div class="store-grid form-check">
+          <label for="store-keeper" class="form-check-label">Store Keeper?
+          <input type="checkbox" formControlName="storekeeper" name="is_store_keeper" id="store_keeper" class="form-check-input">
+        </label>
+        </div>
         <span
           class="error_text"
           *ngIf="
-            mySingnUpForm.get('username').errors?.required &&
-            (mySingnUpForm.get('username').touched ||
-              mySingnUpForm.get('username').dirty)
+            mySignUpForm.get('name').errors?.required &&
+            (mySignUpForm.get('name').touched ||
+              mySignUpForm.get('name').dirty)
           "
         >
           Full Name is required
@@ -25,49 +30,106 @@
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
-              ><i class="fa fa-user fa"></i
+              ><i class="fas fa-user"></i
             ></span>
           </div>
           <input
             type="text"
             class="form-control"
             type="text"
-            formControlName="username"
-            placeholder="Mobile Num. / Email"
+            formControlName="name"
+            placeholder="User Name"
             [ngClass]="{
               'is-invalid':
-                (mySingnUpForm.get('username').touched ||
-                  mySingnUpForm.get('username').dirty) &&
-                mySingnUpForm.get('username').errors
+                (mySignUpForm.get('name').touched ||
+                  mySignUpForm.get('name').dirty) &&
+                mySignUpForm.get('name').errors
             }"
           />
         </div>
         <span
           class="error_text"
           *ngIf="
-            mySingnUpForm.get('number').errors?.required &&
-            (mySingnUpForm.get('number').touched ||
-              mySingnUpForm.get('number').dirty)
+            mySignUpForm.get('pincode').errors?.required &&
+            (mySignUpForm.get('pincode').touched ||
+              mySignUpForm.get('pincode').dirty)
           "
         >
-          Number is required
+          Pincode is required
         </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
-              ><i class="fa fa-mobile"></i
+              ><i class="fas fa-location-arrow"></i></span>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="pincode"
+            placeholder="Pincode"
+            [ngClass]="{
+              'is-invalid':
+                (mySignUpForm.get('pincode').touched ||
+                  mySignUpForm.get('pincode').dirty) &&
+                mySignUpForm.get('pincode').errors
+            }"
+          />
+        </div>
+        <span
+          class="error_text"
+          *ngIf="
+            mySignUpForm.get('mobileNumber').errors?.required &&
+            (mySignUpForm.get('mobileNumber').touched ||
+              mySignUpForm.get('mobileNumber').dirty)
+          "
+        >
+          Phone number is required
+        </span>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text loginspan"
+              ><i class="fas fa-mobile-alt"></i
+            ></span>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="mobileNumber"
+            placeholder="Phone Number"
+            [ngClass]="{
+              'is-invalid':
+                (mySignUpForm.get('mobileNumber').touched ||
+                  mySignUpForm.get('mobileNumber').dirty) &&
+                mySignUpForm.get('mobileNumber').errors
+            }"
+          />
+        </div>
+        <span
+          class="error_text"
+          *ngIf="
+            mySignUpForm.get('email').errors?.required &&
+            (mySignUpForm.get('email').touched ||
+              mySignUpForm.get('email').dirty)
+          "
+        >
+          Email is required
+        </span>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text loginspan"
+              ><i class="far fa-envelope"></i
             ></span>
           </div>
           <input
             type="text"
             class="form-control"
-            formControlName="number"
-            placeholder="number"
+            formControlName="email"
+            placeholder="Email"
             [ngClass]="{
               'is-invalid':
-                (mySingnUpForm.get('number').touched ||
-                  mySingnUpForm.get('number').dirty) &&
-                mySingnUpForm.get('number').errors
+                (mySignUpForm.get('email').touched ||
+                  mySignUpForm.get('email').dirty) &&
+                mySignUpForm.get('email').errors
             }"
           />
         </div>
@@ -75,9 +137,9 @@
         <span
           class="error_text"
           *ngIf="
-            mySingnUpForm.get('password').errors?.required &&
-            (mySingnUpForm.get('password').touched ||
-              mySingnUpForm.get('password').dirty)
+            mySignUpForm.get('password').errors?.required &&
+            (mySignUpForm.get('password').touched ||
+              mySignUpForm.get('password').dirty)
           "
         >
           Password is required
@@ -85,19 +147,19 @@
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
-              ><i class="fa fa-lock"></i
+              ><i class="fas fa-lock"></i
             ></span>
           </div>
           <input
             type="password"
             class="form-control"
             formControlName="password"
-            placeholder="password"
+            placeholder="Password"
             [ngClass]="{
               'is-invalid':
-                (mySingnUpForm.get('password').touched ||
-                  mySingnUpForm.get('password').dirty) &&
-                mySingnUpForm.get('password').errors
+                (mySignUpForm.get('password').touched ||
+                  mySignUpForm.get('password').dirty) &&
+                mySignUpForm.get('password').errors
             }"
           />
         </div>
@@ -105,9 +167,9 @@
         <span
           class="error_text"
           *ngIf="
-            mySingnUpForm.get('confirm_password').errors?.required &&
-            (mySingnUpForm.get('confirm_password').touched ||
-              mySingnUpForm.get('confirm_password').dirty)
+            mySignUpForm.get('confirm_password').errors?.required &&
+            (mySignUpForm.get('confirm_password').touched ||
+              mySignUpForm.get('confirm_password').dirty)
           "
         >
           Confirm Password is required
@@ -115,29 +177,29 @@
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
-              ><i class="fa fa-lock"></i
+              ><i class="fas fa-lock"></i
             ></span>
           </div>
           <input
             type="password"
             class="form-control"
             formControlName="confirm_password"
-            placeholder="confirm_password"
+            placeholder="Confirm Password"
             [ngClass]="{
               'is-invalid':
-                (mySingnUpForm.get('confirm_password').touched ||
-                  mySingnUpForm.get('confirm_password').dirty) &&
-                mySingnUpForm.get('confirm_password').errors
+                (mySignUpForm.get('confirm_password').touched ||
+                  mySignUpForm.get('confirm_password').dirty) &&
+                mySignUpForm.get('confirm_password').errors
             }"
           />
 
           <span
             class="error_text"
             *ngIf="
-              mySingnUpForm.get('confirm_password').invalid &&
-              (mySingnUpForm.get('confirm_password').touched ||
-                mySingnUpForm.get('confirm_password').dirty) &&
-              !mySingnUpForm.get('confirm_password').errors?.required
+              mySignUpForm.get('confirm_password').invalid &&
+              (mySignUpForm.get('confirm_password').touched ||
+                mySignUpForm.get('confirm_password').dirty) &&
+              !mySignUpForm.get('confirm_password').errors?.required
             "
           >
             Password and Confirm Password must be match
@@ -147,7 +209,7 @@
           <div class="col">
             <button
               class="btn btn-outline-danger btn-block"
-              [disabled]="mySingnUpForm.pristine || mySingnUpForm.invalid"
+              [disabled]="mySignUpForm.pristine || mySignUpForm.invalid"
               data-dismiss="modal"
               (click)="onSignUpSubmit()"
             >
