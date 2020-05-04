@@ -304,6 +304,7 @@
           "price": 85.0,
           "weight": 500.0,
           "unit": "g",
+          "quantity": 0,
           "storeInventoryProductUnit": [
             {
               "id": 17,

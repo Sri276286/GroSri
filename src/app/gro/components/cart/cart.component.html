@@ -8,9 +8,11 @@
       type="text"
       placeholder="Vegetables"
     /> -->
-    <button class="btn btn-danger text-center" (click)="emptyCart()">
-      Empty Cart
-    </button>
+    <div class="text-center">
+      <button class="btn btn-danger" (click)="emptyCart()">
+        Empty Cart
+      </button>
+    </div>
     <div *ngFor="let item of items">
       <div class="card" style="margin-top: 10px;">
         <div class="row" style="padding: 10px;">

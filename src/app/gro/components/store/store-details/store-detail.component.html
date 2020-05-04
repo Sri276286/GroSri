@@ -2,151 +2,146 @@
   <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
   <span>Store Name</span>
 </div>
+<div>
+  <div class="category-grid">
+    <div class="text-center">
+      <span style="font-weight: 600;">Category</span>
+    </div>
+    <ul class="_1bQ4u">
+      <ng-container *ngFor="let category of categories">
+        <li class="_35h7b">
+          <a class="_34WAd B-aO0 rippleEffect">
+            <span class="_3xjP6" (click)="getProductsWithCategory(category)">
+              {{ category }}
+            </span>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
 
-<div class="my-2">
-  <input
-    class="form-control"
-    style="
-      text-align: center;
-      border: 0px solid;
-      background-color: #f8f9f9;
-      font-weight: 600;
-    "
-    type="text"
-    placeholder="Catergory"
-    readonly
-  />
-
-  <ul class="_1bQ4u">
-    <ng-container *ngFor="let category of categories">
-      <li class="_35h7b">
-        <a class="_34WAd B-aO0 rippleEffect">
-          <span class="_3xjP6" (click)="getProductsWithCategory(category)">
-            {{ category }}
-          </span>
-        </a>
-      </li>
-    </ng-container>
-  </ul>
-</div>
-
-<div id="accordion" style="height: auto;">
-  <input
-    class="form-control item_li_input"
-    type="text"
-    placeholder="Item List"
-  />
-  <ng-container
-    *ngFor="let productEntity of storeProductCatalog | keyvalue; let j = index"
-  >
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button
-            class="btn btn-link"
-            [ngClass]="{ collpase: j === toggle.step && toggle.trigger }"
-            data-toggle="collapse"
-            [attr.data-target]="'#' + j"
-            [attr.aria-expanded]="j === toggle.step"
-            aria-controls="collapseOne"
-            (click)="toggleCategory(j)"
-          >
-            {{ productEntity.key }}
-          </button>
-        </h5>
-      </div>
-      <div
-        [attr.id]="j"
-        class="collapse show"
-        [ngClass]="{ show: j === toggle.step && !toggle.trigger }"
-        aria-labelledby="headingOne"
-        data-parent="#accordion"
-        #itemslist
-      >
-        <div class="card-body">
-          <div *ngFor="let item of productEntity.value">
-            <div class="card" style="margin-top: 10px;">
-              <div class="row" style="padding: 10px;">
-                <div class="col-4 no-right-padding">
-                  <img
-                    [src]="item.productImgUrl"
-                    class="img-fluid"
-                    alt="Sample image"
-                  />
-                </div>
-                <div class="col-8">
-                  <h6>
-                    {{ item.itemShortDescription }}
-                  </h6>
-                  <h6 style="font-size: small; font-weight: 400;">
-                    {{ item.brandName }}
-                  </h6>
-                  <ng-container
-                    *ngIf="item.storeInventoryProductUnit.length > 1"
-                  >
-                    <select
-                      class="form-control form-control-sm card_item_view_sbox"
-                      name="item-select"
-                      id="item-select"
-                      [ngModel]="item.weight"
-                      (ngModelChange)="onWeightChange($event, item)"
-                      [compareWith]="compareObjects"
+  <div id="accordion" class="products-list-grid">
+    <input
+      class="form-control item_li_input"
+      type="text"
+      placeholder="Item List"
+    />
+    <ng-container
+      *ngFor="
+        let productEntity of storeProductCatalog | keyvalue;
+        let j = index
+      "
+    >
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button
+              class="btn btn-link"
+              [ngClass]="{ collpase: j === toggle.step && toggle.trigger }"
+              data-toggle="collapse"
+              [attr.data-target]="'#' + j"
+              [attr.aria-expanded]="j === toggle.step"
+              aria-controls="collapseOne"
+              (click)="toggleCategory(j)"
+            >
+              {{ productEntity.key }}
+            </button>
+          </h5>
+        </div>
+        <div
+          [attr.id]="j"
+          class="collapse show"
+          [ngClass]="{ show: j === toggle.step && !toggle.trigger }"
+          aria-labelledby="headingOne"
+          data-parent="#accordion"
+          #itemslist
+        >
+          <div class="card-body">
+            <div *ngFor="let item of productEntity.value">
+              <div class="card" style="margin-top: 10px;">
+                <div class="row" style="padding: 10px;">
+                  <div class="col-4 no-right-padding">
+                    <img
+                      [src]="item.productImgUrl"
+                      class="img-fluid"
+                      alt="Sample image"
+                    />
+                  </div>
+                  <div class="col-8">
+                    <h6>
+                      {{ item.itemShortDescription }}
+                    </h6>
+                    <h6 style="font-size: small; font-weight: 400;">
+                      {{ item.brandName }}
+                    </h6>
+                    <ng-container
+                      *ngIf="item.storeInventoryProductUnit.length > 1"
                     >
-                      <option
-                        [ngValue]="val.weight"
-                        *ngFor="let val of item.storeInventoryProductUnit"
-                        >{{ val.weight }} {{ val.unit }}</option
+                      <select
+                        class="form-control form-control-sm card_item_view_sbox"
+                        name="item-select"
+                        id="item-select"
+                        [ngModel]="item.weight"
+                        (ngModelChange)="onWeightChange($event, item)"
+                        [compareWith]="compareObjects"
                       >
-                    </select>
-                  </ng-container>
-                  <ng-container
-                    *ngIf="item.storeInventoryProductUnit.length === 1"
-                  >
-                    {{ item.storeInventoryProductUnit[0].weight }} {{ item.storeInventoryProductUnit[0].unit }}
-                  </ng-container>
-                  <div style="display: flex;">
-                    <div style="padding-right: 20px;">
-                      <h5
-                        name="item-price"
-                        [(ngModel)]="item.price"
-                        ngDefaultControl
-                      >
-                        Rs.{{ item.price }}
-                      </h5>
-                    </div>
-                    <div style="flex-grow: 50%;">
-                      <div *ngIf="!item.quantity">
-                        <button
-                          style="width: 100px;"
-                          class="btn btn-primary btn-sm btn-info"
-                          (click)="addItems(item)"
+                        <option
+                          [ngValue]="val.weight"
+                          *ngFor="let val of item.storeInventoryProductUnit"
+                          >{{ val.weight }} {{ val.unit }}</option
                         >
-                          ADD+
-                        </button>
+                      </select>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="item.storeInventoryProductUnit.length === 1"
+                    >
+                      {{ item.storeInventoryProductUnit[0].weight }}
+                      {{ item.storeInventoryProductUnit[0].unit }}
+                    </ng-container>
+                    <div style="display: flex;">
+                      <div style="padding-right: 20px;">
+                        <h5
+                          name="item-price"
+                          [(ngModel)]="item.price"
+                          ngDefaultControl
+                        >
+                          Rs.{{ item.price }}
+                        </h5>
                       </div>
-                      <div *ngIf="item.quantity">
-                        <button
-                          class="minus_plus_but border border-danger rounded"
-                          style="color: darkred;"
-                          (click)="removeItems(item)"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="text"
-                          class="miuns_plus_input"
-                          placeholder="1"
-                          id="p_10000097"
-                          [value]="item.quantity"
-                          maxlength="2"
-                        />
-                        <button
-                          class="minus_plus_but border border-success rounded"
-                          style="color: rgb(7, 119, 7);"
-                          (click)="addItems(item)"
-                        >
-                          +
-                        </button>
+                      <div style="flex-grow: 50%;">
+                        <ng-container *ngIf="!item.quantity">
+                          <button
+                            style="width: 100px;"
+                            class="btn btn-primary btn-sm btn-info"
+                            (click)="addItems(item)"
+                          >
+                            ADD+
+                          </button>
+                        </ng-container>
+                        <ng-container *ngIf="item.quantity">
+                          <button
+                            class="minus_plus_but border border-danger rounded"
+                            style="color: darkred;"
+                            (click)="removeItems(item)"
+                          >
+                            -
+                          </button>
+                          <input
+                            type="text"
+                            class="miuns_plus_input"
+                            placeholder="1"
+                            id="p_10000097"
+                            [value]="item.quantity"
+                            maxlength="2"
+                          />
+                          <button
+                            class="minus_plus_but border border-success rounded"
+                            style="color: rgb(7, 119, 7);"
+                            (click)="addItems(item)"
+                          >
+                            +
+                          </button>
+                        </ng-container>
                       </div>
                     </div>
                   </div>
@@ -156,10 +151,9 @@
           </div>
         </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </div>
-
 <div style="background-color: grey;">
   <gro-footer></gro-footer>
 </div>

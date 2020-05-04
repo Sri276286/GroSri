@@ -15,8 +15,8 @@ export class GroCartComponent implements OnInit {
 
   ngOnInit() {
     this._cartService.getItems().subscribe((res: any) => {
-      this.cartTotal = res.total;
-      this.items = res.items;
+      this.cartTotal = res && res.total;
+      this.items = res && res.items;
     });
   }
 

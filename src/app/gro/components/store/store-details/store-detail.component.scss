@@ -10,6 +10,16 @@
   }
 }
 
+// div.category-grid {
+//   position: fixed;
+//   top: 10%;
+//   z-index: 100;
+// }
+
+// div.products-list-grid {
+//   height: 25%;
+// }
+
 .fas.fa-long-arrow-alt-left {
   color: white;
   font-size: 24px;
@@ -99,9 +109,6 @@ a {
 
 /* */
 
-
-
-
 .img-fluid {
   height: 80px;
 }
@@ -161,7 +168,6 @@ a {
   padding: 0.5rem 0;
 }
 
-
 .bg-white {
   background: #fff !important;
 }
@@ -190,32 +196,29 @@ a {
   cursor: pointer;
 }
 
-
-
-
 /* Accordion*/
 
 .close {
   line-height: 0;
   color: red;
- }
+}
 
-
-.catergory_card, .card-header{
+.catergory_card,
+.card-header {
   background-color: transparent !important;
-  border: none ;
+  border: none;
   padding: 0 !important;
   margin-bottom: 10px;
 }
 
-.catergory_card{
-  box-shadow: 0 2px 25px 0 rgba(110,130,208,.18);
+.catergory_card {
+  box-shadow: 0 2px 25px 0 rgba(110, 130, 208, 0.18);
 }
-.card-body{
+.card-body {
   padding: 5px;
 }
 
-.btn-link{
+.btn-link {
   width: 100%;
   /* height: 60px; */
   font-weight: 500;
@@ -224,9 +227,8 @@ a {
   color: black;
 }
 
-
-.btn-link:after{
-  content:'\2212';
+.btn-link:after {
+  content: "\2212";
   width: 35px;
   font-size: 25px;
   text-align: center;
@@ -234,9 +236,8 @@ a {
   right: 15px;
   top: 3px;
   position: absolute;
-
 }
 
-.btn-link.collapsed:after{
-  content: '\002B';
+.btn-link.collapsed:after {
+  content: "\002B";
 }

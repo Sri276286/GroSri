@@ -5,4 +5,5 @@ export class ApiConfig {
   // static storeProductsURL: string = 'http://aruceryapiphase1-env.eba-xvk4wrjm.us-east-2.elasticbeanstalk.com/allow/products/findByStoreId';
   static storeProductsURL: string = '/api/items-list';
   static userDetailsURL: string = '/api/user';
+  static cartURL: string = '/api/cart';
 }

@@ -1,0 +1,29 @@
+{
+  "total": 1000,
+  "items": [
+    {
+      "storeInventoryProductId": 6,
+      "quantity": 0,
+      "mrp": 130,
+      "price": 125,
+      "weight": 500,
+      "unit": "g"
+    },
+    {
+      "storeInventoryProductId": 9,
+      "quantity": 2,
+      "mrp": 90,
+      "price": 85,
+      "weight": 500,
+      "unit": "g"
+    },
+    {
+      "storeInventoryProductId": 10,
+      "quantity": 0,
+      "mrp": 190,
+      "price": 185,
+      "weight": 1,
+      "unit": "kg"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -26,34 +27,38 @@ export class CartService {
 
   updateCart(item) {
     console.log('item ', item);
-    let itemRequired = this.getRequiredItem(item);
-    let items = this.cartItems;
-    let itemIndex = items.indexOf(item);
+    // let itemRequired = this.getRequiredItem(item);
+    // console.log('itemRequired ', itemRequired);
+    // this.cartItems.push(itemRequired);
+    let itemIndex = this.cartItems.indexOf(item);
+    console.log('item index ', itemIndex);
     if (itemIndex === -1) {
-      items = [...items, item];
+      this.cartItems = [...this.cartItems, item];
+      console.log('here ', this.cartItems);
       this.cartQuantity++;
     } else {
       if (item && item.quantity) {
-        items[itemIndex] = item;
+        this.cartItems[itemIndex] = item;
       } else {
-        items.splice(itemIndex, 1);
+        this.cartItems.splice(itemIndex, 1);
         this.cartQuantity--;
       }
     }
     this.cartTotal += item.price;
-    this.cartItems = items;
+    console.log('cart items ', this.cartItems);
     // set in local storage
     this.setInLocalStorage();
   }
 
   private getRequiredItem(item) {
+    console.log('item => ', item);
     return {
-      "storeInventoryProductId": item.id,
+      "storeInventoryProductId": item.storeInventoryProductId,
       "quantity": item.quantity || 0,
-      "mrp": item.storeInventoryProductUnit[0].mrp,
-      "price": item.storeInventoryProductUnit[0].price,
-      "weight": item.storeInventoryProductUnit[0].weight,
-      "unit": item.storeInventoryProductUnit[0].unit
+      "mrp": item.mrp,
+      "price": item.price,
+      "weight": item.weight,
+      "unit": item.unit
     };
   }
 
@@ -63,13 +68,15 @@ export class CartService {
 
   postCartItems(cart) {
     console.log('cart ', cart);
-    return this._http.post('/api/cart', cart);
+    return this._http.post(ApiConfig.cartURL, cart);
   }
 
   getItems() {
     return new Observable((observer) => {
       this.getCartItems().subscribe((res: any) => {
+        console.log('aaaaa ', res);
         if (res && res.total && res.items) {
+          localStorage.setItem('cartEntity', JSON.stringify(res));
           observer.next(res);
         } else {
           let cart = this.getCart();
@@ -83,7 +90,7 @@ export class CartService {
   }
 
   getCartItems() {
-    return this._http.get('/api/cart');
+    return this._http.get(ApiConfig.cartURL);
   }
 
   setInLocalStorage() {
@@ -101,7 +108,14 @@ export class CartService {
 
   getFromLocalStorage() {
     let cart = this.getCart();
-    this.postCartItems(cart).subscribe();
+    if (cart && cart.items && cart.items.length) {
+      cart.items = this.mapCart(cart.items);
+      this.postCartItems(cart).subscribe();
+    }
+  }
+
+  mapCart(cart) {
+    return cart.map(t => this.getRequiredItem(t));
   }
 
 }

@@ -6,6 +6,7 @@ const orderRouter = require('./routes/order');
 const userRouter = require('./routes/user');
 const storeRouter = require('./routes/store');
 const searchRouter = require('./routes/search');
+const cartRouter = require('./routes/cart');
 const app = express();
 
 // connect to database
@@ -35,4 +36,5 @@ app.use('/api', orderRouter);
 app.use('/api', userRouter);
 app.use('/api', storeRouter);
 app.use('/api', searchRouter);
+app.use('/api', cartRouter);
 module.exports = app;
