@@ -18,7 +18,7 @@
         <div class="row" style="padding: 10px;">
           <div class="col-3 no-right-padding">
             <img
-              src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
+              [src]="item.productImgUrl"
               class="img-fluid"
               alt="Sample image"
             />
@@ -26,10 +26,10 @@
           <div class="col-9">
             <div>
               <h6>
-                {{ item.name }}
+                {{ item.itemShortDescription }}
               </h6>
               <h6 style="font-size: small; font-weight: 400;">
-                Brand Name with grams
+                {{ item.brandName }}
               </h6>
             </div>
             <div style="margin: 5px;">

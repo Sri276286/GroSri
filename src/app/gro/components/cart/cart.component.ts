@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gro-cart',
@@ -10,13 +11,19 @@ export class GroCartComponent implements OnInit {
 
   items = [];
   cartTotal = 0;
-  constructor(public _cartService: CartService) {
+  constructor(public _cartService: CartService,
+    private _router: Router) {
   }
 
   ngOnInit() {
     this._cartService.getItems().subscribe((res: any) => {
       this.cartTotal = res && res.total;
       this.items = res && res.items;
+    });
+
+    this._cartService.cartEntity$.subscribe((res) => {
+      this.cartTotal = res && res.total || 0;
+      this.items = res && res.items || [];
     });
   }
 
@@ -29,18 +36,14 @@ export class GroCartComponent implements OnInit {
   }
 
   emptyCart() {
-    this._cartService.cartItems = [];
+    this._cartService.emptyCart();
   }
 
   placeOrder() {
-    let order = {
-      orderId: 123,
-      totalPrice: this._cartService.cartTotal,
-      items: this._cartService.cartItems,
-      orderType: 1
-    };
-    this._cartService.placeOrder(order).subscribe(() => {
+    this._cartService.placeOrder(this._cartService.cartEntity).subscribe(() => {
+      this._cartService.cartEntity$.next(null);
       // console.log('message ');
+      this._router.navigate(['/home']);
     });
   }
 

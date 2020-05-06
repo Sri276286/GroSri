@@ -24,9 +24,9 @@ export class AppComponent implements OnInit {
       }
     });
     // when browser refreshes
-    window.onload = () => {
-      console.log('browser refreshed');
-      this._cartService.getFromLocalStorage();
-    }
+    // window.onload = () => {
+    //   console.log('browser refreshed');
+    //   this._cartService.getFromLocalStorage();
+    // }
   }
 }

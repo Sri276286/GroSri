@@ -1,13 +1,18 @@
 {
-  "total": 1000,
+  "total": 480,
   "items": [
     {
       "storeInventoryProductId": 6,
-      "quantity": 0,
+      "quantity": 1,
       "mrp": 130,
       "price": 125,
       "weight": 500,
-      "unit": "g"
+      "unit": "g",
+      "itemShortDescription": "Udhayam - Moong Dhall",
+      "brandName": "Udhayam",
+      "productImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/pulses/udhayam_moong.jpg",
+      "max_quantity": 5,
+      "available_quantity": 15
     },
     {
       "storeInventoryProductId": 9,
@@ -15,15 +20,25 @@
       "mrp": 90,
       "price": 85,
       "weight": 500,
-      "unit": "g"
+      "unit": "g",
+      "itemShortDescription": "Udhayam - Moong Dhall",
+      "brandName": "Udhayam",
+      "productImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/pulses/udhayam_moong.jpg",
+      "max_quantity": 5,
+      "available_quantity": 15
     },
     {
       "storeInventoryProductId": 10,
-      "quantity": 0,
+      "quantity": 1,
       "mrp": 190,
       "price": 185,
       "weight": 1,
-      "unit": "kg"
+      "unit": "kg",
+      "itemShortDescription": "Udhayam - Moong Dhall",
+      "brandName": "Udhayam",
+      "productImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/pulses/udhayam_moong.jpg",
+      "max_quantity": 5,
+      "available_quantity": 15
     }
   ]
 }

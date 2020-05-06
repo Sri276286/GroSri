@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { ApiConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  cartItems = [];
   cartQuantity = 0;
-  cartTotal = 0;
+  cartEntity$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  cartEntity = {
+    total: 0,
+    items: []
+  };
 
   constructor(private _http: HttpClient) {
 
@@ -25,27 +28,27 @@ export class CartService {
     this.updateCart(item);
   }
 
-  updateCart(item) {
+  private updateCart(item) {
     console.log('item ', item);
-    // let itemRequired = this.getRequiredItem(item);
-    // console.log('itemRequired ', itemRequired);
-    // this.cartItems.push(itemRequired);
-    let itemIndex = this.cartItems.indexOf(item);
+    let itemIndex = this.cartEntity.items.indexOf(item);
     console.log('item index ', itemIndex);
     if (itemIndex === -1) {
-      this.cartItems = [...this.cartItems, item];
-      console.log('here ', this.cartItems);
+      this.cartEntity.items = [...this.cartEntity.items, item];
+      console.log('here ', this.cartEntity.items);
+      this.cartEntity.total += item.price;
       this.cartQuantity++;
     } else {
       if (item && item.quantity) {
-        this.cartItems[itemIndex] = item;
+        this.cartEntity.items[itemIndex] = item;
+        this.cartEntity.total += item.price;
       } else {
-        this.cartItems.splice(itemIndex, 1);
+        this.cartEntity.items.splice(itemIndex, 1);
+        this.cartEntity.total -= item.price;
         this.cartQuantity--;
       }
     }
-    this.cartTotal += item.price;
-    console.log('cart items ', this.cartItems);
+    console.log('cart items ', this.cartEntity.items);
+    this.cartEntity$.next(this.cartEntity);
     // set in local storage
     this.setInLocalStorage();
   }
@@ -58,7 +61,12 @@ export class CartService {
       "mrp": item.mrp,
       "price": item.price,
       "weight": item.weight,
-      "unit": item.unit
+      "unit": item.unit,
+      "productImgUrl": item.productImgUrl,
+      "itemShortDescription": item.itemShortDescription,
+      "brandName": item.brandName,
+      "max_quantity": item.max_quantity,
+      "available_quantity": item.available_quantity
     };
   }
 
@@ -76,6 +84,7 @@ export class CartService {
       this.getCartItems().subscribe((res: any) => {
         console.log('aaaaa ', res);
         if (res && res.total && res.items) {
+          this.cartEntity = res;
           localStorage.setItem('cartEntity', JSON.stringify(res));
           observer.next(res);
         } else {
@@ -89,32 +98,34 @@ export class CartService {
     });
   }
 
-  getCartItems() {
-    return this._http.get(ApiConfig.cartURL);
-  }
-
-  setInLocalStorage() {
-    let cartEntity: any = {};
-    cartEntity.total = this.cartTotal;
-    cartEntity.items = this.cartItems;
-    localStorage.setItem('cartEntity', JSON.stringify(cartEntity));
-  }
-
-  getCart() {
-    let cartEntity = localStorage.getItem('cartEntity');
-    let cart = cartEntity ? JSON.parse(cartEntity) : null;
-    return cart;
-  }
-
   getFromLocalStorage() {
     let cart = this.getCart();
+    console.log('cart ', cart);
     if (cart && cart.items && cart.items.length) {
       cart.items = this.mapCart(cart.items);
       this.postCartItems(cart).subscribe();
     }
   }
 
-  mapCart(cart) {
+  emptyCart() {
+    this.cartEntity$.next(null);
+  }
+
+  private getCartItems() {
+    return this._http.get(ApiConfig.cartURL);
+  }
+
+  private setInLocalStorage() {
+    localStorage.setItem('cartEntity', JSON.stringify(this.cartEntity));
+  }
+
+  private getCart() {
+    let cartEntity = localStorage.getItem('cartEntity');
+    let cart = cartEntity ? JSON.parse(cartEntity) : null;
+    return cart;
+  }
+
+  private mapCart(cart) {
     return cart.map(t => this.getRequiredItem(t));
   }
 
