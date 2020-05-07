@@ -100,10 +100,16 @@
     </div>
   </footer>
 </div>
-<div *ngIf="!items.length" style="height: 80vh;">
+<div *ngIf="!items.length && !isOrdered" style="height: 80vh;">
   <gro-page-error
     [message]="'There are no items in the cart. Add some.'"
     [actiontext]="'Start Shopping'"
+  ></gro-page-error>
+</div>
+<div *ngIf="isOrdered" style="height: 80vh;">
+  <gro-page-error
+    [message]="'Your order is placed successfully!'"
+    [actiontext]="'Home'"
   ></gro-page-error>
 </div>
 <gro-footer></gro-footer>

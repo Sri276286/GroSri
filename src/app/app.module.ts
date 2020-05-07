@@ -9,6 +9,7 @@ import { GroModule } from './gro/gro.module';
 import { StoreModule } from './store/store.module';
 import { GrosriCommonModule } from './common/common.module';
 import { ApiInterceptor } from './common/interceptors/api.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ApiInterceptor } from './common/interceptors/api.interceptor';
     GrosriCommonModule,
     GroModule,
     StoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }

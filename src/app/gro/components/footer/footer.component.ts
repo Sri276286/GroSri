@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -6,7 +6,14 @@ import { CartService } from '../../services/cart.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
 
-  constructor(public _cartService: CartService) {}
+  public _cartQuantity = 0;
+  constructor(public _cartService: CartService) { }
+
+  ngOnInit() {
+    this._cartService.cartQuantity$.subscribe((quantity) => {
+      this._cartQuantity = quantity;
+    });
+  }
 }

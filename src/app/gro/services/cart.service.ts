@@ -7,15 +7,15 @@ import { ApiConfig } from 'src/app/config/api.config';
   providedIn: 'root'
 })
 export class CartService {
-  cartQuantity = 0;
+  cartQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   cartEntity$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  cartEntity = {
+  public cartEntity = {
     total: 0,
     items: []
   };
+  private cartQuantity = 0;
 
   constructor(private _http: HttpClient) {
-
   }
 
   addItems(item) {
@@ -48,6 +48,7 @@ export class CartService {
       }
     }
     console.log('cart items ', this.cartEntity.items);
+    this.cartQuantity$.next(this.cartQuantity);
     this.cartEntity$.next(this.cartEntity);
     // set in local storage
     this.setInLocalStorage();
@@ -107,15 +108,11 @@ export class CartService {
     }
   }
 
-  emptyCart() {
-    this.cartEntity$.next(null);
-  }
-
   private getCartItems() {
     return this._http.get(ApiConfig.cartURL);
   }
 
-  private setInLocalStorage() {
+  setInLocalStorage() {
     localStorage.setItem('cartEntity', JSON.stringify(this.cartEntity));
   }
 
