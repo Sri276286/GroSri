@@ -1,0 +1,32 @@
+{
+  "orders": [
+    {
+      "orderId": "o1234",
+      "storeId": "s1",
+      "total": 340,
+      "status": "placed",
+      "no_of_items": 22
+    },
+    {
+      "orderId": "o4567",
+      "storeId": "s1",
+      "total": 1020,
+      "status": "delivered",
+      "no_of_items": 10
+    },
+    {
+      "orderId": "o3456",
+      "storeId": "s1",
+      "total": 570,
+      "status": "delivered",
+      "no_of_items": 12
+    },
+    {
+      "orderId": "o2345",
+      "storeId": "s1",
+      "total": 870,
+      "status": "delivered",
+      "no_of_items": 4
+    }
+  ]
+}

@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.mySignUpForm = this.fb.group({
-      storekeeper: [],
+      // storekeeper: [],
       name: ["", [Validators.required, Validators.minLength(6)]],
       pincode:["", [Validators.minLength(6), Validators.maxLength(6)]],
       email:["", [Validators.required, Validators.email]],

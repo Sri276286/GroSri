@@ -60,7 +60,7 @@ export class LoginService {
   }
 
   private getUser() {
-    return this._http.get(`${ApiConfig.userDetailsURL}/123`)
+    return this._http.get(`${ApiConfig.userDetailsURL}`)
       .pipe(map((user: any) => {
         console.log('user ', user);
         // login successful if there's a jwt token in the response
