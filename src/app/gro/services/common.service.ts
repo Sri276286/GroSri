@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   userLocation: string = '';
+  canProceedUpdatingCart: boolean = false;
+  proceedUpdatingCart$: Subject<boolean> = new Subject<boolean>();
+  ordersPlaced = [];
+  storesListed = [];
 
   handleUserStorage(property: string, value: any) {
     const profile = JSON.parse(localStorage.getItem('currentUser'));
@@ -19,5 +23,15 @@ export class CommonService {
         observer.next(true);
       }, 10 * 60 * 1000);
     });
+  }
+
+  getStoreDetailsFromId(id: string) {
+    console.log('stores listed ', this.storesListed);
+    return this.storesListed.find(t => t.id === +id);
+  }
+
+  getOrderDetailsFromId(id: string) {
+    console.log('orders placed ', this.ordersPlaced);
+    return this.ordersPlaced.find(t => t.orderId === id);
   }
 }

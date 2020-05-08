@@ -53,7 +53,7 @@
                   </button>
                 </div>
                 <div *ngIf="item.quantity">
-                  <button
+                  <!-- <button
                     class="minus_plus_but border border-danger rounded"
                     style="color: darkred;"
                     (click)="removeItems(item)"
@@ -74,7 +74,47 @@
                     (click)="addItems(item)"
                   >
                     +
-                  </button>
+                  </button> -->
+                  <div
+                    class="d-flex flex-row"
+                    style="
+                      opacity: 1;
+                      pointer-events: auto;
+                      border: 1px solid #d4d5d9;
+                    "
+                  >
+                    <button
+                      class="pl-2 pr-2"
+                      style="
+                        color: inherit;
+                        background: #fff;
+                        font-size: 24px;
+                        font-weight: 800;
+                        outline: 0;
+                        border: 0;
+                      "
+                      (click)="removeItems(item)"
+                    >
+                      -
+                    </button>
+                    <div class="pl-2 pr-2 pt-1 pb-1">
+                      <span>{{ item.quantity }}</span>
+                    </div>
+                    <button
+                      class="pl-2 pr-2"
+                      style="
+                        color: #60b246;
+                        background: #fff;
+                        font-size: 24px;
+                        font-weight: 800;
+                        outline: 0;
+                        border: 0;
+                      "
+                      (click)="addItems(item)"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

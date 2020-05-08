@@ -1,55 +1,70 @@
-<!-- <h1>Order Page</h1>
-<ng-container *ngFor="let order of _service.ordersPlaced">
-  <div style="border: 1px solid grey;" [routerLink]="['/order',order.orderId]">
-    <div>{{order.orderId}}</div>
-    <div>{{order.totalPrice}}</div>
-  </div>
-</ng-container>
- -->
 <ng-container [ngTemplateOutlet]="orderHeader"></ng-container>
-<ng-container *ngFor="let item of [].constructor(5)">
-  <div
-    class="card"
-    style="padding: 10px; margin-bottom: 10px;"
-    [routerLink]="['/order', 1]"
-  >
-    <div>
-      <div class="row">
-        <div class="col-8">
-          <h6>CropBox shop</h6>
-        </div>
-        <div class="col-4">
-          <h6 style="color: seagreen; float: right; font-weight: 400;">
-            Rs. 2349
-          </h6>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-8">
-        <h6 class="shop_location_date">perungudi</h6>
-      </div>
-      <div class="col-4">
-        <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
-        <h6 class="shop_location_date" style="float: right;">May-09</h6>
-      </div>
-    </div>
-    <hr class="hr_dashed" />
-    <div class="row" style="align-items: center;">
-      <div class="col" style="padding-left: 40px;">
-        <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
-      </div>
-      <div class="col">
-        <a class="reorder_report_a">REORDER</a>
-      </div>
-    </div>
-  </div>
+<h6>Current Orders</h6>
+<ng-container *ngFor="let order of current_orders">
+  <ng-template
+    [ngTemplateOutlet]="orderDisplay"
+    [ngTemplateOutletContext]="{ order: order }"
+  ></ng-template>
+</ng-container>
+<h6>Past Orders</h6>
+<ng-container *ngFor="let order of past_orders">
+  <ng-template
+    [ngTemplateOutlet]="orderDisplay"
+    [ngTemplateOutletContext]="{ order: order }"
+  ></ng-template>
 </ng-container>
 
 <ng-template #orderHeader>
   <div class="order-header-grid">
     <i class="fas fa-chevron-left" [routerLink]="['/home']"></i>
     <span>My Orders</span>
+  </div>
+</ng-template>
+
+<ng-template #orderDisplay let-order="order">
+  <div class="card" style="padding: 10px; margin-bottom: 10px;">
+    <div [routerLink]="['/order', order.orderId]">
+      <div class="row">
+        <div class="col-8">
+          <h6>{{ order.storeName }}</h6>
+        </div>
+        <div class="col-4">
+          <h6 style="color: seagreen; float: right; font-weight: 400;">
+            Rs. {{ order.total }}
+          </h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8">
+          <h6 class="shop_location_date">{{ order.storeAddress }}</h6>
+        </div>
+        <div class="col-4">
+          <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
+          <h6 class="shop_location_date" style="float: right;">
+            {{ order.no_of_items }} items
+          </h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h6 class="shop_location_date">
+            {{ order.date }}
+          </h6>
+        </div>
+      </div>
+    </div>
+    <hr class="hr_dashed" />
+    <div class="row" style="align-items: center;">
+      <!-- <div class="col" style="padding-left: 40px;">
+      <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
+    </div> -->
+      <div class="col" *ngIf="order.status !== 'placed'">
+        <a class="reorder_report_a">REORDER</a>
+      </div>
+      <div class="col" *ngIf="order.status === 'placed'">
+        <a class="reorder_report_a">Track Order</a>
+      </div>
+    </div>
   </div>
 </ng-template>

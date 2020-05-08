@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiConfig } from 'src/app/config/api.config';
+import { map } from 'rxjs/operators';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  storesListed = [];
-  constructor(private _http: HttpClient) {
-
+  constructor(private _http: HttpClient,
+    private _commonService: CommonService) {
   }
 
   /**
@@ -18,7 +19,11 @@ export class StoreService {
    */
   getStores(locationKey: string) {
     // return this._http.get('/api/stores');
-    return this._http.get(`${ApiConfig.storeListURL}/${locationKey}`);
+    return this._http.get(`${ApiConfig.storeListURL}/${locationKey}`)
+      .pipe(map((res: any) => {
+        const stores = res && res.storeDetails;
+        this._commonService.storesListed = stores;
+        return res;
+      }));
   }
-
 }

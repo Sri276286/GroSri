@@ -6,22 +6,31 @@
         <img [src]="store.storeImgUrl" class="img-fluid" alt="Store image" />
       </div>
       <div class="col-9">
-        <h6>{{ store.storeName }} | {{ store.storeCategory | titlecase }}</h6>
-        <h6 style="font-size: small; line-height: 1; font-weight: 400;">
-          {{ store.supplyItems | titlecase }}
-        </h6>
-        <h6 style="font-size: small; line-height: 1; font-weight: 400;">
-          {{ store.area | titlecase }}
-        </h6>
-        <h6>
-          {{ store.deliveryMethod }}
-        </h6>
+        <div class="row p-1">
+          <div class="col-8 h6">{{ store.storeName | titlecase }}</div>
+          <div class="col-4 text-right" style="font-style: italic;">
+            {{ store.storeCategory | titlecase }}
+          </div>
+        </div>
+        <div>
+          <h6 style="font-size: small; line-height: 1; font-weight: 400;">
+            {{ store.supplyItems | titlecase }}
+          </h6>
+        </div>
+        <hr />
+        <div>
+          <h6 style="font-size: small; line-height: 1; font-weight: 400;">
+            {{ store.area | titlecase }}
+          </h6>
+        </div>
       </div>
     </div>
   </div>
 </ng-container>
 <ng-container *ngIf="!storesListed.length">
   <gro-page-error
-    [message]="'We are working on getting some stores on boarded near you. Reach out to us if you want to refer some stores.'"
+    [message]="
+      'We are working on getting some stores on boarded near you. Reach out to us if you want to refer some stores.'
+    "
   ></gro-page-error>
 </ng-container>

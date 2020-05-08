@@ -1,0 +1,174 @@
+{
+  "status": "SUCCESS",
+  "code": 200,
+  "products": {
+    "Foodgrains, Oil and Masala": {
+      "Rice Products": [
+        {
+          "id": 1,
+          "storeDetailsId": 1,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Foodgrains, Oil and Masala",
+          "productSubCategory": "Rice Products",
+          "productSub2Category": null,
+          "productName": "Steam Rice",
+          "productImgUrl": null,
+          "brandName": "GSM",
+          "itemShortDescription": "GSM - Steam Rice",
+          "itemLongDescription": "GSM - Steam Rice Chennai",
+          "quantity": 0,
+          "storeInventoryProductId": 1,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 110.0,
+          "price": 105.0,
+          "weight": 25.0,
+          "unit": "kg",
+          "storeInventoryProductUnit": [
+            {
+              "id": 1,
+              "storeInventoryProductId": 1,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 110.0,
+              "price": 105.0,
+              "weight": 25.0,
+              "unit": "kg"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "storeDetailsId": 1,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Foodgrains, Oil and Masala",
+          "productSubCategory": "Rice Products",
+          "productSub2Category": null,
+          "productName": "Boiled Rice",
+          "productImgUrl": null,
+          "brandName": "GSM",
+          "itemShortDescription": "GSM - Boiled Rice",
+          "itemLongDescription": "GSM - Boiled Rice Chennai",
+          "quantity": 0,
+          "storeInventoryProductId": 2,
+          "max_quantity": 3,
+          "available_quantity": 5,
+          "mrp": 100.0,
+          "price": 98.0,
+          "weight": 25.0,
+          "unit": "kg",
+          "storeInventoryProductUnit": [
+            {
+              "id": 3,
+              "storeInventoryProductId": 2,
+              "max_quantity": 3,
+              "available_quantity": 5,
+              "mrp": 100.0,
+              "price": 98.0,
+              "weight": 25.0,
+              "unit": "kg"
+            },
+            {
+              "id": 4,
+              "storeInventoryProductId": 2,
+              "max_quantity": 3,
+              "available_quantity": 5,
+              "mrp": 1000.0,
+              "price": 980.0,
+              "weight": 50.0,
+              "unit": "kg"
+            },
+            {
+              "id": 5,
+              "storeInventoryProductId": 2,
+              "max_quantity": 3,
+              "available_quantity": 5,
+              "mrp": 1500.0,
+              "price": 1480.0,
+              "weight": 100.0,
+              "unit": "kg"
+            }
+          ]
+        }
+      ],
+      "Dal & Pulses": [
+        {
+          "id": 6,
+          "storeDetailsId": 1,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Foodgrains, Oil and Masala",
+          "productSubCategory": "Dal & Pulses",
+          "productSub2Category": null,
+          "productName": "Toor Dhall",
+          "productImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/pulses/udhayam_toor.jpg",
+          "brandName": "Udhayam",
+          "itemShortDescription": "Udhayam - Toor Dhall",
+          "itemLongDescription": "Udhayam - Toor Dhall in Chennai",
+          "storeInventoryProductId": 6,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 130.0,
+          "price": 125.0,
+          "weight": 500.0,
+          "unit": "g",
+          "quantity": 0,
+          "storeInventoryProductUnit": [
+            {
+              "id": 14,
+              "storeInventoryProductId": 6,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 130.0,
+              "price": 125.0,
+              "weight": 500.0,
+              "unit": "g"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "storeDetailsId": 1,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Foodgrains, Oil and Masala",
+          "productSubCategory": "Dal & Pulses",
+          "productSub2Category": null,
+          "productName": "Moong Dhall",
+          "productImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/pulses/udhayam_moong.jpg",
+          "brandName": "Udhayam",
+          "itemShortDescription": "Udhayam - Moong Dhall",
+          "itemLongDescription": "Udhayam - Moong Dhall in Chennai",
+          "storeInventoryProductId": 9,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 90.0,
+          "price": 85.0,
+          "weight": 500.0,
+          "unit": "g",
+          "quantity": 0,
+          "storeInventoryProductUnit": [
+            {
+              "id": 17,
+              "storeInventoryProductId": 9,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 90.0,
+              "price": 85.0,
+              "weight": 500.0,
+              "unit": "g"
+            },
+            {
+              "id": 18,
+              "storeInventoryProductId": 9,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 190.0,
+              "price": 185.0,
+              "weight": 1.0,
+              "unit": "kg"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

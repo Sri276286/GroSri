@@ -16,5 +16,6 @@ export class ApiConfig {
   static userDetailsURL: string = '/api/user'; // GET, POST
   static cartURL: string = '/api/cart'; // GET, POST
   static orderURL: string = '/api/order'; // GET, POST
+  static ordersListURL: string = '/api/orders'; // GET
 }
 

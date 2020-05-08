@@ -1,17 +1,38 @@
 <ng-container [ngTemplateOutlet]="orderDetailsHeader"></ng-container>
 <div>
-  <div style="background-color: #f8f9f9; padding: 10px; padding-top: 0px;">
+  <div style="background-color: #f8f9f9; padding: 10px; padding-top: 5px;">
     <div class="text-center">
-      <button class="btn btn-danger">
+      <button
+        class="btn btn-danger"
+        (click)="reorder()"
+        *ngIf="orderDetails && orderDetails.status === 'delivered'"
+      >
         Reorder
       </button>
+      <button
+        class="btn btn-danger"
+        (click)="reorder()"
+        *ngIf="orderDetails && orderDetails.status === 'placed'"
+      >
+        Track Order
+      </button>
     </div>
-    <div *ngFor="let item of [].constructor(10)">
+    <div class="card m-1 p-1" *ngIf="storeDetails && orderDetails">
+      <div class="row">
+        <div class="col-6 h6">{{ storeDetails.storeName | titlecase }}</div>
+        <div class="col-6 text-right">Rs.{{ orderDetails.total }}</div>
+      </div>
+      <div class="row">
+        <div class="col-6 h6">{{ storeDetails.area | titlecase }}</div>
+        <div class="col-6 text-right">{{ orderDetails.no_of_items }} items</div>
+      </div>
+    </div>
+    <div *ngFor="let item of items">
       <div class="card" style="margin-top: 10px;">
         <div class="row" style="padding: 10px;">
           <div class="col-3 no-right-padding">
             <img
-              src="https://cdn.grofers.com/app/images/category/cms_images/icon/icon_cat_16_v_3_500_1580063793.jpg"
+              [src]="item.productImgUrl"
               class="img-fluid"
               alt="Sample image"
             />
@@ -19,20 +40,24 @@
           <div class="col-9">
             <div>
               <h6>
-                Item Name
+                {{ item.itemShortDescription }}
               </h6>
               <h6 style="font-size: small; font-weight: 400;">
-                Brand Name with grams
+                {{ item.brandName }}
               </h6>
             </div>
             <div style="margin: 5px;">
-              <span>5 kg</span>
-            </div>
-            <div>
-              <div class="item_li_price">
-                <h5 name="item-price">
-                  Rs.200
-                </h5>
+              <div class="row">
+                <div class="col-6">
+                  <span
+                    >{{ item.weight }}{{ item.unit }}&nbsp;&times;&nbsp;{{
+                      item.quantity
+                    }}</span
+                  >
+                </div>
+                <div class="col-6">
+                  <span class="h5">Rs.{{ item.price * item.quantity }}</span>
+                </div>
               </div>
             </div>
           </div>

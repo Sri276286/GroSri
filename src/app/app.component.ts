@@ -23,10 +23,11 @@ export class AppComponent implements OnInit {
         this._cartService.getFromLocalStorage();
       }
     });
-    // when browser refreshes
-    // window.onload = () => {
-    //   console.log('browser refreshed');
-    //   this._cartService.getFromLocalStorage();
-    // }
+    this.init();
+  }
+
+  init() {
+    // load cart when application is loaded
+    this._cartService.getCartItems().subscribe();
   }
 }

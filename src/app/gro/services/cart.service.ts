@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ApiConfig } from 'src/app/config/api.config';
+import { map } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartReplaceDialogComponent } from '../components/floating-modal/cart-replace-dialog/replace-dialog.component';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +13,30 @@ import { ApiConfig } from 'src/app/config/api.config';
 export class CartService {
   cartQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   cartEntity$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public cartEntityMap = new Map();
   public cartEntity = {
+    storeId: null,
     total: 0,
     items: []
   };
   private cartQuantity = 0;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient,
+    private _modalService: NgbModal,
+    private _commonService: CommonService) {
+  }
+
+  resetCart() {
+    this.cartEntity$.next(null);
+    this.cartQuantity$.next(0);
+    this.cartEntityMap = new Map();
+    this.cartEntity = {
+      storeId: null,
+      total: 0,
+      items: []
+    };
+    this.cartQuantity = 0;
+    localStorage.removeItem('cartEntity');
   }
 
   addItems(item) {
@@ -30,6 +51,36 @@ export class CartService {
 
   private updateCart(item) {
     console.log('item ', item);
+    // check if already items presnt in cart (same or different store)
+    let cartEntityFromMap = this.checkCartByStoreId(item.storeDetailsId);
+    console.log('checkCartWithStore ', cartEntityFromMap);
+    console.log('cartEntity ', this.cartEntity);
+    if (cartEntityFromMap) {
+      this.cartEntity = cartEntityFromMap;
+      this.handleCartEntity(item);
+    } else {
+      // check if any store are in cart
+      let cartMapLength = this.cartEntityMap.size;
+      console.log('cart map length ', cartMapLength);
+      if (cartMapLength) {
+        this._commonService.canProceedUpdatingCart = false;
+        // show an alert to proceed
+        this.showAlert();
+        if (this._commonService.canProceedUpdatingCart) {
+          this.handleCartEntity(item);
+        }
+      } else {
+        // directly add items
+        this.handleCartEntity(item);
+      }
+    }
+  }
+
+  private checkCartByStoreId(id: string) {
+    return this.cartEntityMap.get(id);
+  }
+
+  private handleCartEntity(item) {
     let itemIndex = this.cartEntity.items.indexOf(item);
     console.log('item index ', itemIndex);
     if (itemIndex === -1) {
@@ -47,11 +98,14 @@ export class CartService {
         this.cartQuantity--;
       }
     }
-    console.log('cart items ', this.cartEntity.items);
-    this.cartQuantity$.next(this.cartQuantity);
-    this.cartEntity$.next(this.cartEntity);
-    // set in local storage
+    // Add store id
+    this.cartEntity.storeId = item.storeDetailsId;
+    // Map cart with id
+    this.cartEntityMap.set(item.storeDetailsId, this.cartEntity);
+    // save in local storage
     this.setInLocalStorage();
+
+    this.manageCart(this.cartQuantity, this.cartEntity);
   }
 
   private getRequiredItem(item) {
@@ -80,25 +134,6 @@ export class CartService {
     return this._http.post(ApiConfig.cartURL, cart);
   }
 
-  getItems() {
-    return new Observable((observer) => {
-      this.getCartItems().subscribe((res: any) => {
-        console.log('aaaaa ', res);
-        if (res && res.total && res.items) {
-          this.cartEntity = res;
-          localStorage.setItem('cartEntity', JSON.stringify(res));
-          observer.next(res);
-        } else {
-          let cart = this.getCart();
-          observer.next(cart);
-        }
-      }, () => {
-        let cart = this.getCart();
-        observer.next(cart);
-      });
-    });
-  }
-
   getFromLocalStorage() {
     let cart = this.getCart();
     console.log('cart ', cart);
@@ -108,12 +143,31 @@ export class CartService {
     }
   }
 
-  private getCartItems() {
-    return this._http.get(ApiConfig.cartURL);
+  getCartItems() {
+    return this._http.get(ApiConfig.cartURL)
+      .pipe(map((res: any) => {
+        if (res && res.total && res.items) {
+          this.cartEntityMap.set(res.storeId, res);
+          localStorage.setItem(`cartEntity`, JSON.stringify(res));
+          this.manageCart(res.items.length, res);
+        } else {
+          let cart = this.getCart();
+          if (cart) {
+            this.cartEntityMap.set(cart.storeId, cart);
+            this.manageCart(cart.items.length, cart);
+          }
+        }
+      }, () => {
+        let cart = this.getCart();
+        if (cart) {
+          this.cartEntityMap.set(cart.storeId, cart);
+          this.manageCart(cart.items.length, cart);
+        }
+      }));
   }
 
   setInLocalStorage() {
-    localStorage.setItem('cartEntity', JSON.stringify(this.cartEntity));
+    localStorage.setItem(`cartEntity`, JSON.stringify(this.cartEntity));
   }
 
   private getCart() {
@@ -124,6 +178,15 @@ export class CartService {
 
   private mapCart(cart) {
     return cart.map(t => this.getRequiredItem(t));
+  }
+
+  private manageCart(cartQuantity: number, cartEntity: any) {
+    this.cartEntity$.next(cartEntity);
+    this.cartQuantity$.next(cartQuantity);
+  }
+
+  public showAlert() {
+    this._modalService.open(CartReplaceDialogComponent);
   }
 
 }

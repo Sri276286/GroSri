@@ -22,6 +22,7 @@ export class StoreItemsService {
         console.log('res ', res);
         if (res && res.products) {
           this.storeProductsList = res && res.products;
+          this.categories = [];
           this.mapProducts(res.products);
           return true;
         } else {

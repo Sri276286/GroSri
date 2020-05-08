@@ -8,7 +8,7 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 const json = bodyParser.json();
 
 router.get('/cart', (req, res) => {
-  res.json(mockCart);
+  res.json({});
 });
 
 router.post('/cart', urlEncodedParser, json, (req, res) => {

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FloatingModalComponent } from '../floating-modal/floating-modal.component';
 
 @Component({
   selector: 'gro-cart',
@@ -15,17 +13,13 @@ export class GroCartComponent implements OnInit {
   cartTotal = 0;
   isOrdered: boolean = false;
   constructor(public _cartService: CartService,
-    private _router: Router,
-    private _modalService: NgbModal) {
+    private _router: Router) {
   }
 
   ngOnInit() {
-    this._cartService.getItems().subscribe((res: any) => {
-      this.cartTotal = res && res.total;
-      this.items = res && res.items;
-    });
-
     this._cartService.cartEntity$.subscribe((res) => {
+      this._cartService.cartEntity = res;
+      console.log('res cart ', res)
       this.cartTotal = res && res.total || 0;
       this.items = res && res.items || [];
     });
@@ -40,28 +34,20 @@ export class GroCartComponent implements OnInit {
   }
 
   emptyCart() {
-    this.resetCart();
+    this._cartService.resetCart();
   }
 
   placeOrder() {
     const isLoggedIn = localStorage.getItem('auth_token');
     if (isLoggedIn) {
-      this._cartService.placeOrder(this._cartService.cartEntity).subscribe(() => {
-        // console.log('message ');
-        // this._router.navigate(['/home']);
-        // this._modalService.open(FloatingModalComponent);
-        this.resetCart();
-        this.isOrdered = true;
-      });
+      console.log('orderr place ', this._cartService.cartEntity);
+        this._cartService.placeOrder(this._cartService.cartEntity).subscribe(() => {
+          this._cartService.resetCart();
+          this.isOrdered = true;
+        });
     } else {
       this._router.navigate(['/login']);
     }
-  }
-
-  private resetCart() {
-    this._cartService.cartEntity$.next(null);
-    this._cartService.cartQuantity$.next(0);
-    this._cartService.setInLocalStorage();
   }
 
 }
