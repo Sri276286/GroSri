@@ -1,0 +1,42 @@
+{
+  "categoryId": "c1",
+  "categoryName": "Grocery",
+  "storeDetails": [
+    {
+      "id": 1,
+      "storeName": "thirumalai store",
+      "storeCategory": "Grocery",
+      "supplyItems": "Rice, Dal, Pulses and Others",
+      "storeImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/tirumalai_store.jpg",
+      "rating": 4,
+      "flatNo": "26",
+      "street": "5th Cross Street",
+      "area": "Lakshmi Nagar, Porur",
+      "city": "chennai",
+      "state": "tamilnadu",
+      "country": "India",
+      "pincode": "600116",
+      "geolocation": null,
+      "landmark": null,
+      "deliveryMethod": "PARTNER_DELIVERY"
+    },
+    {
+      "id": 8,
+      "storeName": "Malini store",
+      "storeCategory": "Grocery",
+      "supplyItems": "Rice, Dal, Pulses and Others",
+      "storeImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/deepak_store.jpg",
+      "rating": 4,
+      "flatNo": "26",
+      "street": "5th Cross Street",
+      "area": "Lakshmi Nagar, Porur",
+      "city": "chennai",
+      "state": "tamilnadu",
+      "country": "India",
+      "pincode": "600116",
+      "geolocation": null,
+      "landmark": null,
+      "deliveryMethod": "PICK_UP_ONLY"
+    }
+  ]
+}

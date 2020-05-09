@@ -5,6 +5,7 @@ const userRouter = require('./routes/user');
 const storeRouter = require('./routes/store-list');
 // const searchRouter = require('./routes/search');
 const cartRouter = require('./routes/cart');
+const categoryRouter = require('./routes/store-category');
 const app = express();
 
 // listen to port
@@ -18,4 +19,5 @@ app.use('/api', userRouter);
 app.use('/api', storeRouter);
 // app.use('/api', searchRouter);
 app.use('/api', cartRouter);
+app.use('/api', categoryRouter);
 module.exports = app;

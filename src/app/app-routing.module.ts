@@ -10,9 +10,11 @@ import { LoginComponent } from './common/components/login/login.component';
 import { GroStoreDetailComponent } from './gro/components/store/store-details/store-detail.component';
 import { StoreDashboardComponent } from './store/components/dashboard/dashboard.component';
 import { ViewOrderComponent } from './store/components/view-order/view-order.component';
+import { GroCategoryStoreComponent } from './gro/components/category/category-stores/category-store.component';
 
 const routes: Routes = [
   { path: 'home', component: GroHomeComponent },
+  { path: 'category/:id', component: GroCategoryStoreComponent },
   { path: 'store/:id', component: GroStoreDetailComponent },
   { path: 'cart', component: GroCartComponent },
   {

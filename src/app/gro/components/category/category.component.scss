@@ -6,10 +6,6 @@
   padding-right: 0px;
 }
 
-.categories .card, .categories .card-body {
-  width: 30%;
-}
-
 .categories {
   width: 100%;
   overflow-x: scroll;
@@ -18,15 +14,11 @@
 }
 
 .categories .card {
-  box-shadow: 0 0 4px darkred;
-  border: 0px;
+  width: 30%;
+  border: 1px solid grey;
   height: 100px;
   display: inline-block;
-  margin: 5px;
+  margin: 3px;
 }
 
-
-.categories .card-body {
-  word-wrap: break-word;
-}
 

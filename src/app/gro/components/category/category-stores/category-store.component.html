@@ -1,0 +1,6 @@
+<div class="category-store-header-grid">
+  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
+  <span *ngIf="categoryName">{{categoryName}}</span>
+</div>
+<gro-store [stores]="categoryStores"></gro-store>
+<gro-footer></gro-footer>
