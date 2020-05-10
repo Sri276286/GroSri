@@ -1,0 +1,78 @@
+<ng-container *ngFor="let item of items">
+  <div class="card" style="margin-top: 10px;">
+    <div class="row" style="padding: 10px;">
+      <div class="col-4 pr-0">
+        <img [src]="item.productImgUrl" class="img-fluid" alt="Sample image" />
+      </div>
+      <div class="col-8">
+        <h6>
+          {{ item.itemShortDescription }}
+        </h6>
+        <h6 style="font-size: small; font-weight: 400;">
+          {{ item.brandName }}
+        </h6>
+        <ng-container *ngIf="item.storeInventoryProductUnit.length > 1">
+          <select
+            class="form-control form-control-sm card_item_view_sbox"
+            name="item-select"
+            id="item-select"
+            [ngModel]="item.weight"
+            (ngModelChange)="onWeightChange($event, item)"
+          >
+            <option
+              [ngValue]="val.weight"
+              *ngFor="let val of item.storeInventoryProductUnit"
+              >{{ val.weight }} {{ val.unit }}</option
+            >
+          </select>
+        </ng-container>
+        <ng-container *ngIf="item.storeInventoryProductUnit.length === 1">
+          {{ item.weight }}
+          {{ item.unit }}
+        </ng-container>
+        <div style="display: flex;">
+          <div style="padding-right: 20px;">
+            <h5 name="item-price" [(ngModel)]="item.price" ngDefaultControl>
+              Rs.{{ item.price }}
+            </h5>
+          </div>
+          <div style="flex-grow: 50%;">
+            <ng-container *ngIf="!item.quantity">
+              <button
+                style="width: 100px;"
+                class="btn btn-primary btn-sm btn-info"
+                (click)="addItems(item)"
+              >
+                ADD+
+              </button>
+            </ng-container>
+            <ng-container *ngIf="item.quantity">
+              <button
+                class="minus_plus_but border border-danger rounded"
+                style="color: darkred;"
+                (click)="removeItems(item)"
+              >
+                -
+              </button>
+              <input
+                type="text"
+                class="miuns_plus_input"
+                placeholder="1"
+                id="p_10000097"
+                [value]="item.quantity"
+                maxlength="2"
+              />
+              <button
+                class="minus_plus_but border border-success rounded"
+                style="color: rgb(7, 119, 7);"
+                (click)="addItems(item)"
+              >
+                +
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

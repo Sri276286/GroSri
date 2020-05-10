@@ -1,0 +1,32 @@
+<!-- Search Modal -->
+<div
+  class="modal search-store fade"
+  id="searchStoreModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchStoreModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="search-store-grid">
+        <button class="btn btn-light back-link">
+          <i class="fas fa-chevron-left" data-dismiss="modal"></i>
+        </button>
+        <input
+          [formControl]="queryField"
+          class="form-control search-store-input"
+          type="search"
+          placeholder="Search for products"
+          aria-label="Search"
+          autofocus
+        />
+      </div>
+      <div>
+        <gro-store-list [items]="results"></gro-store-list>
+      </div>
+      <gro-cart-bar></gro-cart-bar>
+    </div>
+  </div>
+</div>
+<!-- Search Modal Ends Here -->

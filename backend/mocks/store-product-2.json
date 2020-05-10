@@ -1,6 +1,9 @@
 {
   "status": "SUCCESS",
   "code": 200,
+  "store_details": {
+    "storeDetailsId": 8
+  },
   "products": {
     "Vegetables and Fruits": {
       "Vegetables": [

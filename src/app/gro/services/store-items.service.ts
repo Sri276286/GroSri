@@ -12,6 +12,7 @@ export class StoreItemsService {
   categories = [];
   subCategoriesWithCategory = {};
   storeProductsList;
+  private productsList = [];
   constructor(private _http: HttpClient) {
 
   }
@@ -21,9 +22,11 @@ export class StoreItemsService {
       .pipe(map((res: any) => {
         console.log('res ', res);
         if (res && res.products) {
-          this.storeProductsList = res && res.products;
+          // map products with cart for quantity
+          let result = this.mapWithCart(res);
+          this.storeProductsList = result && result.products;
           this.categories = [];
-          this.mapProducts(res.products);
+          this.mapProducts(result.products);
           return true;
         } else {
           return false;
@@ -31,11 +34,51 @@ export class StoreItemsService {
       }));
   }
 
-  mapProducts(itemsRes: any) {
+  private mapProducts(itemsRes: any) {
+    this.productsList = [];
     for (let category in itemsRes) {
       this.categories = [...this.categories, category];
       this.getItemsObjectOnCategory(category);
+      for (let subcategory in itemsRes[category]) {
+        this.productsList = [...this.productsList, ...itemsRes[category][subcategory]];
+      }
     }
+    console.log('products list ', this.productsList);
+  }
+
+  public searchStore(searchInput: string): Observable<any> {
+    const searchResults = this.productsList.filter((t) => {
+      const pattern = new RegExp(searchInput, 'gi');
+      return pattern.test(t.productName) || pattern.test(t.brandName) || pattern.test(t.itemShortDescription);
+    });
+    return of(searchResults);
+  }
+
+  private mapWithCart(result) {
+    let cart = JSON.parse(localStorage.getItem('cartEntity'));
+    const products = result && result.products;
+    if (cart && cart.storeId
+      && result.store_details
+      && cart.storeId === result.store_details.storeDetailsId) {
+      cart.items.forEach((item) => {
+        for (let category in products) {
+          for (let sub in products[category]) {
+            products[category][sub].map((t) => {
+              if (t.id === item.storeInventoryProductId) {
+                t.quantity = item.quantity;
+                t.weight = item.weight;
+                t.unit = item.unit;
+                t.mrp = item.mrp;
+                t.price = item.price;
+              }
+              return t;
+            });
+          }
+        }
+      });
+    }
+    console.log('res ', result);
+    return result;
   }
 
   /**
@@ -57,10 +100,6 @@ export class StoreItemsService {
     console.log('list ', category, subCats);
     this.subCategoriesWithCategory[category] = subCats;
     console.log('sub categ ', this.subCategoriesWithCategory);
-  }
-
-  private getSubCategoryWithCategory(category) {
-    return this.subCategoriesWithCategory[category];
   }
 
   private getItemsObjectOnCategSubCategory(category, subcategory) {

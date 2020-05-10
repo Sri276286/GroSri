@@ -1,6 +1,9 @@
 {
   "status": "SUCCESS",
   "code": 200,
+  "store_details": {
+    "storeDetailsId": 1
+  },
   "products": {
     "Foodgrains, Oil and Masala": {
       "Rice Products": [

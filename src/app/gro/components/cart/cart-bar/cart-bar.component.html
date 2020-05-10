@@ -1,0 +1,6 @@
+<div class="display-cart-grid" *ngIf="cartTotal && quantity">
+  <div>{{ cartQuantity }} | Rs.{{ cartTotal }}</div>
+  <div [routerLink]="['/cart']" data-dismiss="modal">
+    View Cart <i class="fas fa-shopping-basket"></i>
+  </div>
+</div>

@@ -26,6 +26,14 @@ export class CartService {
     private _commonService: CommonService) {
   }
 
+  /**
+   * Push to BE when item is added or removed
+   * @param item
+   */
+  postToCart(item) {
+    return this._http.post(ApiConfig.cartURL, item);
+  }
+
   resetCart() {
     this.cartEntity$.next(null);
     this.cartQuantity$.next(0);
@@ -66,9 +74,11 @@ export class CartService {
         this._commonService.canProceedUpdatingCart = false;
         // show an alert to proceed
         this.showAlert();
-        if (this._commonService.canProceedUpdatingCart) {
-          this.handleCartEntity(item);
-        }
+        this._commonService.proceedUpdatingCart$.subscribe((proceed) => {
+          if (proceed) {
+            this.handleCartEntity(item);
+          }
+        });
       } else {
         // directly add items
         this.handleCartEntity(item);
@@ -81,7 +91,8 @@ export class CartService {
   }
 
   private handleCartEntity(item) {
-    let itemIndex = this.cartEntity.items.indexOf(item);
+    console.log('item handle ', item);
+    let itemIndex = this.cartEntity && this.cartEntity.items.indexOf(item);
     console.log('item index ', itemIndex);
     if (itemIndex === -1) {
       this.cartEntity.items = [...this.cartEntity.items, item];
@@ -129,17 +140,12 @@ export class CartService {
     return this._http.post('/api/order', order);
   }
 
-  postCartItems(cart) {
-    console.log('cart ', cart);
-    return this._http.post(ApiConfig.cartURL, cart);
-  }
-
   getFromLocalStorage() {
     let cart = this.getCart();
     console.log('cart ', cart);
     if (cart && cart.items && cart.items.length) {
       cart.items = this.mapCart(cart.items);
-      this.postCartItems(cart).subscribe();
+      this.postToCart(cart).subscribe();
     }
   }
 

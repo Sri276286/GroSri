@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { map } from 'rxjs/operators';
 import { ApiConfig } from 'src/app/config/api.config';
 import { CommonService } from '../../gro/services/common.service';
+import { CartService } from 'src/app/gro/services/cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class LoginService {
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
   constructor(private _http: HttpClient,
-    private _commonService: CommonService) {
+    private _commonService: CommonService,
+    private _cartService: CartService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
@@ -50,6 +52,8 @@ export class LoginService {
     ).pipe(map((res: any) => {
       if (res && res.accessToken) {
         localStorage.setItem('auth_token', res.accessToken);
+        // post cart once login
+        this._cartService.getFromLocalStorage();
         // get user details once login is successful
         this.getUser().subscribe();
         return res;

@@ -20,9 +20,7 @@ export class GroStoreDetailComponent implements OnInit {
   @ViewChild('itemslist') itemslist;
   private _subscriptions: Subscription[] = [];
   constructor(public _storeItemsService: StoreItemsService,
-    private _cartService: CartService,
     private _route: ActivatedRoute) {
-
   }
 
   ngOnInit() {
@@ -37,24 +35,6 @@ export class GroStoreDetailComponent implements OnInit {
           }
         })
     );
-  }
-
-  compareObjects(o1: any, o2: any): boolean {
-    return o1 && o2 ? o1.id === o2.id : o1 === o2;
-  }
-
-  onWeightChange(val, item) {
-    let weightEntity = item.storeInventoryProductUnit.find(t => t.weight === val);
-    item.weight = weightEntity.weight;
-    item.price = weightEntity.price;
-  }
-
-  addItems(item) {
-    this._cartService.addItems(item);
-  }
-
-  removeItems(item) {
-    this._cartService.removeItems(item);
   }
 
   toggleCategory(step) {

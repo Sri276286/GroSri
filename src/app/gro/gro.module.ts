@@ -21,6 +21,9 @@ import { PageErrorComponent } from './components/page-error/page-error.component
 import { GroContactComponent } from './components/contact/contact.component';
 import { CartReplaceDialogComponent } from './components/floating-modal/cart-replace-dialog/replace-dialog.component';
 import { GroCategoryStoreComponent } from './components/category/category-stores/category-store.component';
+import { SearchStoreComponent } from './components/store/store-details/search-store/search-store.component';
+import { StoreListComponent } from './components/store/store-details/store-list/store-list.component';
+import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { GroCategoryStoreComponent } from './components/category/category-stores
     PageErrorComponent,
     GroContactComponent,
     CartReplaceDialogComponent,
-    GroCategoryStoreComponent
+    GroCategoryStoreComponent,
+    SearchStoreComponent,
+    StoreListComponent,
+    CartBarComponent
   ],
   exports: [
     GroComponent,
@@ -61,7 +67,10 @@ import { GroCategoryStoreComponent } from './components/category/category-stores
     PageErrorComponent,
     GroContactComponent,
     CartReplaceDialogComponent,
-    GroCategoryStoreComponent
+    GroCategoryStoreComponent,
+    SearchStoreComponent,
+    StoreListComponent,
+    CartBarComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent
