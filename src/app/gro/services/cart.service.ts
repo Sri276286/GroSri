@@ -92,9 +92,11 @@ export class CartService {
 
   private handleCartEntity(item) {
     console.log('item handle ', item);
-    let itemIndex = this.cartEntity && this.cartEntity.items.indexOf(item);
+    let isItemInCart = this.cartEntity && this.cartEntity.items.find(t => t.id === item.id);
+    let itemIndex = isItemInCart && this.cartEntity && this.cartEntity.items.indexOf(isItemInCart);
     console.log('item index ', itemIndex);
-    if (itemIndex === -1) {
+    console.log('isItemInCart ', isItemInCart);
+    if (!isItemInCart) {
       this.cartEntity.items = [...this.cartEntity.items, item];
       console.log('here ', this.cartEntity.items);
       this.cartEntity.total += item.price;
@@ -109,6 +111,7 @@ export class CartService {
         this.cartQuantity--;
       }
     }
+    console.log('cart entity ', this.cartEntity);
     // Add store id
     this.cartEntity.storeId = item.storeDetailsId;
     // Map cart with id

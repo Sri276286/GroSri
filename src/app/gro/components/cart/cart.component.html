@@ -1,4 +1,5 @@
 <div class="cart-header-grid">
+  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
   <span>Review Basket</span>
 </div>
 <div *ngIf="items.length">
@@ -14,7 +15,7 @@
       </button>
     </div>
     <div *ngFor="let item of items">
-      <div class="card" style="margin-top: 10px;">
+      <div class="card" style="margin-top: 5px;margin-bottom:5px;">
         <div class="row" style="padding: 10px;">
           <div class="col-3 no-right-padding">
             <img
@@ -131,7 +132,7 @@
   >
     <div class="footer-flex-container-checkout">
       <div class="flex-item-checkout">
-        <span> Rs. {{ cartTotal }}</span>
+        <span class="h4"> Rs. {{ cartTotal }}</span>
         <!-- <span style="color: rgb(132, 194, 37);">Saved Rs 331.5</span> -->
       </div>
       <div class="flex-item-checkout-button">
@@ -152,4 +153,4 @@
     [actiontext]="'Home'"
   ></gro-page-error>
 </div>
-<gro-footer></gro-footer>
+<!-- <gro-footer></gro-footer> -->
