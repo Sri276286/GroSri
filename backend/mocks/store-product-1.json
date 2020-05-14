@@ -2,7 +2,9 @@
   "status": "SUCCESS",
   "code": 200,
   "store_details": {
-    "storeDetailsId": 1
+    "storeDetailsId": 1,
+    "storename": "Thirumalai Store",
+    "mark_favorite": 0
   },
   "products": {
     "Foodgrains, Oil and Masala": {

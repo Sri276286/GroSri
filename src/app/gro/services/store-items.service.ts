@@ -20,6 +20,7 @@ export class StoreItemsService {
   getItems(id) {
     return this._http.get(`${ApiConfig.storeProductsURL}/${id}`)
       .pipe(map((res: any) => {
+
         console.log('res ', res);
         if (res && res.products) {
           // map products with cart for quantity
@@ -27,10 +28,9 @@ export class StoreItemsService {
           this.storeProductsList = result && result.products;
           this.categories = [];
           this.mapProducts(result.products);
-          return true;
-        } else {
-          return false;
         }
+        console.log('reeeesss ', res);
+        return res;
       }));
   }
 

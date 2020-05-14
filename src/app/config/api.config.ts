@@ -18,5 +18,6 @@ export class ApiConfig {
   static cartURL: string = '/api/cart'; // GET, POST
   static orderURL: string = '/api/order'; // GET, POST
   static ordersListURL: string = '/api/orders'; // GET
+  static favoriteStoreURL: string = '/api/store/favorite'; // POST
 }
 

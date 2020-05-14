@@ -1,9 +1,15 @@
 <div class="store-header-grid">
   <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
-  <span>Store Name</span>
+  <span>{{ storeName }}</span>
   <div class="text-right">
     <i
-      class="fas fa-search"
+      class="fas fa-heart"
+      [ngStyle]="{ color: isFavoriteStore ? 'red' : 'white' }"
+      (click)="makeFavorite()"
+      *ngIf="user"
+    ></i>
+    <i
+      class="fas fa-search pl-3"
       data-toggle="modal"
       data-target="#searchStoreModal"
     ></i>

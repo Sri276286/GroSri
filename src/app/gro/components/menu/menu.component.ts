@@ -20,6 +20,7 @@ export class MenuComponent {
   logout() {
     // TODO: Save cart to backend
     localStorage.clear();
+    // this._loginService.currentUserValue.next(null);
     this._route.navigate(['/login']);
   }
 }

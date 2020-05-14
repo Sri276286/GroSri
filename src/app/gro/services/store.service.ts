@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiConfig } from 'src/app/config/api.config';
+import { ApiConfig } from '../../config/api.config';
 import { map } from 'rxjs/operators';
 import { CommonService } from './common.service';
 
@@ -25,5 +25,10 @@ export class StoreService {
         this._commonService.storesListed = stores;
         return res;
       }));
+  }
+
+  markFavorite(storeEntity: any) {
+    console.log('url ', ApiConfig.favoriteStoreURL);
+    return this._http.post(ApiConfig.favoriteStoreURL, storeEntity);
   }
 }
