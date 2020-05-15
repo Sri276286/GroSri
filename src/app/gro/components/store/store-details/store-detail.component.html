@@ -6,7 +6,7 @@
       class="fas fa-heart"
       [ngStyle]="{ color: isFavoriteStore ? 'red' : 'white' }"
       (click)="makeFavorite()"
-      *ngIf="user"
+      *ngIf="isLoggedIn"
     ></i>
     <i
       class="fas fa-search pl-3"

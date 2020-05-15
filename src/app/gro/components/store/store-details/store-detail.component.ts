@@ -21,7 +21,7 @@ export class GroStoreDetailComponent implements OnInit {
   };
   public storeName: string = '';
   public isFavoriteStore: boolean = false;
-  user;
+  public isLoggedIn: boolean = false;;
   @ViewChild('itemslist') itemslist;
   private _subscriptions: Subscription[] = [];
   constructor(public _storeItemsService: StoreItemsService,
@@ -31,10 +31,7 @@ export class GroStoreDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._loginService.getCurrentUser().subscribe((user) => {
-      console.log('user ', user);
-      this.user = user;
-    });
+    this.isLoggedIn = this._loginService.isLogin();
     this._route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       this._subscriptions.push(

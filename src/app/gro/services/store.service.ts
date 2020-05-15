@@ -28,7 +28,10 @@ export class StoreService {
   }
 
   markFavorite(storeEntity: any) {
-    console.log('url ', ApiConfig.favoriteStoreURL);
     return this._http.post(ApiConfig.favoriteStoreURL, storeEntity);
+  }
+
+  getFavStores() {
+    return this._http.get(ApiConfig.favoriteStoreURL);
   }
 }

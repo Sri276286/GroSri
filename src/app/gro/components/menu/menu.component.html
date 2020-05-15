@@ -9,7 +9,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="menuModalLabel" *ngIf="user">
+        <h5 class="modal-title" id="menuModalLabel" *ngIf="user && isLoggedIn">
           Hello {{ user.name }}
         </h5>
         <button
@@ -31,12 +31,10 @@
           SignUp
         </button>
       </div>
-      <div class="modal-body" *ngIf="user">
+      <div class="modal-body" *ngIf="isLoggedIn">
         <ul class="menu-list">
           <li class="menu-list-item">
-            <span [routerLink]="['/home']" data-dismiss="modal"
-              >Home</span
-            >
+            <span [routerLink]="['/home']" data-dismiss="modal">Home</span>
           </li>
           <li class="menu-list-item">
             <span [routerLink]="['/order']" data-dismiss="modal"
@@ -46,10 +44,21 @@
           <li class="menu-list-item">
             <span [routerLink]="['/cart']" data-dismiss="modal">My Cart</span>
           </li>
+          <hr />
+          <li class="menu-list-item">
+            <span [routerLink]="['/fav-stores']" data-dismiss="modal"
+              >Favorites</span
+            >
+          </li>
         </ul>
       </div>
       <div class="modal-footer" *ngIf="user">
-        <button type="button" class="btn btn-primary" (click)="logout()" data-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="logout()"
+          data-dismiss="modal"
+        >
           Logout
         </button>
       </div>

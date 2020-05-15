@@ -24,6 +24,7 @@ import { GroCategoryStoreComponent } from './components/category/category-stores
 import { SearchStoreComponent } from './components/store/store-details/search-store/search-store.component';
 import { StoreListComponent } from './components/store/store-details/store-list/store-list.component';
 import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component';
+import { FavoriteStoreComponent } from './components/store/favorite-store/favorite-store.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component'
     GroCategoryStoreComponent,
     SearchStoreComponent,
     StoreListComponent,
-    CartBarComponent
+    CartBarComponent,
+    FavoriteStoreComponent
   ],
   exports: [
     GroComponent,
@@ -70,7 +72,8 @@ import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component'
     GroCategoryStoreComponent,
     SearchStoreComponent,
     StoreListComponent,
-    CartBarComponent
+    CartBarComponent,
+    FavoriteStoreComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent

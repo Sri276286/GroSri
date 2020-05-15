@@ -23,6 +23,10 @@ export class LoginService {
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
+  public isLogin() {
+    const auth_token = localStorage.getItem('auth_token');
+    return auth_token ? true : false;
+  }
   public getCurrentUser(): Observable<any> {
     return this.currentUser$;
   }

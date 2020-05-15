@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent {
   user;
+  isLoggedIn: boolean = false;
   constructor(private _loginService: LoginService,
     private _route: Router) {
     // this.user = this._loginService.currentUserValue;
     this._loginService.getCurrentUser().subscribe((user) => {
       this.user = user;
     });
+    this.isLoggedIn = this._loginService.isLogin();
   }
 
   logout() {
-    // TODO: Save cart to backend
     localStorage.clear();
-    // this._loginService.currentUserValue.next(null);
     this._route.navigate(['/login']);
   }
 }

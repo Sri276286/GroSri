@@ -1,4 +1,3 @@
-<span style="font-size: 20px;">All stores near you</span>
 <ng-container *ngFor="let store of storesListed">
   <div class="card" style="padding-bottom: 10px;">
     <div class="row" [routerLink]="['/store', store.id]">
