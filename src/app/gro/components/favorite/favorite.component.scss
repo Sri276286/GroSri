@@ -1,13 +1,13 @@
-.categories {
+.favorites {
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
 }
 
-.categories .card {
+.favorites .card {
   width: 30%;
-  border: 1px solid grey;
+  // border: 1px solid grey;
   height: 100px;
   display: inline-block;
   margin: 3px;

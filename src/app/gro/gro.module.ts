@@ -25,6 +25,7 @@ import { SearchStoreComponent } from './components/store/store-details/search-st
 import { StoreListComponent } from './components/store/store-details/store-list/store-list.component';
 import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component';
 import { FavoriteStoreComponent } from './components/store/favorite-store/favorite-store.component';
+import { GroFavoriteComponent } from './components/favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FavoriteStoreComponent } from './components/store/favorite-store/favori
     SearchStoreComponent,
     StoreListComponent,
     CartBarComponent,
-    FavoriteStoreComponent
+    FavoriteStoreComponent,
+    GroFavoriteComponent
   ],
   exports: [
     GroComponent,
@@ -73,7 +75,8 @@ import { FavoriteStoreComponent } from './components/store/favorite-store/favori
     SearchStoreComponent,
     StoreListComponent,
     CartBarComponent,
-    FavoriteStoreComponent
+    FavoriteStoreComponent,
+    GroFavoriteComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent

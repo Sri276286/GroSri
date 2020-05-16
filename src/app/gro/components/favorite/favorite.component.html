@@ -1,0 +1,15 @@
+<span style="font-size: 20px;">Top picks for you</span>
+<div class="favorites">
+  <div
+    class="card text-center"
+    [routerLink]="['/store', item.id]"
+    *ngFor="let item of favorites"
+  >
+    <img class="card-img rounded-circle" [src]="item.storeImgUrl" alt="Card image cap" />
+    <div class="card-image-overlay">
+      <h6 class="card-text text-wrap">
+        {{ item.storeName | titlecase}}
+      </h6>
+    </div>
+  </div>
+</div>

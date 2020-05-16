@@ -1,19 +1,30 @@
 import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 import { StoreService } from '../../services/store.service';
+import { LoginService } from '../../../common/services/login.service';
 
 @Component({
   selector: 'gro-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class GroHomeComponent implements AfterViewInit {
+export class GroHomeComponent implements OnInit, AfterViewInit {
   stores = [];
   user = localStorage.getItem('currentUser');
+  public isLoggedIn: boolean = false;
+  public favorites = [];
   @ViewChild('openModal') myModal;
 
   constructor(private _commonService: CommonService,
-    private _storeService: StoreService) {
+    private _storeService: StoreService,
+    private _loginService: LoginService) {
+  }
+
+  ngOnInit() {
+    this.isLoggedIn = this._loginService.isLogin();
+    this._storeService.getFavStores().subscribe((res: any) => {
+      this.favorites = res && res.storeDetails;
+    });
   }
 
   ngAfterViewInit() {
