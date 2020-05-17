@@ -15,7 +15,7 @@
       </button>
     </div>
     <div *ngFor="let item of items">
-      <div class="card" style="margin-top: 5px;margin-bottom:5px;">
+      <div class="card" style="margin-top: 5px; margin-bottom: 5px;">
         <div class="row" style="padding: 10px;">
           <div class="col-3 no-right-padding">
             <img
@@ -130,7 +130,7 @@
     class="footer-checkout"
     style="border-top: 1px solid #777;"
   >
-    <div class="footer-flex-container-checkout">
+    <div class="footer-flex-container-checkout" *ngIf="isLoggedIn">
       <div class="flex-item-checkout">
         <span class="h4"> Rs. {{ cartTotal }}</span>
         <!-- <span style="color: rgb(132, 194, 37);">Saved Rs 331.5</span> -->
@@ -138,6 +138,10 @@
       <div class="flex-item-checkout-button">
         <span (click)="placeOrder()">CHECKOUT</span>
       </div>
+    </div>
+    <div class="login_cart" *ngIf="!isLoggedIn">
+      <span>One step away. Please login to place order.</span>
+      <button class="btn btn-success">Continue</button>
     </div>
   </footer>
 </div>

@@ -22,12 +22,12 @@ export class StoreItemsService {
       .pipe(map((res: any) => {
 
         console.log('res ', res);
-        if (res && res.products) {
+        if (res && res.productsByCategory) {
           // map products with cart for quantity
           let result = this.mapWithCart(res);
-          this.storeProductsList = result && result.products;
+          this.storeProductsList = result && result.productsByCategory;
           this.categories = [];
-          this.mapProducts(result.products);
+          this.mapProducts(result.productsByCategory);
         }
         console.log('reeeesss ', res);
         return res;

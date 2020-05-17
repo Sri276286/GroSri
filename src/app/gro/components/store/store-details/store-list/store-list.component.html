@@ -22,13 +22,12 @@
             <option
               [ngValue]="val.weight"
               *ngFor="let val of item.storeInventoryProductUnit"
-              >{{ val.weight }} {{ val.unit }}</option
+              >{{ val.weight }}{{ val.unit }}</option
             >
           </select>
         </ng-container>
         <ng-container *ngIf="item.storeInventoryProductUnit.length === 1">
-          {{ item.weight }}
-          {{ item.unit }}
+          {{ item.weight }}{{ item.unit }}
         </ng-container>
         <div style="display: flex;">
           <div style="padding-right: 20px;">

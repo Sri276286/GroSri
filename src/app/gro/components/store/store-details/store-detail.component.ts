@@ -38,11 +38,11 @@ export class GroStoreDetailComponent implements OnInit {
         this._storeItemsService.getItems(id)
           .subscribe((store) => {
             console.log('storeeee ', store);
-            if (store.store_details) {
-              this.storeName = store.store_details.storename;
-              this.isFavoriteStore = store.store_details.mark_favorite ? true : false;
+            if (store.store) {
+              this.storeName = store.store.storeName;
+              this.isFavoriteStore = store.store.mark_favorite ? true : false;
             }
-            if (store.products) {
+            if (store.productsByCategory) {
               this.categories = this._storeItemsService.categories;
               const category = this.categories[0];
               this.getProductsWithCategory(category);

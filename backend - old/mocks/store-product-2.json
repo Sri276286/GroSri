@@ -1,0 +1,167 @@
+{
+  "status": "SUCCESS",
+  "code": 200,
+  "store_details": {
+    "storeDetailsId": 8
+  },
+  "products": {
+    "Vegetables and Fruits": {
+      "Vegetables": [
+        {
+          "id": 12,
+          "storeDetailsId": 8,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Vegetables and Fruits",
+          "productSubCategory": "Vegetables",
+          "productSub2Category": null,
+          "productName": "Tomato",
+          "productImgUrl": null,
+          "brandName": null,
+          "itemShortDescription": "Tomato10",
+          "itemLongDescription": "Tomato",
+          "storeInventoryProductId": 12,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 25.0,
+          "price": 25.0,
+          "weight": 500.0,
+          "unit": "g",
+          "quantity": 0,
+          "storeInventoryProductUnit": [
+            {
+              "id": 21,
+              "storeInventoryProductId": 12,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 25.0,
+              "price": 25.0,
+              "weight": 500.0,
+              "unit": "g"
+            },
+            {
+              "id": 22,
+              "storeInventoryProductId": 12,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 45.0,
+              "price": 45.0,
+              "weight": 1.0,
+              "unit": "kg"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "storeDetailsId": 8,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Vegetables and Fruits",
+          "productSubCategory": "Vegetables",
+          "productSub2Category": null,
+          "productName": "Onions",
+          "productImgUrl": null,
+          "brandName": null,
+          "itemShortDescription": "Onions",
+          "itemLongDescription": "Onions",
+          "storeInventoryProductId": 13,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 30.0,
+          "price": 25.0,
+          "weight": 500.0,
+          "unit": "g",
+          "quantity": 0,
+          "storeInventoryProductUnit": [
+            {
+              "id": 23,
+              "storeInventoryProductId": 13,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 30.0,
+              "price": 25.0,
+              "weight": 500.0,
+              "unit": "g"
+            }
+          ]
+        }
+      ],
+      "Fruits": [
+        {
+          "id": 14,
+          "storeDetailsId": 8,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Vegetables and Fruits",
+          "productSubCategory": "Fruits",
+          "productSub2Category": null,
+          "productName": "Apple",
+          "productImgUrl": null,
+          "brandName": null,
+          "itemShortDescription": "Adani - Apple",
+          "itemLongDescription": "Adani - Apple",
+          "storeInventoryProductId": 14,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 160.0,
+          "price": 150.0,
+          "weight": 1.0,
+          "unit": "kg",
+          "quantity": 0,
+          "storeInventoryProductUnit": [
+            {
+              "id": 25,
+              "storeInventoryProductId": 14,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 130.0,
+              "price": 125.0,
+              "weight": 500.0,
+              "unit": "g"
+            },
+            {
+              "id": 26,
+              "storeInventoryProductId": 14,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 160.0,
+              "price": 150.0,
+              "weight": 1.0,
+              "unit": "kg"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "storeDetailsId": 8,
+          "storeDetailsStoreName": "thirumalai store",
+          "productCategory": "Vegetables and Fruits",
+          "productSubCategory": "Fruits",
+          "productSub2Category": null,
+          "productName": "Apple",
+          "productImgUrl": null,
+          "brandName": null,
+          "itemShortDescription": "Apple",
+          "itemLongDescription": "Apple",
+          "storeInventoryProductId": 15,
+          "max_quantity": 5,
+          "available_quantity": 15,
+          "mrp": 180.0,
+          "price": 180.0,
+          "weight": 1.0,
+          "unit": "kg",
+          "quantity": 0,
+          "storeInventoryProductUnit": [
+            {
+              "id": 27,
+              "storeInventoryProductId": 15,
+              "max_quantity": 5,
+              "available_quantity": 15,
+              "mrp": 180.0,
+              "price": 180.0,
+              "weight": 1.0,
+              "unit": "kg"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

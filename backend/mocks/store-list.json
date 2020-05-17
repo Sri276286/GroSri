@@ -1,12 +1,13 @@
 {
   "status": "SUCCESS",
   "code": 200,
-  "storeDetails": [
+  "storeLst": [
     {
       "id": 1,
       "storeName": "thirumalai store",
       "storeCategory": "Grocery",
       "supplyItems": "Rice, Dal, Pulses and Others",
+      "storeAdminId": "1",
       "storeImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/tirumalai_store.jpg",
       "rating": 4,
       "flatNo": "26",
@@ -18,13 +19,15 @@
       "pincode": "600116",
       "geolocation": null,
       "landmark": null,
-      "deliveryMethod": "PARTNER_DELIVERY"
+      "deliveryMethod": "PARTNER_DELIVERY",
+      "status": "ACTIVE"
     },
     {
       "id": 8,
       "storeName": "Malini store",
       "storeCategory": "Grocery",
       "supplyItems": "Rice, Dal, Pulses and Others",
+      "storeAdminId": "4",
       "storeImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/deepak_store.jpg",
       "rating": 4,
       "flatNo": "26",
@@ -36,7 +39,8 @@
       "pincode": "600116",
       "geolocation": null,
       "landmark": null,
-      "deliveryMethod": "PICK_UP_ONLY"
+      "deliveryMethod": "PICK_UP_ONLY",
+      "status": "ACTIVE"
     }
   ]
 }

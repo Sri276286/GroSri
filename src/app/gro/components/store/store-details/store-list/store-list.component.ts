@@ -19,14 +19,10 @@ export class StoreListComponent {
   }
 
   addItems(item) {
-    this._cartService.postToCart(item).subscribe(() => {
-      this._cartService.addItems(item);
-    });
+    this._cartService.addItems(item);
   }
 
   removeItems(item) {
-    this._cartService.postToCart(item).subscribe(() => {
-      this._cartService.removeItems(item);
-    });
+    this._cartService.removeItems(item);
   }
 }

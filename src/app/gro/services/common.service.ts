@@ -17,6 +17,18 @@ export class CommonService {
     localStorage.setItem('currentUser', JSON.stringify(profile));
   }
 
+  getUserLocation() {
+    const userLocation = localStorage.getItem('userLocation');
+    if (userLocation) {
+      return userLocation;
+    }
+  }
+
+  public isLogin() {
+    const auth_token = localStorage.getItem('auth_token');
+    return auth_token ? true : false;
+  }
+
   checkForSession(): Observable<boolean> {
     return new Observable((observer) => {
       setTimeout(() => {

@@ -48,7 +48,8 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
         this._commonService.handleUserStorage('location', searchKey);
       }
       localStorage.setItem('userLocation', searchKey);
-      this.stores = result && result.storeDetails ? result.storeDetails : [];
+      this.stores = result && result.storeLst ? result.storeLst : [];
+      console.log('get stores ', this.stores);
       this.closeModal();
     });
   }

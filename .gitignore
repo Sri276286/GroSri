@@ -17,6 +17,8 @@ api/node_modules
 api/package-lock.json
 backend/node_modules
 backend/package-lock.json
+backend-old/node_modules
+backend-old/package-lock.json
 
 # profiling files
 chrome-profiler-events*.json

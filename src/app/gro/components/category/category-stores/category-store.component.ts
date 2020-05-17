@@ -21,7 +21,7 @@ export class GroCategoryStoreComponent implements OnInit {
       this._categoryService.getStoresByCategory(id).subscribe((res: any) => {
         console.log('res ', res);
         this.categoryName = res && res.categoryName;
-        this.categoryStores = res && res.storeDetails;
+        this.categoryStores = res && res.storeLst;
       })
     });
   }

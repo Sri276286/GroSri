@@ -1,0 +1,44 @@
+{
+  "orders": [
+    {
+      "orderId": "o1234",
+      "storeId": "1",
+      "storeName": "Store 1",
+      "storeAddress": "Perungudi",
+      "date": "March 15, 11:50 AM",
+      "total": 340,
+      "status": "placed",
+      "no_of_items": 22
+    },
+    {
+      "orderId": "o4567",
+      "storeId": "2",
+      "storeName": "Store 2",
+      "storeAddress": "Thoraipakkam",
+      "date": "Feb 25, 10:30 AM",
+      "total": 1020,
+      "status": "delivered",
+      "no_of_items": 10
+    },
+    {
+      "orderId": "o3456",
+      "storeId": "2",
+      "storeName": "Store 2",
+      "storeAddress": "Thoraipakkam",
+      "date": "March 3, 10:30 AM",
+      "total": 570,
+      "status": "delivered",
+      "no_of_items": 12
+    },
+    {
+      "orderId": "o2345",
+      "storeId": "1",
+      "storeName": "Store 1",
+      "storeAddress": "Perungudi",
+      "date": "Feb 21, 02:30 PM",
+      "total": 870,
+      "status": "delivered",
+      "no_of_items": 4
+    }
+  ]
+}
