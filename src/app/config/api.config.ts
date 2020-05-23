@@ -13,16 +13,18 @@ export class ApiConfig1 {
 
 export class ApiConfig {
   static apiHostUrl: string = "http://aruceryapiphase1-env.eba-xvk4wrjm.us-east-2.elasticbeanstalk.com"
-  static loginURL: string = `${ApiConfig.apiHostUrl}/api/login`; // POST
+  static loginURL: string = `/api/login`; // POST
   static signupURL: string = `${ApiConfig.apiHostUrl}/api/signup`; // POST
   static storeListURL: string = `${ApiConfig.apiHostUrl}/stores/findStoresByPincode`; // GET
   static storeListByCategoryURL: string = `${ApiConfig.apiHostUrl}/stores/findStoresByPincode`; // GET
   static storeProductsURL: string = `${ApiConfig.apiHostUrl}/stores/findProductsByStoreId`; // GET
-  static userDetailsURL: string = `${ApiConfig.apiHostUrl}/api/user`; // GET, POST
+  static userDetailsURL: string = `/api/user`; // GET, POST
   static cartURL: string = `${ApiConfig.apiHostUrl}/api/cart`; // GET
   static cartUpdateURL: string = `${ApiConfig.apiHostUrl}/orderProducts/upsert`; // PUT
-  static orderURL: string = `${ApiConfig.apiHostUrl}/api/order`; // GET, POST
-  static ordersListURL: string = `${ApiConfig.apiHostUrl}/api/orders`; // GET
+  static orderURL: string = `${ApiConfig.apiHostUrl}/orders`; // GET, POST
+  static ordersListURL: string = `${ApiConfig.apiHostUrl}/orders/findByCustomerId`; // GET
   static favoriteStoreURL: string = `${ApiConfig.apiHostUrl}/api/store/favorite`; // POST, GET
+  static placeOrderURL: string = `${ApiConfig.apiHostUrl}/orders/update`; // PUT
+  static commonCartAndOrderURL: string = `${ApiConfig.apiHostUrl}/orders/customers`;
 }
 

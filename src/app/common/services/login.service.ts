@@ -61,6 +61,8 @@ export class LoginService {
         this._cartService.getFromLocalStorage();
         // get user details once login is successful
         this.getUser().subscribe();
+        // post items to cart if in local storage and loggedin
+        this.postToCart();
         return res;
       } else {
         return throwError(`No access token received`);
@@ -69,7 +71,7 @@ export class LoginService {
   }
 
   private getUser() {
-    return this._http.get(`${ApiConfig.userDetailsURL}`)
+    return this._http.get(ApiConfig.userDetailsURL)
       .pipe(map((user: any) => {
         console.log('user ', user);
         // login successful if there's a jwt token in the response
@@ -83,6 +85,20 @@ export class LoginService {
           this.currentUserSubject.next(user);
         }
       }));
+  }
+
+  private postToCart() {
+    const cartEntity = localStorage.getItem('cartEntity');
+    if (cartEntity) {
+      const cart = JSON.parse(cartEntity);
+      const items = cart && cart.items ? cart.items : [];
+      if (items.length) {
+        items.forEach(element => {
+          this._cartService.postToCart(element);
+        });
+        localStorage.removeItem('cartEntity');
+      }
+    }
   }
 
 }

@@ -12,7 +12,7 @@ import { CommonService } from 'src/app/gro/services/common.service';
 export class GroOrderDetailsComponent implements OnInit {
 
   items = [];
-  itemsEntity;
+  orderEntity;
   orderDetails;
   storeDetails;
   constructor(public _service: OrderService,
@@ -26,22 +26,21 @@ export class GroOrderDetailsComponent implements OnInit {
     this._route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       this._service.getOrderById(id).subscribe((res: any) => {
-        console.log('res ', res);
-        this.orderDetails = this._commonService.getOrderDetailsFromId(res.orderId);
-        this.storeDetails = this._commonService.getStoreDetailsFromId(res.storeId);
-        console.log('order details ', this.orderDetails);
+        this.orderEntity = res.order;
+        // this.orderDetails = this._commonService.getOrderDetailsFromId(res.orderId);
+        console.log('res ', this.orderEntity);
+        this.storeDetails = this.orderEntity && this.orderEntity.store;
         console.log('store details ', this.storeDetails);
-        this.itemsEntity = res;
-        this.items = res.items;
+        this.items = this.orderEntity.orderProductLstDTO;
       });
     });
   }
 
   reorder() {
     let cartEntity = {
-      storeId: this.itemsEntity.storeId,
-      total: this.itemsEntity.total,
-      items: this.itemsEntity.items
+      storeId: this.orderEntity.store && this.orderEntity.store.id,
+      total: this.orderEntity.billTotal,
+      items: this.orderEntity.orderProductLstDTO
     };
     console.log('itemssss ', cartEntity);
     let cart = localStorage.getItem('cartEntity');
@@ -58,10 +57,10 @@ export class GroOrderDetailsComponent implements OnInit {
   }
 
   private _handleCart(cartEntity) {
-    localStorage.setItem('cartEntity', JSON.stringify(cartEntity));
+    // localStorage.setItem('cartEntity', JSON.stringify(cartEntity));
     this._cartService.cartEntity$.next(cartEntity);
     this._cartService.cartQuantity$.next(cartEntity.items.length);
-    this._cartService.cartEntityMap.set(this.itemsEntity.storeId, cartEntity);
+    this._cartService.cartEntityMap.set(this.orderEntity.store.id, cartEntity);
     this._router.navigate(['/cart']);
   }
 

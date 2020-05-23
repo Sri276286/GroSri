@@ -64,7 +64,7 @@ export class StoreItemsService {
         for (let category in products) {
           for (let sub in products[category]) {
             products[category][sub].map((t) => {
-              if (t.id === item.storeInventoryProductId) {
+              if (t.id === item.storeId) {
                 t.quantity = item.quantity;
                 t.weight = item.weight;
                 t.unit = item.unit;

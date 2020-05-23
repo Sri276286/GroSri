@@ -16,7 +16,7 @@ export class OrderService {
   }
 
   getOrders() {
-    return this._http.get(ApiConfig.ordersListURL)
+    return this._http.get(`${ApiConfig.ordersListURL}/1`)
       .pipe(map((res: any) => {
         const orders = res && res.orders;
         this._commonService.ordersPlaced = orders;

@@ -22,9 +22,11 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.isLoggedIn = this._loginService.isLogin();
-    this._storeService.getFavStores().subscribe((res: any) => {
-      this.favorites = res && res.storeDetails;
-    });
+    if (this.isLoggedIn) {
+      this._storeService.getFavStores().subscribe((res: any) => {
+        this.favorites = res && res.storeDetails;
+      });
+    }
   }
 
   ngAfterViewInit() {

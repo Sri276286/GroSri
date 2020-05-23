@@ -5,26 +5,36 @@
       <button
         class="btn btn-danger"
         (click)="reorder()"
-        *ngIf="orderDetails && orderDetails.status === 'delivered'"
+        *ngIf="
+          orderEntity && orderEntity.orderStatus.toLowerCase() === 'placed'
+        "
       >
         Reorder
       </button>
       <button
         class="btn btn-danger"
         (click)="reorder()"
-        *ngIf="orderDetails && orderDetails.status === 'placed'"
+        *ngIf="
+          orderEntity && orderEntity.orderStatus.toLowerCase() === 'in_cart'
+        "
       >
         Track Order
       </button>
     </div>
-    <div class="card m-1 p-1" *ngIf="storeDetails && orderDetails">
+    <div class="card m-1 p-1" *ngIf="storeDetails">
       <div class="row">
         <div class="col-6 h6">{{ storeDetails.storeName | titlecase }}</div>
-        <div class="col-6 text-right">Rs.{{ orderDetails.total }}</div>
+        <div class="col-6 text-right" *ngIf="orderEntity && orderEntity.billTotal">Rs.{{ orderEntity.billTotal }}</div>
       </div>
       <div class="row">
         <div class="col-6 h6">{{ storeDetails.area | titlecase }}</div>
-        <div class="col-6 text-right">{{ orderDetails.no_of_items }} items</div>
+        <div class="col-6 text-right">
+          {{
+            orderEntity.totalNumOfProducts === 1
+              ? orderEntity.totalNumOfProducts + "item"
+              : orderEntity.totalNumOfProducts + "items"
+          }}
+        </div>
       </div>
     </div>
     <div *ngFor="let item of items">

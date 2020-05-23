@@ -17,11 +17,13 @@ export class GroOrderComponent implements OnInit {
     this._service.getOrders().subscribe((res: any) => {
       if (res && res.orders) {
         this.current_orders = res.orders.filter((order) => {
-          return order.status.toLowerCase() === 'placed';
+          return order.orderStatus.toLowerCase() === 'in_cart';
         });
+        console.log('current orders ', this.current_orders);
         this.past_orders = res.orders.filter((order) => {
-          return order.status.toLowerCase() === 'delivered';
+          return order.orderStatus.toLowerCase() === 'placed';
         });
+        console.log('past orders ', this.past_orders);
       }
     });
   }

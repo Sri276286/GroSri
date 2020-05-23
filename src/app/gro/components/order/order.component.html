@@ -23,26 +23,39 @@
 
 <ng-template #orderDisplay let-order="order">
   <div class="card" style="padding: 10px; margin-bottom: 10px;">
-    <div [routerLink]="['/order', order.orderId]">
+    <div [routerLink]="['/order', order.id]">
       <div class="row">
         <div class="col-8">
-          <h6>{{ order.storeName }}</h6>
+          <h6>{{ order.store && order.store.storeName | titlecase }}</h6>
         </div>
         <div class="col-4">
-          <h6 style="color: seagreen; float: right; font-weight: 400;">
-            Rs. {{ order.total }}
+          <h6
+            style="color: seagreen; float: right; font-weight: 400;"
+            *ngIf="order.billTotal"
+          >
+            Rs. {{ order.billTotal }}
           </h6>
         </div>
       </div>
 
       <div class="row">
         <div class="col-8">
-          <h6 class="shop_location_date">{{ order.storeAddress }}</h6>
+          <h6 class="shop_location_date">
+            {{ order.store && order.store.area }}
+          </h6>
         </div>
         <div class="col-4">
           <!-- <i class="fa fa-angle-right" style="font-size:20px;float: right; color: lightgrey;"></i> -->
-          <h6 class="shop_location_date" style="float: right;">
-            {{ order.no_of_items }} items
+          <h6
+            class="shop_location_date"
+            style="float: right;"
+            *ngIf="order.totalNumOfProducts"
+          >
+            {{
+              order.totalNumOfProducts === 1
+                ? order.totalNumOfProducts + " item"
+                : order.totalNumOfProducts + " items"
+            }}
           </h6>
         </div>
       </div>
@@ -59,10 +72,10 @@
       <!-- <div class="col" style="padding-left: 40px;">
       <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
     </div> -->
-      <div class="col" *ngIf="order.status !== 'placed'">
+      <div class="col" *ngIf="order.orderStatus.toLowerCase() !== 'in_cart'">
         <a class="reorder_report_a">REORDER</a>
       </div>
-      <div class="col" *ngIf="order.status === 'placed'">
+      <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'in_cart'">
         <a class="reorder_report_a">Track Order</a>
       </div>
     </div>

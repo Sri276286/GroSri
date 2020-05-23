@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartReplaceDialogComponent } from '../components/floating-modal/cart-replace-dialog/replace-dialog.component';
 import { CommonService } from './common.service';
-import { LoginService } from 'src/app/common/services/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +32,13 @@ export class CartService {
    */
   postToCart(item) {
     const entity = {
-      "storeInventoryProductUnitId": item.storeId,
-      "quantity": item.quantity
+      storeInventoryProductUnitId: item.id,
+      quantity: item.quantity,
+      customerId: "1"
     };
-    this._http.put(ApiConfig.cartUpdateURL, entity).subscribe();
+    this._http.put(ApiConfig.cartUpdateURL, entity).subscribe(() => {
+      this.updateCart(item);
+    });
   }
 
   resetCart() {
@@ -76,7 +78,7 @@ export class CartService {
   private updateCart(item) {
     console.log('item ', item);
     // check if already items presnt in cart (same or different store)
-    let cartEntityFromMap = this.checkCartByStoreId(item.storeDetailsId);
+    let cartEntityFromMap = this.checkCartByStoreId(item.storeId);
     console.log('checkCartWithStore ', cartEntityFromMap);
     console.log('cartEntity ', this.cartEntity);
     if (cartEntityFromMap) {
@@ -127,13 +129,16 @@ export class CartService {
         this.cartQuantity--;
       }
     }
-    console.log('cart entity ', this.cartEntity);
     // Add store id
-    this.cartEntity.storeId = item.storeDetailsId;
+    this.cartEntity.storeId = item.storeId;
+    console.log('cart entity ', this.cartEntity);
     // Map cart with id
-    this.cartEntityMap.set(item.storeDetailsId, this.cartEntity);
+    this.cartEntityMap.set(item.storeId, this.cartEntity);
     // save in local storage
-    this.setInLocalStorage();
+    const isLoggedIn = this._commonService.isLogin();
+    if (!isLoggedIn) {
+      this.setInLocalStorage();
+    }
 
     this.manageCart(this.cartQuantity, this.cartEntity);
   }
@@ -156,7 +161,20 @@ export class CartService {
   }
 
   placeOrder(order) {
-    return this._http.post('/api/order', order);
+    const obj = {
+      "orderAddress": {
+        "flatNo": 35,
+        "country": "India",
+        "state": "TN",
+        "pincode": "600091",
+        "street": "kamarajar street",
+        "city": "chennai",
+        "area": "porur"
+      },
+      "orderStatus": "PLACED"
+    };
+    return this._http.put(`${ApiConfig.commonCartAndOrderURL}/1/update`, obj);
+    // return this._http.post('/api/order', order);
   }
 
   getFromLocalStorage() {
@@ -175,7 +193,7 @@ export class CartService {
         .pipe(map((res: any) => {
           if (res && res.total && res.items) {
             this.cartEntityMap.set(res.storeId, res);
-            localStorage.setItem(`cartEntity`, JSON.stringify(res));
+            // localStorage.setItem(`cartEntity`, JSON.stringify(res));
             this.manageCart(res.items.length, res);
           } else {
             // show error

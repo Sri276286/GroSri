@@ -141,7 +141,7 @@
     </div>
     <div class="login_cart" *ngIf="!isLoggedIn">
       <span>One step away. Please login to place order.</span>
-      <button class="btn btn-success">Continue</button>
+      <button class="btn btn-success" [routerLink]="['/login']">Continue</button>
     </div>
   </footer>
 </div>
