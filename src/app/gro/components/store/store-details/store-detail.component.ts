@@ -16,13 +16,16 @@ export class GroStoreDetailComponent implements OnInit {
   categories = [];
   storeProductCatalog;
   toggle = {
-    step: 0,
-    trigger: false
+    last_step: 0,
+    current_step: 0,
+    expand: true,
+    collapse: false
   };
+  public categoryIndex: number = 0;
   public storeName: string = '';
   public isFavoriteStore: boolean = false;
   public isLoggedIn: boolean = false;;
-  @ViewChild('itemslist') itemslist;
+
   private _subscriptions: Subscription[] = [];
   constructor(public _storeItemsService: StoreItemsService,
     private _route: ActivatedRoute,
@@ -44,6 +47,12 @@ export class GroStoreDetailComponent implements OnInit {
             }
             if (store.productsByCategory) {
               this.categories = this._storeItemsService.categories;
+              this.categories = this.categories.map((t, index) => {
+                return {
+                  id: index,
+                  name: t
+                }
+              })
               const category = this.categories[0];
               this.getProductsWithCategory(category);
             }
@@ -53,14 +62,20 @@ export class GroStoreDetailComponent implements OnInit {
   }
 
   toggleCategory(step) {
-    console.log('step ', step, this.itemslist.nativeElement);
-    this.toggle.step = step;
-    this.toggle.trigger = !this.toggle.trigger;
+    console.log('step ', step, this.toggle);
+    this.toggle.current_step = step;
+    if (this.toggle.last_step !== this.toggle.current_step) {
+      this.toggle.expand = true;
+    } else {
+      this.toggle.expand = false;
+    }
+    console.log('trigger ', this.toggle);
   }
 
   getProductsWithCategory(category) {
     console.log('category ', category);
-    this._storeItemsService.getProductsWithCategory(category).subscribe((entity) => {
+    this.categoryIndex = category.id;
+    this._storeItemsService.getProductsWithCategory(category.name).subscribe((entity) => {
       this.storeProductCatalog = entity;
     });
   }

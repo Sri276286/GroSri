@@ -1,4 +1,7 @@
 .store-header-grid {
+  position: fixed;
+  top: 0%;
+  z-index: 100;
   display: flex;
   width: 100%;
   background: black;
@@ -11,15 +14,20 @@
   }
 }
 
-// div.category-grid {
-//   position: fixed;
-//   top: 10%;
-//   z-index: 100;
-// }
+div.category-grid {
+  position: fixed;
+  top: 10%;
+  z-index: 100;
+  width: 100%;
+  background: lightgrey;
+  border: 1px solid white;
+}
 
-// div.products-list-grid {
-//   height: 25%;
-// }
+div.products-list-grid {
+  margin-top: 45%;
+  // position: relative;
+  // height: 25%;
+}
 
 .fas.fa-long-arrow-alt-left,
 .fas.fa-search,
@@ -30,8 +38,8 @@
 
 ._1bQ4u {
   overflow-x: scroll;
-  padding: 9px 0;
-  background: #f8f9f9;
+  padding: 3px 0;
+  background: lightgrey;
 }
 
 ._1bQ4u,

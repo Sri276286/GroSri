@@ -15,17 +15,23 @@
     ></i>
   </div>
 </div>
-<div>
+<div class="store-content-grid">
   <div class="category-grid">
     <div class="text-center">
-      <span style="font-weight: 600;">Category</span>
+      <span style="font-weight: 600;color:black;">Menu</span>
     </div>
     <ul class="_1bQ4u">
-      <ng-container *ngFor="let category of categories">
+      <ng-container *ngFor="let category of categories; let i = index">
         <li class="_35h7b">
-          <a class="_34WAd B-aO0 rippleEffect">
+          <a
+            class="_34WAd B-aO0 rippleEffect"
+            [ngStyle]="{
+              background: category.id === categoryIndex ? 'blue' : 'white',
+              color: category.id === categoryIndex ? 'white' : 'black'
+            }"
+          >
             <span class="_3xjP6" (click)="getProductsWithCategory(category)">
-              {{ category }}
+              {{ category.name }}
             </span>
           </a>
         </li>
@@ -34,11 +40,11 @@
   </div>
 
   <div id="accordion" class="products-list-grid">
-    <input
+    <!-- <input
       class="form-control item_li_input"
       type="text"
       placeholder="Item List"
-    />
+    /> -->
     <ng-container
       *ngFor="
         let productEntity of storeProductCatalog | keyvalue;
@@ -50,24 +56,23 @@
           <h5 class="mb-0">
             <button
               class="btn btn-link"
-              [ngClass]="{ collpase: j === toggle.step && toggle.trigger }"
+              [ngClass]="{ collpase: j === toggle.current_step && toggle.expand }"
               data-toggle="collapse"
               [attr.data-target]="'#' + j"
-              [attr.aria-expanded]="j === toggle.step"
+              [attr.aria-expanded]="j === toggle.current_step"
               aria-controls="collapseOne"
               (click)="toggleCategory(j)"
             >
-              {{ productEntity.key }}
+             #{{j}} {{ productEntity.key }}
             </button>
           </h5>
         </div>
         <div
           [attr.id]="j"
-          class="collapse show"
-          [ngClass]="{ show: j === toggle.step && !toggle.trigger }"
+          class="collapse"
+          [ngClass]="{ show: (j === toggle.current_step) && toggle.expand }"
           aria-labelledby="headingOne"
           data-parent="#accordion"
-          #itemslist
         >
           <div class="card-body">
             <gro-store-list [items]="productEntity.value"></gro-store-list>
@@ -77,9 +82,10 @@
     </ng-container>
   </div>
 </div>
-<div style="background-color: grey;">
+<!-- <div style="background-color: grey;">
   <gro-footer></gro-footer>
-</div>
+</div> -->
+<gro-cart-bar></gro-cart-bar>
 
 <!-- Store search modal -->
 <gro-store-search></gro-store-search>
