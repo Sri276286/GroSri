@@ -19,7 +19,7 @@ export class ApiConfig {
   static storeListByCategoryURL: string = `${ApiConfig.apiHostUrl}/stores/findStoresByPincode`; // GET
   static storeProductsURL: string = `${ApiConfig.apiHostUrl}/stores/findProductsByStoreId`; // GET
   static userDetailsURL: string = `/api/user`; // GET, POST
-  static cartURL: string = `${ApiConfig.apiHostUrl}/api/cart`; // GET
+  static cartURL: string = `${ApiConfig.apiHostUrl}/orders/findByCustomerId`; // GET
   static cartUpdateURL: string = `${ApiConfig.apiHostUrl}/orderProducts/upsert`; // PUT
   static orderURL: string = `${ApiConfig.apiHostUrl}/orders`; // GET, POST
   static ordersListURL: string = `${ApiConfig.apiHostUrl}/orders/findByCustomerId`; // GET

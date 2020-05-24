@@ -26,6 +26,8 @@ import { StoreListComponent } from './components/store/store-details/store-list/
 import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component';
 import { FavoriteStoreComponent } from './components/store/favorite-store/favorite-store.component';
 import { GroFavoriteComponent } from './components/favorite/favorite.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppToastsComponent } from '../common/components/toasts/toasts.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { GroFavoriteComponent } from './components/favorite/favorite.component';
     StoreListComponent,
     CartBarComponent,
     FavoriteStoreComponent,
-    GroFavoriteComponent
+    GroFavoriteComponent,
+    AppToastsComponent
   ],
   exports: [
     GroComponent,
@@ -76,7 +79,8 @@ import { GroFavoriteComponent } from './components/favorite/favorite.component';
     StoreListComponent,
     CartBarComponent,
     FavoriteStoreComponent,
-    GroFavoriteComponent
+    GroFavoriteComponent,
+    AppToastsComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent
@@ -85,7 +89,8 @@ import { GroFavoriteComponent } from './components/favorite/favorite.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   providers: []
 })

@@ -24,6 +24,10 @@
 <ng-template #orderDisplay let-order="order">
   <div class="card" style="padding: 10px; margin-bottom: 10px;">
     <div [routerLink]="['/order', order.id]">
+      <div class="d-flex justify-content-between">
+        <span class="h5">#{{ order.id }}</span>
+        <span class="h6">{{ order.orderStatus }}</span>
+      </div>
       <div class="row">
         <div class="col-8">
           <h6>{{ order.store && order.store.storeName | titlecase }}</h6>
@@ -72,12 +76,79 @@
       <!-- <div class="col" style="padding-left: 40px;">
       <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
     </div> -->
-      <div class="col" *ngIf="order.orderStatus.toLowerCase() !== 'in_cart'">
+      <div class="col" *ngIf="order.orderStatus.toLowerCase() !== 'placed'">
         <a class="reorder_report_a">REORDER</a>
       </div>
-      <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'in_cart'">
-        <a class="reorder_report_a">Track Order</a>
+      <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'placed'">
+        <button class="btn btn-success" (click)="trackOrder(trackOrderDialog)">
+          TRACK
+        </button>
+      </div>
+      <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'placed'">
+        <button class="btn btn-danger" (click)="cancelOrder(cancelDialog)">
+          CANCEL
+        </button>
       </div>
     </div>
   </div>
+  <ng-template #cancelDialog let-c="close" let-d="dismiss">
+    <div>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Cancel Order</h4>
+        <button
+          type="button"
+          class="close"
+          aria-describedby="modal-title"
+          (click)="d('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to cancel the order (#{{ order.id }})?</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="c('cancel click')"
+        >
+          No
+        </button>
+        <button type="button" class="btn btn-danger" (click)="cancel(order.id)">
+          Yes
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #trackOrderDialog let-c="close" let-d="dismiss">
+    <div>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">
+          Track Order #{{ order.id }}
+        </h4>
+        <button
+          type="button"
+          class="close"
+          aria-describedby="modal-title"
+          (click)="d('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Your order will be delivered by XXX(Wed, Jan 1)</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="cancelOrder(cancelDialog)"
+        >
+          Cancel Order
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </ng-template>

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../../../services/order.service';
 import { CartService } from 'src/app/gro/services/cart.service';
 import { CommonService } from 'src/app/gro/services/common.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../../../common/services/toast.service';
 
 @Component({
   selector: 'gro-order-details',
@@ -19,7 +21,9 @@ export class GroOrderDetailsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _cartService: CartService,
     private _router: Router,
-    private _commonService: CommonService) {
+    private _commonService: CommonService,
+    private _modalService: NgbModal,
+    private _toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -62,6 +66,26 @@ export class GroOrderDetailsComponent implements OnInit {
     this._cartService.cartQuantity$.next(cartEntity.items.length);
     this._cartService.cartEntityMap.set(this.orderEntity.store.id, cartEntity);
     this._router.navigate(['/cart']);
+  }
+
+  trackOrder(trackTemplate: TemplateRef<any>) {
+    this._modalService.open(trackTemplate, { centered: true });
+  }
+
+  cancelOrder(cancelTemplate: TemplateRef<any>) {
+    this._modalService.open(cancelTemplate, { centered: true });
+  }
+
+  cancel(id: string) {
+    this._service.cancelOrder(id).subscribe(() => {
+      this._modalService.dismissAll();
+      // show success snackbar
+      this._toastService.show(`Order #${id} cancelled successfully`);
+    }, () => {
+      this._modalService.dismissAll();
+      // show failed snackbar
+      this._toastService.show(`Failed to cancel order #${id}`);
+    });
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { ApiConfig } from 'src/app/config/api.config';
 import { map } from 'rxjs/operators';
@@ -189,11 +189,12 @@ export class CartService {
   getCartItems() {
     const isLoggedIn = this._commonService.isLogin();
     if (isLoggedIn) {
-      return this._http.get(ApiConfig.cartURL)
+      let params = new HttpParams();
+      params = params.append('inCart', 'true');
+      return this._http.get(`${ApiConfig.cartURL}/1`, { params: params })
         .pipe(map((res: any) => {
-          if (res && res.total && res.items) {
+          if (res && res.billTotal && res.orderProductLstDTO) {
             this.cartEntityMap.set(res.storeId, res);
-            // localStorage.setItem(`cartEntity`, JSON.stringify(res));
             this.manageCart(res.items.length, res);
           } else {
             // show error
