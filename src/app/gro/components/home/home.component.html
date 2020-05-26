@@ -16,6 +16,9 @@
 <gro-favorite [favorites]="favorites" *ngIf="isLoggedIn && favorites.length"></gro-favorite>
 <gro-category></gro-category>
 <div style="margin-top: 10px;">
+  <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium" *ngIf="!stores.length">
+    <p class="loading">Loading nearby stores...</p>
+  </ngx-spinner>
   <span style="font-size: 20px;">All stores near you</span>
   <gro-store [stores]="stores"></gro-store>
 </div>

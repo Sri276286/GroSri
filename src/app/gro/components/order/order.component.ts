@@ -12,6 +12,8 @@ export class GroOrderComponent implements OnInit {
 
   current_orders = [];
   past_orders = [];
+  currentRate = 0;
+  canReview: boolean = false;
   constructor(private _service: OrderService,
     private _modalService: NgbModal,
     private _toastService: ToastService) {
@@ -50,5 +52,14 @@ export class GroOrderComponent implements OnInit {
       // show failed snackbar
       this._toastService.show(`Failed to cancel order #${id}`);
     });
+  }
+
+  rateStore(ratingTemplate: TemplateRef<any>) {
+    this._modalService.open(ratingTemplate, { centered: true });
+  }
+
+  onRateChange(value) {
+    console.log('value is  ', value);
+    this.canReview = true;
   }
 }

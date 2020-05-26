@@ -56,11 +56,10 @@
           <h5 class="mb-0">
             <button
               class="btn btn-link"
-              [ngClass]="{ collpase: j === toggle.current_step && toggle.expand }"
+              [ngClass]="{ collapsed: !toggleMap.get(j) }"
               data-toggle="collapse"
               [attr.data-target]="'#' + j"
-              [attr.aria-expanded]="j === toggle.current_step"
-              aria-controls="collapseOne"
+              [attr.aria-expanded]="toggleMap.get(j)"
               (click)="toggleCategory(j)"
             >
              #{{j}} {{ productEntity.key }}
@@ -70,8 +69,7 @@
         <div
           [attr.id]="j"
           class="collapse"
-          [ngClass]="{ show: (j === toggle.current_step) && toggle.expand }"
-          aria-labelledby="headingOne"
+          [ngClass]="{ show: toggleMap.get(j) }"
           data-parent="#accordion"
         >
           <div class="card-body">
@@ -90,3 +88,12 @@
 <!-- Store search modal -->
 <gro-store-search></gro-store-search>
 <!-- Store search modal ends here -->
+<!-- <button class="menu-btn" (click)="openMenu(storeMenuDialog)">Menu</button> -->
+
+<ng-template #storeMenuDialog>
+    <div class="modal-body">
+      <ul *ngFor="let category of categories">
+        <li>{{category.name}}</li>
+      </ul>
+    </div>
+</ng-template>

@@ -28,6 +28,7 @@ import { FavoriteStoreComponent } from './components/store/favorite-store/favori
 import { GroFavoriteComponent } from './components/favorite/favorite.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppToastsComponent } from '../common/components/toasts/toasts.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { AppToastsComponent } from '../common/components/toasts/toasts.component
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    NgxSpinnerModule,
     NgbModule
   ],
   providers: []

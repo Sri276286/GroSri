@@ -90,6 +90,19 @@
         </button>
       </div>
     </div>
+    <hr class="hr_dashed" />
+    <div class="row" style="align-items: center;">
+      <div class="col">
+        <button class="btn btn-success" (click)="rateStore(rateStoreDialog)">
+          Rate Store
+        </button>
+      </div>
+      <!-- <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'placed'">
+        <button class="btn btn-danger" (click)="cancelOrder(cancelDialog)">
+          CANCEL
+        </button>
+      </div> -->
+    </div>
   </div>
   <ng-template #cancelDialog let-c="close" let-d="dismiss">
     <div>
@@ -147,6 +160,46 @@
           (click)="cancelOrder(cancelDialog)"
         >
           Cancel Order
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #rateStoreDialog let-c="close" let-d="dismiss">
+    <div>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">
+          Rate # Store Name
+        </h4>
+        <button
+          type="button"
+          class="close"
+          aria-describedby="modal-title"
+          (click)="d('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ngb-rating
+          [(rate)]="currentRate"
+          [max]="5"
+          (rateChange)="onRateChange($event)"
+          [starTemplate]="rating"
+        >
+        </ngb-rating>
+        <ng-template #rating let-fill="fill">
+          <span class="star" [class.filled]="fill === 100">
+            &hearts;
+          </span>
+        </ng-template>
+        <div *ngIf="canReview" class="d-flex">
+          <span>Your review</span>
+          <textarea name="rating-area" cols="40" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">
+          Submit
         </button>
       </div>
     </div>

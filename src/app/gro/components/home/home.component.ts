@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 import { StoreService } from '../../services/store.service';
 import { LoginService } from '../../../common/services/login.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'gro-home',
@@ -17,11 +18,13 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
 
   constructor(private _commonService: CommonService,
     private _storeService: StoreService,
-    private _loginService: LoginService) {
+    private _loginService: LoginService,
+    private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
     this.isLoggedIn = this._loginService.isLogin();
+    this.spinner.show();
     if (this.isLoggedIn) {
       this._storeService.getFavStores().subscribe((res: any) => {
         this.favorites = res && res.storeDetails;
@@ -53,6 +56,7 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
       this.stores = result && result.storeLst ? result.storeLst : [];
       console.log('get stores ', this.stores);
       this.closeModal();
+      this.spinner.hide();
     });
   }
 

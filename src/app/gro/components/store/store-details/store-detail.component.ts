@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StoreItemsService } from '../../../services/store-items.service';
 import { CartService } from '../../../services/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from 'src/app/gro/services/store.service';
 import { LoginService } from 'src/app/common/services/login.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'gro-store-detail',
@@ -21,6 +22,7 @@ export class GroStoreDetailComponent implements OnInit {
     expand: true,
     collapse: false
   };
+  toggleMap = new Map();
   public categoryIndex: number = 0;
   public storeName: string = '';
   public isFavoriteStore: boolean = false;
@@ -30,7 +32,8 @@ export class GroStoreDetailComponent implements OnInit {
   constructor(public _storeItemsService: StoreItemsService,
     private _route: ActivatedRoute,
     private _storeService: StoreService,
-    private _loginService: LoginService) {
+    private _loginService: LoginService,
+    private _modal: NgbModal) {
   }
 
   ngOnInit() {
@@ -61,22 +64,24 @@ export class GroStoreDetailComponent implements OnInit {
     })
   }
 
+  openMenu(menuTemplate: TemplateRef<any>) {
+    this._modal.open(menuTemplate, { backdrop: false, scrollable: true, container: '#menu-container' });
+  }
+
   toggleCategory(step) {
-    console.log('step ', step, this.toggle);
-    this.toggle.current_step = step;
-    if (this.toggle.last_step !== this.toggle.current_step) {
-      this.toggle.expand = true;
+    const canToggle = this.toggleMap.get(step);
+    if (canToggle) {
+      this.toggleMap.set(step, false);
     } else {
-      this.toggle.expand = false;
+      this.toggleMap.set(step, true);
     }
-    console.log('trigger ', this.toggle);
   }
 
   getProductsWithCategory(category) {
-    console.log('category ', category);
     this.categoryIndex = category.id;
     this._storeItemsService.getProductsWithCategory(category.name).subscribe((entity) => {
       this.storeProductCatalog = entity;
+      this.toggleMap.set(0, true);
     });
   }
 

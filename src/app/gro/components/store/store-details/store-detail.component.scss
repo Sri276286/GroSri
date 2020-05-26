@@ -25,8 +25,21 @@ div.category-grid {
 
 div.products-list-grid {
   margin-top: 45%;
-  // position: relative;
-  // height: 25%;
+}
+
+.menu-btn {
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  margin: 5%;
+  background: rgb(102, 102, 216);
+  color: white;
+  outline: 0;
+  border: 0;
+  width: 20%;
+  height: 5%;
+  font-size: 18px;
+  text-transform: uppercase;
 }
 
 .fas.fa-long-arrow-alt-left,

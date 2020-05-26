@@ -30,12 +30,12 @@ export class GroOrderDetailsComponent implements OnInit {
     this._route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       this._service.getOrderById(id).subscribe((res: any) => {
-        this.orderEntity = res.order;
+        this.orderEntity = res.orders.length && res.orders[0];
         // this.orderDetails = this._commonService.getOrderDetailsFromId(res.orderId);
         console.log('res ', this.orderEntity);
         this.storeDetails = this.orderEntity && this.orderEntity.store;
         console.log('store details ', this.storeDetails);
-        this.items = this.orderEntity.orderProductLstDTO;
+        this.items = this.orderEntity.orderProducts;
       });
     });
   }
