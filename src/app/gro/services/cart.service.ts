@@ -34,7 +34,9 @@ export class CartService {
     const entity = {
       storeInventoryProductUnitId: item.id,
       quantity: item.quantity,
-      customerId: "1"
+      customerId: "1",
+      orderId: "0",
+      id: "0"
     };
     this._http.put(ApiConfig.cartUpdateURL, entity).subscribe(() => {
       this.updateCart(item);

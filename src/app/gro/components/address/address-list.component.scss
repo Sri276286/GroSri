@@ -1,0 +1,22 @@
+.address-header-grid {
+  display: flex;
+  width: 100%;
+  background: black;
+  padding: 15px;
+  span {
+    padding-left: 20px;
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.fas.fa-long-arrow-alt-left {
+  color: white;
+  font-size: 24px;
+}
+
+.address-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}

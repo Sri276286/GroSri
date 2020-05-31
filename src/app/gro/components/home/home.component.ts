@@ -24,7 +24,6 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.isLoggedIn = this._loginService.isLogin();
-    this.spinner.show();
     if (this.isLoggedIn) {
       this._storeService.getFavStores().subscribe((res: any) => {
         this.favorites = res && res.storeDetails;
@@ -33,7 +32,7 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
+    // setTimeout(() => {
       const profile = JSON.parse(this.user);
       const location = profile && profile.location || localStorage.getItem('userLocation');
       console.log('location ', location);
@@ -43,7 +42,7 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
         this._commonService.userLocation = location;
         this.loadStores(location);
       }
-    }, 1000);
+    // }, 1000);
   }
 
   loadStores(searchKey: string) {

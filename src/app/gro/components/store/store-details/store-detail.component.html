@@ -18,7 +18,7 @@
 <div class="store-content-grid">
   <div class="category-grid">
     <div class="text-center">
-      <span style="font-weight: 600;color:black;">Menu</span>
+      <span style="font-weight: 600; color: black;">Menu</span>
     </div>
     <ul class="_1bQ4u">
       <ng-container *ngFor="let category of categories; let i = index">
@@ -62,7 +62,7 @@
               [attr.aria-expanded]="toggleMap.get(j)"
               (click)="toggleCategory(j)"
             >
-             #{{j}} {{ productEntity.key }}
+              {{ productEntity.key }}
             </button>
           </h5>
         </div>
@@ -91,9 +91,9 @@
 <!-- <button class="menu-btn" (click)="openMenu(storeMenuDialog)">Menu</button> -->
 
 <ng-template #storeMenuDialog>
-    <div class="modal-body">
-      <ul *ngFor="let category of categories">
-        <li>{{category.name}}</li>
-      </ul>
-    </div>
+  <div class="modal-body">
+    <ul *ngFor="let category of categories">
+      <li>{{ category.name }}</li>
+    </ul>
+  </div>
 </ng-template>

@@ -1,0 +1,36 @@
+.address-detail-header-grid {
+  display: flex;
+  width: 100%;
+  background: black;
+  padding: 15px;
+  span {
+    padding-left: 20px;
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.fas.fa-long-arrow-alt-left {
+  color: white;
+  font-size: 24px;
+}
+
+.edit-address-footer {
+  position: fixed;
+  bottom: 0;
+  // background: rgb(27, 27, 177);
+  // color: white;
+  // text-transform: uppercase;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 0.5rem !important;
+}
+
+.error {
+  font-size: 13px;
+  color: #c7254e;
+  background: #f9f2f4;
+  border-radius: 3px;
+}

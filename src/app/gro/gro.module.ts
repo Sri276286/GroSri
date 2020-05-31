@@ -29,6 +29,8 @@ import { GroFavoriteComponent } from './components/favorite/favorite.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppToastsComponent } from '../common/components/toasts/toasts.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AddressListComponent } from './components/address/address-list.component';
+import { AddressDetailComponent } from './components/address/address-detail/address-detail.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CartBarComponent,
     FavoriteStoreComponent,
     GroFavoriteComponent,
-    AppToastsComponent
+    AppToastsComponent,
+    AddressListComponent,
+    AddressDetailComponent
   ],
   exports: [
     GroComponent,
@@ -81,7 +85,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CartBarComponent,
     FavoriteStoreComponent,
     GroFavoriteComponent,
-    AppToastsComponent
+    AppToastsComponent,
+    AddressListComponent,
+    AddressDetailComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent

@@ -1,0 +1,45 @@
+<div class="address-header-grid">
+  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
+  <span>Address Book</span>
+</div>
+<div class="address-bar">
+  <span style="color: grey; font-weight: bold; font-size: 20px;"
+    >Saved Addresses</span
+  >
+  <span
+    style="color: rgb(24, 94, 224); font-weight: 600; font-size: 18px;"
+    [routerLink]="['/address/new']"
+    >+Add New Address</span
+  >
+</div>
+<ng-container *ngFor="let user_address of user_address_data">
+  <div class="card" *ngIf="user_address">
+    <div class="card-header">
+      <div class="d-flex justify-content-between">
+        <div class="radio">
+          <input
+            class="input-sm mr-3"
+            type="radio"
+            name="default_address"
+            [(ngModel)]="user_address.default_address"
+            [value]="user_address.default_address"
+          />
+          <span>{{user_address.address_type | titlecase}}</span>
+        </div>
+        <div>
+          <i class="fas fa-edit mr-3" [routerLink]="['/address', user_address.id]"></i>
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h6>{{user_address.name}}</h6>
+      <h6>{{user_address.doorNo}}</h6>
+      <h6>{{user_address.street}}</h6>
+      <h6>{{user_address.landmark}}</h6>
+      <h6>{{user_address.area}}</h6>
+      <h6>{{user_address.city}}-{{user_address.pincode}}</h6>
+      <h6>Ph: {{user_address.phone_number}}</h6>
+    </div>
+  </div>
+</ng-container>

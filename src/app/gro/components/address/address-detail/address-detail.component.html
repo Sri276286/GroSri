@@ -1,0 +1,264 @@
+<div class="address-detail-header-grid">
+  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/address']"></i>
+  <span>Add New Address</span>
+</div>
+<form
+  class="p-1"
+  name="form"
+  novalidate
+  (ngSubmit)="user_address.valid && onSubmit(user_address, user_address.valid)"
+  [formGroup]="user_address"
+>
+  <div class="error" *ngIf="user_address.invalid">
+    * All mandatory fields should be filled
+  </div>
+  <div class="form-row">
+    <div class="form-group row ml-1 mr-1" *ngIf="edit_main_details">
+      <div class="form-group col-6">
+        <div
+          class="error"
+          *ngIf="
+            user_address.get('name').touched &&
+            user_address.get('name').hasError('required') &&
+            user_address.get('name').invalid
+          "
+        >
+          Name is required
+        </div>
+        <label for="name">Name <span style="color: red;">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-group col-6">
+        <div
+          class="error"
+          *ngIf="
+            user_address.get('phone_number').touched &&
+            user_address.get('phone_number').hasError('required')
+          "
+        >
+          Phone Number is required
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            user_address.get('phone_number').touched &&
+            user_address.get('phone_number').hasError('minlength')
+          "
+        >
+          Phone Number has to be 10 digit number
+        </div>
+        <label for="phone_number"
+          >Mobile No. <span style="color: red;">*</span></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="phone_number"
+          formControlName="phone_number"
+        />
+      </div>
+    </div>
+    <div class="row border w-100 ml-1 mr-1" *ngIf="!edit_main_details">
+      <div class="col-9 d-flex flex-column">
+        <span>Name: Srikanth K</span>
+        <span>Mobile: 7299933974</span>
+      </div>
+      <div class="col-2" (click)="edit_main_details = true">
+        <i class="fas fa-edit mr-3 text-right"></i>
+      </div>
+    </div>
+  </div>
+  <div style="font-size: 18px; font-weight: 600;">
+    Address Information
+  </div>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <label for="doorNo">Door no. <span style="color: red;">*</span></label>
+      <div
+        class="error"
+        *ngIf="
+          user_address.get('doorNo').touched &&
+          user_address.get('doorNo').hasError('required')
+        "
+      >
+        Door Number is required
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="doorNo"
+        formControlName="doorNo"
+      />
+    </div>
+    <div class="form-group col-6">
+      <label for="apartment">Apartment</label>
+      <input
+        type="text"
+        class="form-control"
+        id="apartment"
+        formControlName="apartment"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="street" class="col-3"
+      >Street <span style="color: red;">*</span></label
+    >
+    <div
+      class="error"
+      *ngIf="
+        user_address.get('street').touched &&
+        user_address.get('street').hasError('required')
+      "
+    >
+      Street is required
+    </div>
+    <input
+      type="text"
+      class="form-control col-8"
+      id="street"
+      formControlName="street"
+    />
+  </div>
+  <div class="form-group row">
+    <label for="landmark" class="col-3">Landmark</label>
+    <input
+      type="text"
+      class="form-control col-8"
+      id="landmark"
+      formControlName="landmark"
+    />
+  </div>
+  <div class="form-group row">
+    <label for="area" class="col-3"
+      >Area <span style="color: red;">*</span></label
+    >
+    <div
+      class="error"
+      *ngIf="
+        user_address.get('area').touched &&
+        user_address.get('area').hasError('required')
+      "
+    >
+      Area is required
+    </div>
+    <input
+      type="text"
+      class="form-control col-8"
+      id="area"
+      formControlName="area"
+    />
+  </div>
+  <div class="form-row">
+    <div class="form-group col-8">
+      <label for="city">City <span style="color: red;">*</span></label>
+      <div
+        class="error"
+        *ngIf="
+          user_address.get('city').touched &&
+          user_address.get('city').hasError('required')
+        "
+      >
+        City is required
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        formControlName="city"
+      />
+    </div>
+    <div class="form-group col-4">
+      <label for="pincode">Pincode <span style="color: red;">*</span></label>
+      <div
+        class="error"
+        *ngIf="
+          user_address.get('pincode').touched &&
+          user_address.get('pincode').hasError('required')
+        "
+      >
+        Pincode is required
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          user_address.get('pincode').touched &&
+          user_address.get('pincode').hasError('minlength')
+        "
+      >
+        Pincode has to be 6 digit number
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="pincode"
+        formControlName="pincode"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="address_type" class="col-4">Address Type</label>
+    <div class="form-row col-8">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="address_type"
+          id="inlineRadioHome"
+          value="home"
+          formControlName="address_type"
+        />
+        <label class="form-check-label" for="inlineRadio1">Home</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="address_type"
+          id="inlineRadioOffice"
+          value="office"
+          formControlName="address_type"
+        />
+        <label class="form-check-label" for="inlineRadio2">Office</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="address_type"
+          id="inlineRadioOther"
+          value="other"
+          formControlName="address_type"
+        />
+        <label class="form-check-label" for="inlineRadioOther">Other</label>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="form-group row">
+    <label for="nickname" class="col-3">Set a nickname</label>
+    <input type="text" class="form-control col-8" id="nickname" />
+  </div> -->
+  <div class="form-group">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="default_address"
+        formControlName="default_address"
+      />
+      <label class="form-check-label" for="default_address">
+        Set this as my default delivery address
+      </label>
+    </div>
+  </div>
+  <div class="edit-address-footer">
+    <button type="submit" class="btn btn-primary btn-block">
+      ADD ADDRESS
+    </button>
+  </div>
+</form>

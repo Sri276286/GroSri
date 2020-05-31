@@ -12,9 +12,13 @@ import { StoreDashboardComponent } from './store/components/dashboard/dashboard.
 import { ViewOrderComponent } from './store/components/view-order/view-order.component';
 import { GroCategoryStoreComponent } from './gro/components/category/category-stores/category-store.component';
 import { FavoriteStoreComponent } from './gro/components/store/favorite-store/favorite-store.component';
+import { AddressListComponent } from './gro/components/address/address-list.component';
+import { AddressDetailComponent } from './gro/components/address/address-detail/address-detail.component';
 
 const routes: Routes = [
   { path: 'home', component: GroHomeComponent },
+  { path: 'address', component: AddressListComponent },
+  { path: 'address/:id', component: AddressDetailComponent },
   { path: 'category/:id', component: GroCategoryStoreComponent },
   { path: 'store/:id', component: GroStoreDetailComponent },
   { path: 'fav-stores', component: FavoriteStoreComponent, canActivate: [AuthGuard] },
