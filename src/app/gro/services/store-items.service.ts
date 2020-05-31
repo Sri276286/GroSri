@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { ApiConfig } from 'src/app/config/api.config';
+import { CommonService } from './common.service';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,14 @@ export class StoreItemsService {
   subCategoriesWithCategory = {};
   storeProductsList;
   private productsList = [];
-  constructor(private _http: HttpClient) {
-
+  constructor(private _http: HttpClient,
+    private _commonService: CommonService,
+    private _cartService: CartService) {
   }
 
   getItems(id) {
     return this._http.get(`${ApiConfig.storeProductsURL}/${id}`)
       .pipe(map((res: any) => {
-
         console.log('res ', res);
         if (res && res.productsByCategory) {
           // map products with cart for quantity
@@ -55,16 +57,23 @@ export class StoreItemsService {
   }
 
   private mapWithCart(result) {
-    let cart = JSON.parse(localStorage.getItem('cartEntity'));
-    const products = result && result.products;
+    const isLoggedIn = this._commonService.isLogin();
+    let cart;
+    if (isLoggedIn) {
+      cart = this._cartService.cartEntity;
+    } else {
+      cart = JSON.parse(localStorage.getItem('cartEntity'));
+    }
+    const products = result && result.productsByCategory;
+    const store = result && result.store;
     if (cart && cart.storeId
-      && result.store_details
-      && cart.storeId === result.store_details.storeDetailsId) {
-      cart.items.forEach((item) => {
+      && store
+      && cart.storeId === store.id) {
+      cart.orderProducts.forEach((item) => {
         for (let category in products) {
           for (let sub in products[category]) {
             products[category][sub].map((t) => {
-              if (t.id === item.storeId) {
+              if (t.id === item.id) {
                 t.quantity = item.quantity;
                 t.weight = item.weight;
                 t.unit = item.unit;

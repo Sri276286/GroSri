@@ -81,6 +81,7 @@ export class GroOrderDetailsComponent implements OnInit {
       this._modalService.dismissAll();
       // show success snackbar
       this._toastService.show(`Order #${id} cancelled successfully`);
+      this._router.navigate(['/order']);
     }, () => {
       this._modalService.dismissAll();
       // show failed snackbar

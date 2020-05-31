@@ -16,9 +16,9 @@ export class OrderService {
   }
 
   getOrders() {
-    let params = new HttpParams();
-    params = params.append('inprogress', 'true');
-    return this._http.get(`${ApiConfig.ordersListURL}/1`, { params: params })
+    // let params = new HttpParams();
+    // params = params.append('inprogress', 'true');
+    return this._http.get(ApiConfig.ordersListURL)
       .pipe(map((res: any) => {
         const orders = res && res.orders;
         this._commonService.ordersPlaced = orders;
@@ -31,6 +31,6 @@ export class OrderService {
   }
 
   cancelOrder(id: string) {
-    return this._http.delete(`${ApiConfig.orderURL}/${id}`);
+    return this._http.delete(`${ApiConfig.orderURL}/${id}/delete`);
   }
 }

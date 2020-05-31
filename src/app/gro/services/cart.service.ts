@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { ApiConfig } from 'src/app/config/api.config';
 import { map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartReplaceDialogComponent } from '../components/floating-modal/cart-replace-dialog/replace-dialog.component';
 import { CommonService } from './common.service';
@@ -17,13 +18,50 @@ export class CartService {
   public cartEntity = {
     storeId: null,
     total: 0,
-    items: []
+    orderProducts: []
   };
   private cartQuantity = 0;
+  private storeCartDetails;
 
   constructor(private _http: HttpClient,
     private _modalService: NgbModal,
     private _commonService: CommonService) {
+  }
+
+  /**
+   * API to load cart details
+   */
+  getCartItems() {
+    const isLoggedIn = this._commonService.isLogin();
+    if (isLoggedIn) {
+      return this._http.get(`${ApiConfig.commonCartAndOrderURL}/IN_CART`)
+        .pipe(map((res: any) => {
+          console.log('res cart ', res);
+          const cart = res && res.orders && res.orders.length && res.orders[0];
+          console.log('cart ', cart);
+          this.storeCartDetails = cart;
+          if (cart && cart.billTotal && cart.orderProducts) {
+            this.cartEntityMap.set(cart.store.id, cart);
+            this.manageCart(cart.orderProducts.length, cart);
+          } else {
+            // show error
+          }
+          return cart;
+        }, () => {
+          // show error
+          return throwError(`Failed to get details`);
+        }));
+    } else {
+      let cart = this.getCart();
+      if (cart) {
+        return of(cart).pipe(map(() => {
+          this.cartEntityMap.set(cart.storeId, cart);
+          this.manageCart(cart.orderProducts.length, cart);
+        }))
+      } else {
+        return throwError('Cannot fetch details');
+      }
+    }
   }
 
   /**
@@ -34,13 +72,19 @@ export class CartService {
     const entity = {
       storeInventoryProductUnitId: item.id,
       quantity: item.quantity,
-      customerId: "1",
-      orderId: "0",
-      id: "0"
+      customerId: "1"
     };
     this._http.put(ApiConfig.cartUpdateURL, entity).subscribe(() => {
       this.updateCart(item);
     });
+  }
+
+  /**
+   * API call to clear items in cart
+   */
+  clearCart() {
+    const id = this.storeCartDetails && this.storeCartDetails.id;
+    return this._http.delete(`${ApiConfig.orderURL}/${id}/delete`);
   }
 
   resetCart() {
@@ -50,7 +94,7 @@ export class CartService {
     this.cartEntity = {
       storeId: null,
       total: 0,
-      items: []
+      orderProducts: []
     };
     this.cartQuantity = 0;
     localStorage.removeItem('cartEntity');
@@ -112,21 +156,22 @@ export class CartService {
 
   private handleCartEntity(item) {
     console.log('item handle ', item);
-    let isItemInCart = this.cartEntity && this.cartEntity.items.find(t => t.id === item.id);
-    let itemIndex = isItemInCart && this.cartEntity && this.cartEntity.items.indexOf(isItemInCart);
+    console.log('cart eeeeee ', this.cartEntity);
+    let isItemInCart = this.cartEntity && this.cartEntity.orderProducts.find(t => t.id === item.id);
+    let itemIndex = isItemInCart && this.cartEntity && this.cartEntity.orderProducts.indexOf(isItemInCart);
     console.log('item index ', itemIndex);
     console.log('isItemInCart ', isItemInCart);
     if (!isItemInCart) {
-      this.cartEntity.items = [...this.cartEntity.items, item];
-      console.log('here ', this.cartEntity.items);
+      this.cartEntity.orderProducts = [...this.cartEntity.orderProducts, item];
+      console.log('here ', this.cartEntity.orderProducts);
       this.cartEntity.total += item.price;
       this.cartQuantity++;
     } else {
       if (item && item.quantity) {
-        this.cartEntity.items[itemIndex] = item;
+        this.cartEntity.orderProducts[itemIndex] = item;
         this.cartEntity.total += item.price;
       } else {
-        this.cartEntity.items.splice(itemIndex, 1);
+        this.cartEntity.orderProducts.splice(itemIndex, 1);
         this.cartEntity.total -= item.price;
         this.cartQuantity--;
       }
@@ -175,43 +220,16 @@ export class CartService {
       },
       "orderStatus": "PLACED"
     };
-    return this._http.put(`${ApiConfig.commonCartAndOrderURL}/1/update`, obj);
+    return this._http.put(ApiConfig.placeOrderURL, obj);
     // return this._http.post('/api/order', order);
   }
 
   getFromLocalStorage() {
     let cart = this.getCart();
     console.log('cart ', cart);
-    if (cart && cart.items && cart.items.length) {
-      cart.items = this.mapCart(cart.items);
+    if (cart && cart.orderProducts && cart.orderProducts.length) {
+      cart.orderProducts = this.mapCart(cart.orderProducts);
       this.postToCart(cart);
-    }
-  }
-
-  getCartItems() {
-    const isLoggedIn = this._commonService.isLogin();
-    if (isLoggedIn) {
-      let params = new HttpParams();
-      params = params.append('inCart', 'true');
-      return this._http.get(`${ApiConfig.cartURL}/1`, { params: params })
-        .pipe(map((res: any) => {
-          if (res && res.billTotal && res.orderProductLstDTO) {
-            this.cartEntityMap.set(res.storeId, res);
-            this.manageCart(res.items.length, res);
-          } else {
-            // show error
-          }
-        }, () => {
-          // show error
-        }));
-    } else {
-      let cart = this.getCart();
-      if (cart) {
-        return of(cart).pipe(map(() => {
-          this.cartEntityMap.set(cart.storeId, cart);
-          this.manageCart(cart.items.length, cart);
-        }))
-      }
     }
   }
 
@@ -230,6 +248,7 @@ export class CartService {
   }
 
   private manageCart(cartQuantity: number, cartEntity: any) {
+    this.cartEntity = cartEntity;
     this.cartEntity$.next(cartEntity);
     this.cartQuantity$.next(cartQuantity);
   }

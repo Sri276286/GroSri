@@ -3,6 +3,7 @@ import { CommonService } from '../../services/common.service';
 import { StoreService } from '../../services/store.service';
 import { LoginService } from '../../../common/services/login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'gro-home',
@@ -19,7 +20,8 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
   constructor(private _commonService: CommonService,
     private _storeService: StoreService,
     private _loginService: LoginService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    private _modal: NgbModal) {
   }
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
       console.log('location ', location);
       if (!location) {
         this.myModal.nativeElement.click();
+        // this._modal.open();
       } else {
         this._commonService.userLocation = location;
         this.loadStores(location);

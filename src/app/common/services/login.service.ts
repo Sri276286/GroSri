@@ -14,7 +14,6 @@ export class LoginService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser$: Observable<User>;
-  private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
   constructor(private _http: HttpClient,
     private _commonService: CommonService,
@@ -34,15 +33,6 @@ export class LoginService {
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
-  }
-
-  setLoggedIn(value: boolean) {
-    this.loggedInStatus = value;
-    localStorage.setItem('loggedIn', 'true');
-  }
-
-  get isLoggedIn() {
-    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString());
   }
 
   doLogin(loginform: any): Observable<any> {
@@ -72,7 +62,8 @@ export class LoginService {
 
   private getUser() {
     return this._http.get(ApiConfig.userDetailsURL)
-      .pipe(map((user: any) => {
+      .pipe(map((res: any) => {
+        const user = res && res.data;
         console.log('user ', user);
         // login successful if there's a jwt token in the response
         if (user) {
@@ -99,6 +90,13 @@ export class LoginService {
         localStorage.removeItem('cartEntity');
       }
     }
+  }
+
+  /**
+   * Logout url
+   */
+  doLogout() {
+    return this._http.get(ApiConfig.logoutURL);
   }
 
 }

@@ -1,19 +1,43 @@
 <ng-container [ngTemplateOutlet]="orderHeader"></ng-container>
-<h6>Current Orders</h6>
-<ng-container *ngFor="let order of current_orders">
-  <ng-template
-    [ngTemplateOutlet]="orderDisplay"
-    [ngTemplateOutletContext]="{ order: order }"
-  ></ng-template>
+<ng-container
+  *ngIf="!current_orders.length && !past_orders.length; else showOrders"
+>
+  <div style="height: 80vh;">
+    <gro-page-error
+      [message]="'There are no orders placed yet'"
+      [actiontext]="'Start Shopping'"
+    ></gro-page-error>
+  </div>
 </ng-container>
-<h6>Past Orders</h6>
-<ng-container *ngFor="let order of past_orders">
-  <ng-template
-    [ngTemplateOutlet]="orderDisplay"
-    [ngTemplateOutletContext]="{ order: order }"
-  ></ng-template>
-</ng-container>
-
+<ng-template #showOrders>
+  <h6 style="font-weight: 600; font-size: 18px;">Current Orders</h6>
+  <ng-container *ngIf="current_orders.length">
+    <ng-container *ngFor="let order of current_orders">
+      <ng-template
+        [ngTemplateOutlet]="orderDisplay"
+        [ngTemplateOutletContext]="{ order: order }"
+      ></ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!current_orders.length">
+    <gro-page-error
+      [message]="'Currently, no orders placed'"
+      [actiontext]="'Start Shopping'"
+    ></gro-page-error>
+  </ng-container>
+  <h6 style="font-weight: 600; font-size: 18px;">Past Orders</h6>
+  <ng-container *ngIf="past_orders.length">
+    <ng-container *ngFor="let order of past_orders">
+      <ng-template
+        [ngTemplateOutlet]="orderDisplay"
+        [ngTemplateOutletContext]="{ order: order }"
+      ></ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!past_orders.length">
+    <gro-page-error [message]="'There are no previous orders'"></gro-page-error>
+  </ng-container>
+</ng-template>
 <ng-template #orderHeader>
   <div class="order-header-grid">
     <i class="fas fa-chevron-left" [routerLink]="['/home']"></i>
