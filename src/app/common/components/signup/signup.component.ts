@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SignupService } from '../../services/signup.service';
 import { ConfirmPasswordValidator } from '../../services/confirm.password';
 import { Router } from '@angular/router';
+import { CommonConstants } from '../../common.constants';
 
 @Component({
   selector: 'gro-signup',
@@ -22,11 +23,12 @@ export class SignupComponent implements OnInit {
     this.mySignUpForm = this.fb.group({
       // storekeeper: [],
       name: ["", [Validators.required, Validators.minLength(6)]],
-      pincode:["", [Validators.minLength(6), Validators.maxLength(6)]],
+      pincode:["", [Validators.pattern(CommonConstants.pincode)]],
       email:["", [Validators.required, Validators.email]],
-      mobileNumber: ["", Validators.required],
-      password: ["", [Validators.required, Validators.minLength(8)]],
-      confirm_password: ["", [Validators.required, ConfirmPasswordValidator]]
+      mobileNumber: ["", [Validators.required, Validators.pattern(CommonConstants.phoneNumber)]],
+      password: ["", [Validators.required, Validators.pattern(CommonConstants.password)]],
+      confirm_password: ["", [Validators.required,
+        ConfirmPasswordValidator]]
     });
   }
 

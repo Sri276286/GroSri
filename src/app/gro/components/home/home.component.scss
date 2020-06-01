@@ -1,0 +1,13 @@
+.search-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-grid .search-input {
+  padding: 20px;
+  margin: 10px;
+}
+
+.search-grid .search-button {
+  margin: auto;
+}

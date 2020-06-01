@@ -8,7 +8,7 @@
   </button>
   <div class="card">
     <div class="card-header">
-      <h5>Sign Up</h5>
+      <h5>Register</h5>
     </div>
     <div class="card-body">
       <form [formGroup]="mySignUpForm">
@@ -18,15 +18,22 @@
         </label>
         </div> -->
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
             mySignUpForm.get('name').errors?.required &&
-            (mySignUpForm.get('name').touched ||
-              mySignUpForm.get('name').dirty)
+            (mySignUpForm.get('name').touched || mySignUpForm.get('name').dirty)
           "
         >
-          Full Name is required
+          Name is required
         </span>
+        <span
+        class="text-danger"
+        *ngIf="
+          mySignUpForm.get('name').errors?.minlength
+        "
+      >
+        Name must be minimum 6 characters
+      </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
@@ -38,7 +45,7 @@
             class="form-control"
             type="text"
             formControlName="name"
-            placeholder="User Name"
+            placeholder="Display Name *"
             [ngClass]="{
               'is-invalid':
                 (mySignUpForm.get('name').touched ||
@@ -48,7 +55,7 @@
           />
         </div>
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
             mySignUpForm.get('pincode').errors?.required &&
             (mySignUpForm.get('pincode').touched ||
@@ -57,10 +64,19 @@
         >
           Pincode is required
         </span>
+        <span
+        class="text-danger"
+        *ngIf="
+          mySignUpForm.get('pincode').errors?.pattern
+        "
+      >
+        Pincode must be a valid 6 digit number
+      </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
-              ><i class="fas fa-location-arrow"></i></span>
+              ><i class="fas fa-location-arrow"></i
+            ></span>
           </div>
           <input
             type="number"
@@ -76,7 +92,7 @@
           />
         </div>
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
             mySignUpForm.get('mobileNumber').errors?.required &&
             (mySignUpForm.get('mobileNumber').touched ||
@@ -85,6 +101,14 @@
         >
           Phone number is required
         </span>
+        <span
+        class="text-danger"
+        *ngIf="
+          mySignUpForm.get('mobileNumber').errors?.pattern
+        "
+      >
+        Phone number must be a valid 10 digit number
+      </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text loginspan"
@@ -95,7 +119,7 @@
             type="number"
             class="form-control"
             formControlName="mobileNumber"
-            placeholder="Phone Number"
+            placeholder="Phone Number *"
             [ngClass]="{
               'is-invalid':
                 (mySignUpForm.get('mobileNumber').touched ||
@@ -105,7 +129,7 @@
           />
         </div>
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
             mySignUpForm.get('email').errors?.required &&
             (mySignUpForm.get('email').touched ||
@@ -113,6 +137,12 @@
           "
         >
           Email is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="mySignUpForm.get('email').errors?.email"
+        >
+          Please provide a valid email address
         </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
@@ -124,7 +154,7 @@
             type="text"
             class="form-control"
             formControlName="email"
-            placeholder="Email"
+            placeholder="Email *"
             [ngClass]="{
               'is-invalid':
                 (mySignUpForm.get('email').touched ||
@@ -135,7 +165,7 @@
         </div>
 
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
             mySignUpForm.get('password').errors?.required &&
             (mySignUpForm.get('password').touched ||
@@ -143,6 +173,13 @@
           "
         >
           Password is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="mySignUpForm.get('password').errors?.pattern"
+        >
+          Password must contain a digit, an uppercase, a lowercase,a special
+          character and between 6-15 characters.
         </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
@@ -154,7 +191,7 @@
             type="password"
             class="form-control"
             formControlName="password"
-            placeholder="Password"
+            placeholder="Password *"
             [ngClass]="{
               'is-invalid':
                 (mySignUpForm.get('password').touched ||
@@ -165,7 +202,7 @@
         </div>
 
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
             mySignUpForm.get('confirm_password').errors?.required &&
             (mySignUpForm.get('confirm_password').touched ||
@@ -184,7 +221,7 @@
             type="password"
             class="form-control"
             formControlName="confirm_password"
-            placeholder="Confirm Password"
+            placeholder="Confirm Password *"
             [ngClass]="{
               'is-invalid':
                 (mySignUpForm.get('confirm_password').touched ||
@@ -194,7 +231,7 @@
           />
 
           <span
-            class="error_text"
+            class="text-danger"
             *ngIf="
               mySignUpForm.get('confirm_password').invalid &&
               (mySignUpForm.get('confirm_password').touched ||
@@ -202,7 +239,7 @@
               !mySignUpForm.get('confirm_password').errors?.required
             "
           >
-            Password and Confirm Password must be match
+            Password and Confirm Password must match
           </span>
         </div>
         <div class="form-group">

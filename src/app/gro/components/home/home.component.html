@@ -1,25 +1,44 @@
-<!-- Show popup if location not present -->
-<button
-  #openModal
-  type="button"
-  (click)="openModal()"
-  data-target="#locationOnLoadModal"
-  data-toggle="modal"
-  hidden
-  data-backdrop="static"
-  data-keyboard="false"
-></button>
-<gro-location-on-load (search)="loadStores($event)"></gro-location-on-load>
-<!---->
-
 <gro-header></gro-header>
-<gro-favorite [favorites]="favorites" *ngIf="isLoggedIn && favorites.length"></gro-favorite>
+<gro-favorite
+  [favorites]="favorites"
+  *ngIf="isLoggedIn && favorites.length"
+></gro-favorite>
 <gro-category></gro-category>
 <div style="margin-top: 10px;">
-  <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium" *ngIf="!stores.length">
+  <ngx-spinner
+    [fullScreen]="false"
+    type="ball-clip-rotate-multiple"
+    size="medium"
+    *ngIf="!stores.length"
+  >
     <p class="loading">Loading nearby stores...</p>
   </ngx-spinner>
   <span style="font-size: 20px;">All stores near you</span>
   <gro-store [stores]="stores"></gro-store>
 </div>
 <gro-footer></gro-footer>
+
+<ng-template #pincodeModal>
+  <div class="modal-body">
+    <div class="search-grid">
+      <div class="search-input">
+        <input
+          class="form-control search-input"
+          type="input"
+          placeholder="Enter pincode or area"
+          aria-label="Search"
+          [(ngModel)]="searchKey"
+        />
+      </div>
+      <div class="search-button">
+        <button
+          type="button"
+          class="btn btn-dark"
+          (click)="loadStores(searchKey)"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

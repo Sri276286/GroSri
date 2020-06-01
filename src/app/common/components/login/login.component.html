@@ -8,18 +8,20 @@
   </button>
   <div class="card">
     <div class="card-header">
-      <h5 style="display: inline-block;">Log In</h5>
+      <h5 style="display: inline-block;">Login</h5>
     </div>
     <div class="card-body">
       <form [formGroup]="myLoginForm">
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
-            myLoginForm.get('email').errors?.required &&
-            (myLoginForm.get('email').touched || myLoginForm.get('email').dirty)
+            emailData.errors?.required && (emailData.touched || emailData.dirty)
           "
         >
-          Mobile number is required
+          Email is required
+        </span>
+        <span class="text-danger" *ngIf="emailData.errors?.email">
+          Please provide a valid email address
         </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
@@ -32,24 +34,29 @@
             class="form-control"
             type="text"
             formControlName="email"
-            placeholder="Mobile Number / Email"
+            placeholder="Email *"
             [ngClass]="{
               'is-invalid':
-                (myLoginForm.get('email').touched ||
-                  myLoginForm.get('email').dirty) &&
-                myLoginForm.get('email').errors
+                (emailData.touched || emailData.dirty) && emailData.errors
             }"
           />
         </div>
         <span
-          class="error_text"
+          class="text-danger"
           *ngIf="
-            myLoginForm.get('password').errors?.required &&
-            (myLoginForm.get('password').touched ||
-              myLoginForm.get('password').dirty)
+            passwordData.errors?.required &&
+            (passwordData.touched || passwordData.dirty)
           "
         >
           Password is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+            passwordData.errors?.pattern
+          "
+        >
+          Password must contain a digit, an uppercase, a lowercase,a special character and between 6-15 characters.
         </span>
         <div class="input-group form-group">
           <div class="input-group-prepend">
@@ -61,12 +68,11 @@
             type="password"
             class="form-control"
             formControlName="password"
-            placeholder="password"
+            placeholder="Password *"
             [ngClass]="{
               'is-invalid':
-                (myLoginForm.get('password').touched ||
-                  myLoginForm.get('password').dirty) &&
-                myLoginForm.get('password').errors
+                (passwordData.touched || passwordData.dirty) &&
+                passwordData.errors
             }"
           />
         </div>

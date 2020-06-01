@@ -15,7 +15,8 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
   user = localStorage.getItem('currentUser');
   public isLoggedIn: boolean = false;
   public favorites = [];
-  @ViewChild('openModal') myModal;
+  searchKey: string = '';
+  @ViewChild('pincodeModal') pincodeModal;
 
   constructor(private _commonService: CommonService,
     private _storeService: StoreService,
@@ -34,18 +35,15 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // setTimeout(() => {
-      const profile = JSON.parse(this.user);
-      const location = profile && profile.location || localStorage.getItem('userLocation');
-      console.log('location ', location);
-      if (!location) {
-        this.myModal.nativeElement.click();
-        // this._modal.open();
-      } else {
-        this._commonService.userLocation = location;
-        this.loadStores(location);
-      }
-    // }, 1000);
+    const profile = JSON.parse(this.user);
+    const location = profile && profile.location || localStorage.getItem('userLocation');
+    console.log('location ', location);
+    if (!location) {
+      this._modal.open(this.pincodeModal, { centered: true });
+    } else {
+      this._commonService.userLocation = location;
+      this.loadStores(location);
+    }
   }
 
   loadStores(searchKey: string) {
@@ -57,16 +55,11 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
       localStorage.setItem('userLocation', searchKey);
       this.stores = result && result.storeLst ? result.storeLst : [];
       console.log('get stores ', this.stores);
-      this.closeModal();
       this.spinner.hide();
+      this._modal.dismissAll();
+    }, () => {
+      this._modal.dismissAll();
     });
-  }
-
-  openModal() {
-    this.myModal.nativeElement.className = 'modal fade show';
-  }
-  closeModal() {
-    this.myModal.nativeElement.className = 'modal hide';
   }
 
   detect() {

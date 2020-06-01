@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export function ConfirmPasswordValidator(control: AbstractControl) {
     if (control && (control.value !== null || control.value !== undefined)) {
