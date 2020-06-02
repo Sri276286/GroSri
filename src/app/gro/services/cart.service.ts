@@ -70,10 +70,11 @@ export class CartService {
    */
   postToCart(item) {
     const entity = {
-      storeInventoryProductUnitId: item.id,
+      storeInventoryProductUnitId: item.storeInventoryProductUnitId,
       quantity: item.quantity,
       customerId: "1"
     };
+    console.log('eeeeeeee ', entity);
     this._http.put(ApiConfig.cartUpdateURL, entity).subscribe(() => {
       this.updateCart(item);
     });
@@ -122,11 +123,11 @@ export class CartService {
   }
 
   private updateCart(item) {
+    console.log('cartEntity ', JSON.stringify(this.cartEntity));
     console.log('item ', item);
     // check if already items presnt in cart (same or different store)
     let cartEntityFromMap = this.checkCartByStoreId(item.storeId);
-    console.log('checkCartWithStore ', cartEntityFromMap);
-    console.log('cartEntity ', this.cartEntity);
+    console.log('checkCartWithStore ', JSON.stringify(cartEntityFromMap));
     if (cartEntityFromMap) {
       this.cartEntity = cartEntityFromMap;
       this.handleCartEntity(item);
@@ -156,8 +157,8 @@ export class CartService {
 
   private handleCartEntity(item) {
     console.log('item handle ', item);
-    console.log('cart eeeeee ', this.cartEntity);
-    let isItemInCart = this.cartEntity && this.cartEntity.orderProducts.find(t => t.id === item.id);
+    console.log('cart eeeeee ', JSON.stringify(this.cartEntity));
+    let isItemInCart = this.cartEntity && this.cartEntity.orderProducts.find(t => t.storeInventoryProductUnitId === item.storeInventoryProductUnitId);
     let itemIndex = isItemInCart && this.cartEntity && this.cartEntity.orderProducts.indexOf(isItemInCart);
     console.log('item index ', itemIndex);
     console.log('isItemInCart ', isItemInCart);
@@ -178,7 +179,6 @@ export class CartService {
     }
     // Add store id
     this.cartEntity.storeId = item.storeId;
-    console.log('cart entity ', this.cartEntity);
     // Map cart with id
     this.cartEntityMap.set(item.storeId, this.cartEntity);
     // save in local storage
@@ -186,7 +186,7 @@ export class CartService {
     if (!isLoggedIn) {
       this.setInLocalStorage();
     }
-
+    console.log('cart entity end ', JSON.stringify(this.cartEntity));
     this.manageCart(this.cartQuantity, this.cartEntity);
   }
 
@@ -207,7 +207,7 @@ export class CartService {
     };
   }
 
-  placeOrder(order) {
+  placeOrder() {
     const obj = {
       "orderAddress": {
         "flatNo": 35,
@@ -221,7 +221,6 @@ export class CartService {
       "orderStatus": "PLACED"
     };
     return this._http.put(ApiConfig.placeOrderURL, obj);
-    // return this._http.post('/api/order', order);
   }
 
   getFromLocalStorage() {
@@ -248,7 +247,6 @@ export class CartService {
   }
 
   private manageCart(cartQuantity: number, cartEntity: any) {
-    this.cartEntity = cartEntity;
     this.cartEntity$.next(cartEntity);
     this.cartQuantity$.next(cartQuantity);
   }

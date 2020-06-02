@@ -10,19 +10,18 @@ export class CartBarComponent implements OnInit {
 
   cartTotal = 0;
   cartQuantity = '';
-  quantity =0;
+  quantity = 0;
   constructor(private _cartService: CartService) { }
 
   ngOnInit() {
     this._cartService.cartEntity$.subscribe((cart) => {
-      this.cartTotal = cart && cart.total;
-    });
-    this._cartService.cartQuantity$.subscribe((quantity) => {
-      this.quantity = quantity;
-      if (quantity === 1) {
-        this.cartQuantity = `${quantity} item`;
+      console.log('rrrr cart ', cart);
+      this.cartTotal = cart && (cart.billTotal || cart.total);
+      this.quantity = cart && cart.orderProducts && cart.orderProducts.length;
+      if (this.quantity === 1) {
+        this.cartQuantity = `1 item`;
       } else {
-        this.cartQuantity = `${quantity} items`;
+        this.cartQuantity = `${this.quantity} items`;
       }
     });
   }

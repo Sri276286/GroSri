@@ -1,0 +1,23 @@
+.page-no-header-grid {
+  display: flex;
+  width: 100%;
+  background: black;
+  padding: 15px;
+  span {
+    padding-left: 20px;
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.fas.fa-home {
+  color: white;
+  font-size: 24px;
+}
+
+img {
+  margin: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}

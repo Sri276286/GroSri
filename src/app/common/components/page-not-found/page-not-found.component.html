@@ -1,0 +1,16 @@
+<div class="page-no-header-grid">
+  <i class="fas fa-home" [routerLink]="['/home']"></i>
+  <span>Error Page</span>
+</div>
+<div [routerLink]="['/home']">
+  <img src="assets/404.png" alt="404 Page Not Found" />
+  <div class="text-center">
+    <h4>Page Not found</h4>
+    <pre style="padding: 10px;">
+  You seem to have clicked on a broken link
+        or entered a URL that doesn't
+          exist on this site</pre
+    >
+    <button class="btn btn-success" [routerLink]="['/home']">Take me Home</button>
+  </div>
+</div>

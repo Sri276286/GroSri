@@ -14,6 +14,7 @@ export class GroCartComponent implements OnInit {
 
   items = [];
   cartTotal = 0;
+  storeId = '';
   isOrdered: boolean = false;
   isLoggedIn: boolean = false;
   constructor(public _cartService: CartService,
@@ -31,21 +32,21 @@ export class GroCartComponent implements OnInit {
       this._cartService.getCartItems().subscribe((res: any) => {
         this.spinner.hide();
         console.log('res cart from login ', res);
-        this._cartService.cartEntity = res;
         this.cartTotal = res && res.billTotal || 0;
         this.items = res && res.orderProducts || [];
+        this.storeId = res && res.store && res.store.id;
       });
     }
     this._cartService.cartEntity$.subscribe((res) => {
       this.spinner.hide();
-      this._cartService.cartEntity = res;
-      console.log('res cart ', res)
+      console.log('res cart from cart component ', res)
       this.cartTotal = res && res.billTotal || 0;
       this.items = res && res.orderProducts || [];
     });
   }
 
   addItems(item) {
+    console.log('item adddddd ', item);
     this._cartService.addItems(item);
   }
 
@@ -71,8 +72,7 @@ export class GroCartComponent implements OnInit {
 
   placeOrder() {
     if (this.isLoggedIn) {
-      console.log('orderr place ', this._cartService.cartEntity);
-      this._cartService.placeOrder(this._cartService.cartEntity).subscribe(() => {
+      this._cartService.placeOrder().subscribe(() => {
         this._cartService.resetCart();
         this.isOrdered = true;
       });

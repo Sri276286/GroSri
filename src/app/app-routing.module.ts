@@ -14,6 +14,7 @@ import { GroCategoryStoreComponent } from './gro/components/category/category-st
 import { FavoriteStoreComponent } from './gro/components/store/favorite-store/favorite-store.component';
 import { AddressListComponent } from './gro/components/address/address-list.component';
 import { AddressDetailComponent } from './gro/components/address/address-detail/address-detail.component';
+import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'home', component: GroHomeComponent },
@@ -41,7 +42,8 @@ const routes: Routes = [
   {
     path: 'store-view-order', component: ViewOrderComponent
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

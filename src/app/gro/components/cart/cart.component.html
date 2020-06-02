@@ -1,6 +1,6 @@
 <div class="cart-header-grid">
-  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
-  <span>Review Basket</span>
+  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/store', storeId]"></i>
+  <span>Cart Summary</span>
 </div>
 <div *ngIf="items.length">
   <div style="background-color: #f8f9f9; padding: 10px; padding-top: 0px;">
@@ -132,7 +132,10 @@
   >
     <div class="footer-flex-container-checkout" *ngIf="isLoggedIn">
       <div class="flex-item-checkout">
-        <span class="h4"> Rs. {{ cartTotal }}</span>
+        <span class="h6" *ngIf="items.length">{{
+          items.length === 1 ? "1 item" : items.length + " items"
+        }}</span>
+        <span class="h5"> Rs. {{ cartTotal }}</span>
         <!-- <span style="color: rgb(132, 194, 37);">Saved Rs 331.5</span> -->
       </div>
       <div class="flex-item-checkout-button">
@@ -141,7 +144,9 @@
     </div>
     <div class="login_cart" *ngIf="!isLoggedIn">
       <span>One step away. Please login to place order.</span>
-      <button class="btn btn-success" [routerLink]="['/login']">Continue</button>
+      <button class="btn btn-success" [routerLink]="['/login']">
+        Continue
+      </button>
     </div>
   </footer>
 </div>

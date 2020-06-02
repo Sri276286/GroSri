@@ -20,6 +20,13 @@ export class GroOrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getOrders();
+  }
+
+  /**
+   * Get All orders except in cart
+   */
+  getOrders() {
     this._service.getOrders().subscribe((res: any) => {
       if (res && res.orders) {
         this.current_orders = res.orders.filter((order) => {
@@ -44,6 +51,7 @@ export class GroOrderComponent implements OnInit {
 
   cancel(id: string) {
     this._service.cancelOrder(id).subscribe(() => {
+      this.getOrders();
       this._modalService.dismissAll();
       // show success snackbar
       this._toastService.show(`Order #${id} cancelled successfully`);

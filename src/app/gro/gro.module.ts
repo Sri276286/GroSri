@@ -31,6 +31,7 @@ import { AppToastsComponent } from '../common/components/toasts/toasts.component
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddressListComponent } from './components/address/address-list.component';
 import { AddressDetailComponent } from './components/address/address-detail/address-detail.component';
+import { PageNotFoundComponent } from '../common/components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AddressDetailComponent } from './components/address/address-detail/addr
     GroFavoriteComponent,
     AppToastsComponent,
     AddressListComponent,
-    AddressDetailComponent
+    AddressDetailComponent,
+    PageNotFoundComponent
   ],
   exports: [
     GroComponent,
@@ -87,7 +89,8 @@ import { AddressDetailComponent } from './components/address/address-detail/addr
     GroFavoriteComponent,
     AppToastsComponent,
     AddressListComponent,
-    AddressDetailComponent
+    AddressDetailComponent,
+    PageNotFoundComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent
