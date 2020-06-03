@@ -12,6 +12,12 @@
         <h5 class="modal-title" id="menuModalLabel" *ngIf="user && isLoggedIn">
           Hello {{ user.name }}
         </h5>
+        <i
+          *ngIf="user && isLoggedIn"
+          class="fas fa-edit mr-3 text-right"
+          [routerLink]="['/user']"
+          data-dismiss="modal"
+        ></i>
         <button
           type="button"
           class="btn btn-primary"
@@ -28,7 +34,7 @@
           [routerLink]="['/signup']"
           *ngIf="!user"
         >
-          SignUp
+          Register
         </button>
       </div>
       <div class="modal-body" *ngIf="isLoggedIn">

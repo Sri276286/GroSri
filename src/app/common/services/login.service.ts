@@ -35,6 +35,10 @@ export class LoginService {
     return this.currentUserSubject.value;
   }
 
+  saveUserDetails(user) {
+    return this._http.post(ApiConfig.userUpdateURL, user);
+  }
+
   doLogin(loginform: any): Observable<any> {
     let httpHeaders = new HttpHeaders().set("Content-Type", "application/json");
     let options = {
@@ -60,7 +64,10 @@ export class LoginService {
     }));
   }
 
-  private getUser() {
+  /**
+   * Get user details
+   */
+  public getUser() {
     return this._http.get(ApiConfig.userDetailsURL)
       .pipe(map((res: any) => {
         const user = res && res.data;
@@ -75,6 +82,7 @@ export class LoginService {
           }
           this.currentUserSubject.next(user);
         }
+        return user;
       }));
   }
 

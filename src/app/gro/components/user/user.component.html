@@ -1,0 +1,95 @@
+<div class="user-header-grid">
+  <i class="fas fa-long-arrow-alt-left" [routerLink]="['/home']"></i>
+  <span>Update Profile</span>
+</div>
+<form
+  class="p-1"
+  name="form"
+  novalidate
+  (ngSubmit)="user_profile.valid && onSubmit(user_profile, user_profile.valid)"
+  [formGroup]="user_profile"
+>
+  <div class="error" *ngIf="user_profile.invalid">
+    * All mandatory fields should be filled
+  </div>
+  <div class="form-group">
+    <label for="name">Display Name<span style="color: red;">*</span></label>
+    <div
+      class="error"
+      *ngIf="
+        user_profile.get('name').touched &&
+        user_profile.get('name').hasError('required')
+      "
+    >
+      Display Name is required
+    </div>
+    <input type="text" class="form-control" id="name" formControlName="name" />
+  </div>
+  <div class="form-group">
+    <label for="mobileNumber"
+      >Mobile Number<span style="color: red;">*</span></label
+    >
+    <div
+      class="error"
+      *ngIf="
+        user_profile.get('mobileNumber').touched &&
+        user_profile.get('mobileNumber').hasError('required')
+      "
+    >
+      Mobile Number is required
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      id="mobileNumber"
+      formControlName="mobileNumber"
+    />
+  </div>
+  <div class="form-group">
+    <label for="email">Email<span style="color: red;">*</span></label>
+    <div
+      class="error"
+      *ngIf="
+        user_profile.get('email').touched &&
+        user_profile.get('email').hasError('required')
+      "
+    >
+      Email is required
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      id="email"
+      formControlName="email"
+    />
+  </div>
+  <div class="form-group">
+    <label for="dob"
+      >Date of Birth (dd/mm/yyyy)</label
+    >
+    <input
+      type="text"
+      class="form-control"
+      id="dob"
+      formControlName="dob"
+    />
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="promotions_ok"
+        formControlName="promotions_ok"
+      />
+      <label class="form-check-label" for="promotions_ok">
+        Send me promotions, offers on emails/sms
+      </label>
+    </div>
+  </div>
+  <div class="edit-user-footer">
+    <button type="submit" class="btn btn-primary btn-block">
+      UPDATE
+    </button>
+  </div>
+</form>

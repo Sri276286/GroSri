@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { ApiConfig } from 'src/app/config/api.config';
 import { map } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { throwError } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartReplaceDialogComponent } from '../components/floating-modal/cart-replace-dialog/replace-dialog.component';
 import { CommonService } from './common.service';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +37,14 @@ export class CartService {
     if (isLoggedIn) {
       return this._http.get(`${ApiConfig.commonCartAndOrderURL}/IN_CART`)
         .pipe(map((res: any) => {
-          console.log('res cart ', res);
+          console.log('res cart yyyyyy', res);
           const cart = res && res.orders && res.orders.length && res.orders[0];
-          console.log('cart ', cart);
+          console.log('cart yyyyyyy', cart);
           this.storeCartDetails = cart;
           if (cart && cart.billTotal && cart.orderProducts) {
-            this.cartEntityMap.set(cart.store.id, cart);
-            this.manageCart(cart.orderProducts.length, cart);
+            let cloneCart = _.cloneDeep(cart);
+            this.cartEntityMap.set(cart.store.id, cloneCart);
+            this.manageCart(cart.orderProducts.length, cloneCart);
           } else {
             // show error
           }
@@ -128,8 +130,9 @@ export class CartService {
     // check if already items presnt in cart (same or different store)
     let cartEntityFromMap = this.checkCartByStoreId(item.storeId);
     console.log('checkCartWithStore ', JSON.stringify(cartEntityFromMap));
+    const cloneCartMap = _.cloneDeep(cartEntityFromMap);
     if (cartEntityFromMap) {
-      this.cartEntity = cartEntityFromMap;
+      this.cartEntity = cloneCartMap;
       this.handleCartEntity(item);
     } else {
       // check if any store are in cart
@@ -179,15 +182,16 @@ export class CartService {
     }
     // Add store id
     this.cartEntity.storeId = item.storeId;
+    let cloneCartEntity = _.cloneDeep(this.cartEntity);
     // Map cart with id
-    this.cartEntityMap.set(item.storeId, this.cartEntity);
+    this.cartEntityMap.set(item.storeId, cloneCartEntity);
     // save in local storage
     const isLoggedIn = this._commonService.isLogin();
     if (!isLoggedIn) {
       this.setInLocalStorage();
     }
-    console.log('cart entity end ', JSON.stringify(this.cartEntity));
-    this.manageCart(this.cartQuantity, this.cartEntity);
+    console.log('cart entity end ', JSON.stringify(cloneCartEntity));
+    this.manageCart(this.cartQuantity, cloneCartEntity);
   }
 
   private getRequiredItem(item) {

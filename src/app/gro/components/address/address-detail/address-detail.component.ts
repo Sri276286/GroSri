@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/gro/services/user.service';
 
 @Component({
   selector: 'gro-address-edit',
@@ -10,15 +11,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AddressDetailComponent implements OnInit {
   edit_main_details = false;
   user_address: FormGroup;
+  isNewAddress: boolean = false;
+  addressId = '';
   constructor(private fb: FormBuilder, private _route: Router,
-    private _activatedRoute: ActivatedRoute) {
+    private _activatedRoute: ActivatedRoute,
+    private _userService: UserService) {
   }
 
   ngOnInit() {
     this.user_address = this.fb.group({
       name: ['Srikanth K', Validators.required],
       phone_number: ['7299933974', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      doorNo: ['', Validators.required],
+      flatNo: ['', Validators.required],
       apartment: [''],
       street: ['', Validators.required],
       landmark: [''],
@@ -26,10 +30,15 @@ export class AddressDetailComponent implements OnInit {
       city: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
       address_type: ['home'],
-      default_address: [false]
+      primary_address: [false]
     });
     this._activatedRoute.paramMap.subscribe((paramMap) => {
-      const id = paramMap.get('id');
+      this.addressId = paramMap.get('id');
+      if (this.addressId === 'new') {
+        this.isNewAddress = true;
+      } else {
+        this.isNewAddress = false;
+      }
     });
   }
 
@@ -37,7 +46,19 @@ export class AddressDetailComponent implements OnInit {
     console.log('is valid ', isValid);
     console.log('address ', address);
     if (isValid) {
-      this._route.navigate(['/address']);
+      const addressObj = {
+        addressId: this.addressId,
+        ...address.value
+      };
+      if (this.isNewAddress) {
+        this._userService.addAddress(addressObj).subscribe(() => {
+          this._route.navigate(['/address']);
+        });
+      } else {
+        this._userService.updateAddress(addressObj).subscribe(() => {
+          this._route.navigate(['/address']);
+        });
+      }
     }
   }
 }

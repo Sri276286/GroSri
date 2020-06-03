@@ -42,7 +42,7 @@ export class GroStoreDetailComponent implements OnInit {
       const id = paramMap.get('id');
       this._subscriptions.push(
         this._storeItemsService.getItems(id)
-          .subscribe((store) => {
+          .subscribe((store: any) => {
             console.log('storeeee ', store);
             if (store.store) {
               this.storeName = store.store.storeName;

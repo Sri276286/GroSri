@@ -21,19 +21,24 @@ export class StoreItemsService {
   }
 
   getItems(id) {
-    return this._http.get(`${ApiConfig.storeProductsURL}/${id}`)
-      .pipe(map((res: any) => {
-        console.log('res ', res);
-        if (res && res.productsByCategory) {
-          // map products with cart for quantity
-          let result = this.mapWithCart(res);
-          this.storeProductsList = result && result.productsByCategory;
-          this.categories = [];
-          this.mapProducts(result.productsByCategory);
-        }
-        console.log('reeeesss ', res);
-        return res;
-      }));
+    return new Observable((observer) => {
+      this._http.get(`${ApiConfig.storeProductsURL}/${id}`)
+        .subscribe((res: any) => {
+          console.log('res ', res);
+          if (res && res.productsByCategory) {
+            // map products with cart for quantity
+            this.mapWithCart(res).subscribe((result: any) => {
+              console.log('aaaa xxx ', result);
+              this.storeProductsList = result && result.productsByCategory;
+              this.categories = [];
+              this.mapProducts(result.productsByCategory);
+              observer.next(result);
+            });
+          } else {
+            observer.next(res);
+          }
+        });
+    });
   }
 
   private mapProducts(itemsRes: any) {
@@ -58,27 +63,54 @@ export class StoreItemsService {
 
   private mapWithCart(result) {
     const isLoggedIn = this._commonService.isLogin();
-    let cart;
-    if (isLoggedIn) {
-      cart = this._cartService.cartEntity;
-    } else {
-      cart = JSON.parse(localStorage.getItem('cartEntity'));
-    }
+    return new Observable((observer) => {
+      if (isLoggedIn) {
+        // cart = this._cartService.cartEntity;
+        this._cartService.getCartItems().subscribe((res) => {
+          const cartStore = res && res.store && res.store.id;
+          const cartProducts = res && res.orderProducts;
+          if (cartStore && cartProducts && cartProducts.length) {
+            this._handleStoreEntity(cartStore, cartProducts, result);
+          }
+          console.log('res xxxxx', result);
+          observer.next(result);
+        });
+      } else {
+        const cart = JSON.parse(localStorage.getItem('cartEntity'));
+        const cartStore = cart && cart.storeId;
+        const cartProducts = cart && cart.orderProducts;
+        if (cartStore && cartProducts && cartProducts.length) {
+          this._handleStoreEntity(cartStore, cartProducts, result);
+        }
+        observer.next(result);
+      }
+    });
+  }
+
+  private _handleStoreEntity(cartStoreId, cartProducts, result) {
     const products = result && result.productsByCategory;
     const store = result && result.store;
-    if (cart && cart.storeId
+    if (cartStoreId
       && store
-      && cart.storeId === store.id) {
-      cart.orderProducts.forEach((item) => {
+      && cartStoreId === store.id) {
+      cartProducts.forEach((item) => {
         for (let category in products) {
           for (let sub in products[category]) {
             products[category][sub].map((t) => {
-              if (t.id === item.id) {
+              console.log('t xxxx ', t);
+              if (t.storeInventoryProductUnitId === item.storeInventoryProductUnitId) {
                 t.quantity = item.quantity;
                 t.weight = item.weight;
                 t.unit = item.unit;
                 t.mrp = item.mrp;
                 t.price = item.price;
+              }
+              if (t.storeInventoryProductUnit && t.storeInventoryProductUnit.length) {
+                t.storeInventoryProductUnit.forEach((k) => {
+                  if (k.id === item.storeInventoryProductUnitId) {
+                    k.quantity = item.quantity;
+                  }
+                });
               }
               return t;
             });
@@ -86,8 +118,6 @@ export class StoreItemsService {
         }
       });
     }
-    console.log('res ', result);
-    return result;
   }
 
   /**

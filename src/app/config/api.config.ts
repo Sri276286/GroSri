@@ -21,7 +21,12 @@ export class ApiConfig {
   static storeProductsURL: string = `${ApiConfig.apiHostUrl}/stores/findProductsByStoreId`; // GET
   // static storeProductsURL: string = `/api/items-list`; // GET
   static userDetailsURL: string = `${ApiConfig.apiHostUrl}/user/me`; // GET, POST
+  static userUpdateURL: string = `${ApiConfig.apiHostUrl}/user/update`; // POST
+  static userAddressListURL: string = `${ApiConfig.apiHostUrl}/user/address/list`; // GET
+  static userAddressAddURL: string = `${ApiConfig.apiHostUrl}/user/address/save`; // POST
+  static userAddressUpdateURL: string = `${ApiConfig.apiHostUrl}/user/address/update`; // POST
   static cartUpdateURL: string = `${ApiConfig.apiHostUrl}/orderProducts/upsert`; // PUT
+  // Get each order
   static orderURL: string = `${ApiConfig.apiHostUrl}/orders`; // GET, POST
   static ordersListURL: string = `${ApiConfig.apiHostUrl}/orders/customers`; // GET
   static favoriteStoreURL: string = `${ApiConfig.apiHostUrl}/api/store/favorite`; // POST, GET
