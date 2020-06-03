@@ -6,94 +6,113 @@
       class="fas fa-heart"
       [ngStyle]="{ color: isFavoriteStore ? 'red' : 'white' }"
       (click)="makeFavorite()"
-      *ngIf="isLoggedIn"
+      *ngIf="isLoggedIn && storeProductCatalog"
     ></i>
     <i
       class="fas fa-search pl-3"
       data-toggle="modal"
       data-target="#searchStoreModal"
+      *ngIf="storeProductCatalog"
     ></i>
   </div>
 </div>
-<div class="store-content-grid">
-  <div class="category-grid">
-    <div class="text-center">
-      <span style="font-weight: 600; color: black;">Menu</span>
-    </div>
-    <ul class="_1bQ4u">
-      <ng-container *ngFor="let category of categories; let i = index">
-        <li class="_35h7b">
-          <a
-            class="_34WAd B-aO0 rippleEffect"
-            [ngStyle]="{
-              background: category.id === categoryIndex ? 'blue' : 'white',
-              color: category.id === categoryIndex ? 'white' : 'black'
-            }"
-          >
-            <span class="_3xjP6" (click)="getProductsWithCategory(category)">
-              {{ category.name }}
-            </span>
-          </a>
-        </li>
-      </ng-container>
-    </ul>
+<ngx-spinner
+[fullScreen]="true"
+type="ball-clip-rotate-multiple"
+size="medium"
+>
+<p class="loading">Loading store...</p>
+</ngx-spinner>
+<ng-container *ngIf="!storeProductCatalog; else showStore">
+  <div style="height: 80vh;">
+    <gro-page-error
+      [message]="'This store is closed now. Please try another store.'"
+      [actiontext]="'Home'"
+    ></gro-page-error>
   </div>
-
-  <div id="accordion" class="products-list-grid">
-    <!-- <input
-      class="form-control item_li_input"
-      type="text"
-      placeholder="Item List"
-    /> -->
-    <ng-container
-      *ngFor="
-        let productEntity of storeProductCatalog | keyvalue;
-        let j = index
-      "
-    >
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button
-              class="btn btn-link"
-              [ngClass]="{ collapsed: !toggleMap.get(j) }"
-              data-toggle="collapse"
-              [attr.data-target]="'#' + j"
-              [attr.aria-expanded]="toggleMap.get(j)"
-              (click)="toggleCategory(j)"
+</ng-container>
+<ng-template #showStore>
+  <div class="store-content-grid">
+    <div class="category-grid">
+      <div class="text-center">
+        <span style="font-weight: 600; color: black;">Menu</span>
+      </div>
+      <ul class="_1bQ4u">
+        <ng-container *ngFor="let category of categories; let i = index">
+          <li class="_35h7b">
+            <a
+              class="_34WAd B-aO0 rippleEffect"
+              [ngStyle]="{
+                background: category.id === categoryIndex ? 'blue' : 'white',
+                color: category.id === categoryIndex ? 'white' : 'black'
+              }"
             >
-              {{ productEntity.key }}
-            </button>
-          </h5>
-        </div>
-        <div
-          [attr.id]="j"
-          class="collapse"
-          [ngClass]="{ show: toggleMap.get(j) }"
-          data-parent="#accordion"
-        >
-          <div class="card-body">
-            <gro-store-list [items]="productEntity.value"></gro-store-list>
+              <span class="_3xjP6" (click)="getProductsWithCategory(category)">
+                {{ category.name }}
+              </span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div id="accordion" class="products-list-grid">
+      <!-- <input
+        class="form-control item_li_input"
+        type="text"
+        placeholder="Item List"
+      /> -->
+      <ng-container
+        *ngFor="
+          let productEntity of storeProductCatalog | keyvalue;
+          let j = index
+        "
+      >
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button
+                class="btn btn-link"
+                [ngClass]="{ collapsed: !toggleMap.get(j) }"
+                data-toggle="collapse"
+                [attr.data-target]="'#' + j"
+                [attr.aria-expanded]="toggleMap.get(j)"
+                (click)="toggleCategory(j)"
+              >
+                {{ productEntity.key }}
+              </button>
+            </h5>
+          </div>
+          <div
+            [attr.id]="j"
+            class="collapse"
+            [ngClass]="{ show: toggleMap.get(j) }"
+            data-parent="#accordion"
+          >
+            <div class="card-body">
+              <gro-store-list [items]="productEntity.value"></gro-store-list>
+            </div>
           </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
-</div>
-<!-- <div style="background-color: grey;">
-  <gro-footer></gro-footer>
-</div> -->
-<gro-cart-bar></gro-cart-bar>
+  <!-- <div style="background-color: grey;">
+    <gro-footer></gro-footer>
+  </div> -->
+  <gro-cart-bar></gro-cart-bar>
 
-<!-- Store search modal -->
-<gro-store-search></gro-store-search>
-<!-- Store search modal ends here -->
-<!-- <button class="menu-btn" (click)="openMenu(storeMenuDialog)">Menu</button> -->
+  <!-- Store search modal -->
+  <gro-store-search></gro-store-search>
+  <!-- Store search modal ends here -->
+  <!-- <button class="menu-btn" (click)="openMenu(storeMenuDialog)">Menu</button> -->
 
-<ng-template #storeMenuDialog>
-  <div class="modal-body">
-    <ul *ngFor="let category of categories">
-      <li>{{ category.name }}</li>
-    </ul>
-  </div>
+  <ng-template #storeMenuDialog>
+    <div class="modal-body">
+      <ul *ngFor="let category of categories">
+        <li>{{ category.name }}</li>
+      </ul>
+    </div>
+  </ng-template>
 </ng-template>
+

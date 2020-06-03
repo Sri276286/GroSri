@@ -1,7 +1,7 @@
 <ng-container *ngFor="let store of storesListed">
   <div class="card" style="padding-bottom: 10px;">
-    <div class="row" [routerLink]="['/store', store.id]">
-      <div class="col-3 no-right-padding">
+    <div class="d-flex" [routerLink]="['/store', store.id]">
+      <div class="col-3 store-image">
         <img [src]="store.storeImgUrl" class="img-fluid" alt="Store image" />
       </div>
       <div class="col-9">

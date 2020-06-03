@@ -12,7 +12,7 @@
           "productSubCategory": "Rice Products",
           "productSub2Category": null,
           "productName": "Steam Rice",
-          "productImgUrl": null,
+          "productImgUrl": "https://elasticbeanstalk-us-east-2-467243731184.s3.us-east-2.amazonaws.com/yourstore-img/storeiamgesize.jpg",
           "max_quantity": 5,
           "available_quantity": 15,
           "mrp": 110.0,

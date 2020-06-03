@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StoreItemsService } from '../../../services/store-items.service';
-import { CartService } from '../../../services/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from 'src/app/gro/services/store.service';
 import { LoginService } from 'src/app/common/services/login.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'gro-store-detail',
@@ -33,7 +33,9 @@ export class GroStoreDetailComponent implements OnInit {
     private _route: ActivatedRoute,
     private _storeService: StoreService,
     private _loginService: LoginService,
-    private _modal: NgbModal) {
+    private _modal: NgbModal,
+    private spinner: NgxSpinnerService) {
+    this.spinner.show();
   }
 
   ngOnInit() {
@@ -59,6 +61,9 @@ export class GroStoreDetailComponent implements OnInit {
               const category = this.categories[0];
               this.getProductsWithCategory(category);
             }
+            this.spinner.hide();
+          }, () => {
+            this.spinner.hide();
           })
       );
     })

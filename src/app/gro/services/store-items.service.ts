@@ -33,6 +33,7 @@ export class StoreItemsService {
               this.categories = [];
               this.mapProducts(result.productsByCategory);
               observer.next(result);
+            }, () => {
             });
           } else {
             observer.next(res);
@@ -73,6 +74,10 @@ export class StoreItemsService {
             this._handleStoreEntity(cartStore, cartProducts, result);
           }
           console.log('res xxxxx', result);
+          observer.next(result);
+        }, () => {
+          // if cart API fails, continue loading store content
+          console.log('in failure xxxx ');
           observer.next(result);
         });
       } else {

@@ -16,8 +16,9 @@ export class ApiConfig {
   static loginURL: string = `${ApiConfig.apiHostUrl}/auth/login`; // POST
   static signupURL: string = `${ApiConfig.apiHostUrl}/auth/signup`; // POST
   static logoutURL: string = `${ApiConfig.apiHostUrl}/auth/logout`; // GET
+  // List stores by pincode and category
   static storeListURL: string = `${ApiConfig.apiHostUrl}/stores/findStoresByPincode`; // GET
-  static storeListByCategoryURL: string = `${ApiConfig.apiHostUrl}/stores/findStoresByPincode`; // GET
+  // static storeListURL: string = `/api/store`; // GET
   static storeProductsURL: string = `${ApiConfig.apiHostUrl}/stores/findProductsByStoreId`; // GET
   // static storeProductsURL: string = `/api/items-list`; // GET
   static userDetailsURL: string = `${ApiConfig.apiHostUrl}/user/me`; // GET, POST

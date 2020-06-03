@@ -1,10 +1,10 @@
 <ng-container *ngFor="let item of items">
-  <div class="card" style="margin-top: 10px;">
-    <div class="row" style="padding: 10px;">
-      <div class="col-4 pr-0">
+  <div class="card" style="margin-top: 2px;">
+    <div class="d-flex p-2">
+      <div class="col-3 product-image">
         <img [src]="item.productImgUrl" class="img-fluid" alt="Sample image" />
       </div>
-      <div class="col-8">
+      <div class="col-9">
         <h6>
           {{ item.itemShortDescription }}
         </h6>
@@ -22,15 +22,32 @@
             <option
               [ngValue]="val.weight"
               *ngFor="let val of item.storeInventoryProductUnit"
-              >{{ val.weight }}{{ val.unit }}</option
+              ><span style="font-weight: 400px; font-size: 20px;"
+                >{{ val.weight }}{{ val.unit }}</span
+              ></option
             >
           </select>
         </ng-container>
         <ng-container *ngIf="item.storeInventoryProductUnit.length === 1">
-          {{ item.weight }}{{ item.unit }}
+          <span style="font-weight: 400px; font-size: 20px;"
+            >{{ item.weight }}{{ item.unit }}</span
+          >
         </ng-container>
         <div style="display: flex;">
-          <div style="padding-right: 20px;">
+          <div style="padding-right: 40px;">
+            <span style="font-weight: 500; font-size: 14px;">MRP: </span>
+            <span
+              style="
+                font-weight: 500;
+                font-size: 14px;
+                text-decoration: line-through;
+              "
+            >
+              Rs.{{ item.mrp }}
+            </span>
+            <!-- <h6 name="item-price" style="text-decoration: line-through;">
+              MRP: Rs.{{ item.price }}
+            </h6> -->
             <h5 name="item-price" [(ngModel)]="item.price" ngDefaultControl>
               Rs.{{ item.price }}
             </h5>
@@ -59,7 +76,7 @@
                 placeholder="1"
                 id="p_10000097"
                 [value]="item.quantity"
-                maxlength="2"
+                maxlength="3"
               />
               <button
                 class="minus_plus_but border border-success rounded"
