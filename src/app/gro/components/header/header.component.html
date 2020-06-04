@@ -2,7 +2,7 @@
   <div class="menu-grid" data-toggle="modal" data-target="#menuModal">
     <i class="fas fa-bars"></i>
   </div>
-  <div class="location-grid" data-toggle="modal" data-target="#locationModal">
+  <div class="location-grid" (click)="handleLocation()">
     <i class="fas fa-map-marker-alt"></i
     ><span>You are in {{ _commonService.userLocation }}</span>
   </div>
@@ -14,10 +14,6 @@
 <!-- Menu Modal -->
 <gro-menu></gro-menu>
 <!-- Menu Modal Ends Here -->
-
-<!-- Location Modal -->
-<gro-location></gro-location>
-<!-- Location Modal Ends Here -->
 
 <!-- Contact Modal -->
 <gro-contact></gro-contact>

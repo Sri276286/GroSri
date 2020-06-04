@@ -1,36 +1,28 @@
-<!-- Location Modal -->
-<div
-  class="modal location fade"
-  id="locationModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="locationModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="location-grid">
-        <button class="btn btn-light back-link">
-          <i class="fas fa-chevron-left" data-dismiss="modal"></i>
-        </button>
-        <input
-          class="form-control location-input"
-          type="search"
-          placeholder="Search for products or store"
-          aria-label="Search"
-          autofocus
-        />
+<div class="modal-body">
+  <div class="d-flex">
+    <input
+      class="form-control search-input"
+      type="input"
+      placeholder="Enter pincode"
+      aria-label="Search"
+      [(ngModel)]="searchKey"
+    />
+    <button type="button" class="btn btn-dark" (click)="loadStores(searchKey)">
+      Go
+    </button>
+  </div>
+  <div class="p-2">
+    <span>Saved pincodes:</span>
+    <ng-container *ngFor="let i of [].constructor(3)">
+      <span class="location-display" (click)="loadStores('600096')">Perungudi (600096)</span>
+    </ng-container>
+  </div>
+  <div class="p-2">
+    <span>We have stores in:</span>
+    <ng-container *ngFor="let i of [].constructor(10)">
+      <div class="location-display-grid">
+        <span class="location-content" (click)="loadStores('600096')">Perungudi (600096)</span>
       </div>
-      <!-- <button type="button" class="btn btn-light">
-        <i class="fas fa-search-location"></i>
-        <span>Choose Current Location</span>
-      </button>
-      <hr />
-      <div>Saved Addresses</div> -->
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Logout</button>
-      </div> -->
-    </div>
+    </ng-container>
   </div>
 </div>
-<!-- Menu Modal Ends Here -->

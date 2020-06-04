@@ -11,6 +11,7 @@ export class CommonService {
   proceedUpdatingCart$: Subject<boolean> = new Subject<boolean>();
   ordersPlaced = [];
   storesListed = [];
+  loadStores$: Subject<any> = new Subject<any>();
 
   handleUserStorage(property: string, value: any) {
     const profile = JSON.parse(localStorage.getItem('currentUser'));

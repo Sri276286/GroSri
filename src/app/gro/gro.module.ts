@@ -16,7 +16,6 @@ import { GroStoreDetailComponent } from './components/store/store-details/store-
 import { CategoryComponent } from './components/category/category.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
-import { LocationOnLoadComponent } from './components/location/location-on-load/location-on-load.component';
 import { PageErrorComponent } from './components/page-error/page-error.component';
 import { GroContactComponent } from './components/contact/contact.component';
 import { CartReplaceDialogComponent } from './components/floating-modal/cart-replace-dialog/replace-dialog.component';
@@ -45,7 +44,6 @@ import { UserComponent } from './components/user/user.component';
     GroOrderComponent,
     GroOrderDetailsComponent,
     LocationComponent,
-    LocationOnLoadComponent,
     MenuComponent,
     CategoryComponent,
     FooterComponent,
@@ -75,7 +73,6 @@ import { UserComponent } from './components/user/user.component';
     GroOrderComponent,
     GroOrderDetailsComponent,
     LocationComponent,
-    LocationOnLoadComponent,
     MenuComponent,
     CategoryComponent,
     FooterComponent,
@@ -96,7 +93,8 @@ import { UserComponent } from './components/user/user.component';
     UserComponent
   ],
   entryComponents: [
-    CartReplaceDialogComponent
+    CartReplaceDialogComponent,
+    LocationComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { StoreService } from '../../services/store.service';
 import { LoginService } from '../../../common/services/login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocationComponent } from '../location/location.component';
 
 @Component({
   selector: 'gro-home',
@@ -32,6 +33,12 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
         this.favorites = res && res.storeDetails;
       });
     }
+    // load stores from location search
+    this._commonService.loadStores$.subscribe((result) => {
+      if (result) {
+        this.getStores(result.location, result.data);
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -48,18 +55,24 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
 
   loadStores(searchKey: string) {
     this._storeService.getStores(searchKey).subscribe((result: any) => {
-      this._commonService.userLocation = searchKey;
-      if (this.user) {
-        this._commonService.handleUserStorage('location', searchKey);
-      }
-      localStorage.setItem('userLocation', searchKey);
-      this.stores = result && result.storeLst ? result.storeLst : [];
-      console.log('get stores ', this.stores);
+      this.getStores(searchKey, result);
       this.spinner.hide();
       this._modal.dismissAll();
     }, () => {
       this._modal.dismissAll();
     });
+  }
+
+  getStores(searchKey, result) {
+    console.log('search key ', searchKey);
+    console.log('rrrr ', result);
+    this._commonService.userLocation = searchKey;
+    if (this.user) {
+      this._commonService.handleUserStorage('location', searchKey);
+    }
+    localStorage.setItem('userLocation', searchKey);
+    this.stores = result && result.storeLst ? result.storeLst : [];
+    console.log('get stores ', this.stores);
   }
 
   detect() {

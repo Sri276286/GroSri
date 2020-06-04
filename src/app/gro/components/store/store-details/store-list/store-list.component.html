@@ -34,7 +34,7 @@
           >
         </ng-container>
         <div style="display: flex;">
-          <div style="padding-right: 40px;">
+          <div style="padding-right: 30px;">
             <span style="font-weight: 500; font-size: 14px;">MRP: </span>
             <span
               style="
@@ -70,14 +70,17 @@
               >
                 -
               </button>
-              <input
+              <!-- <input
                 type="text"
                 class="miuns_plus_input"
                 placeholder="1"
                 id="p_10000097"
                 [value]="item.quantity"
                 maxlength="3"
-              />
+              /> -->
+              <span class="minus_plus_input">
+                {{item.quantity}}
+              </span>
               <button
                 class="minus_plus_but border border-success rounded"
                 style="color: rgb(7, 119, 7);"
