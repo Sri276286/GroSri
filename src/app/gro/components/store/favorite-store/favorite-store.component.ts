@@ -15,7 +15,6 @@ export class FavoriteStoreComponent implements OnInit {
   ngOnInit() {
     this._service.getFavStores().subscribe((res: any) => {
       this.stores = res && res.storeDetails;
-      console.log('stores ', this.stores);
     });
   }
 }

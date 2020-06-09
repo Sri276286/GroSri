@@ -24,11 +24,9 @@ export class StoreItemsService {
     return new Observable((observer) => {
       this._http.get(`${ApiConfig.storeProductsURL}/${id}`)
         .subscribe((res: any) => {
-          console.log('res ', res);
           if (res && res.productsByCategory) {
             // map products with cart for quantity
             this.mapWithCart(res).subscribe((result: any) => {
-              console.log('aaaa xxx ', result);
               this.storeProductsList = result && result.productsByCategory;
               this.categories = [];
               this.mapProducts(result.productsByCategory);
@@ -51,7 +49,6 @@ export class StoreItemsService {
         this.productsList = [...this.productsList, ...itemsRes[category][subcategory]];
       }
     }
-    console.log('products list ', this.productsList);
   }
 
   public searchStore(searchInput: string): Observable<any> {
@@ -73,11 +70,9 @@ export class StoreItemsService {
           if (cartStore && cartProducts && cartProducts.length) {
             this._handleStoreEntity(cartStore, cartProducts, result);
           }
-          console.log('res xxxxx', result);
           observer.next(result);
         }, () => {
           // if cart API fails, continue loading store content
-          console.log('in failure xxxx ');
           observer.next(result);
         });
       } else {
@@ -102,7 +97,6 @@ export class StoreItemsService {
         for (let category in products) {
           for (let sub in products[category]) {
             products[category][sub].map((t) => {
-              console.log('t xxxx ', t);
               if (t.storeInventoryProductUnitId === item.storeInventoryProductUnitId) {
                 t.quantity = item.quantity;
                 t.weight = item.weight;
@@ -136,14 +130,11 @@ export class StoreItemsService {
   private getItemsObjectOnCategory(category) {
     let subCats = [];
     let itemsOnCategory = this.storeProductsList[category];
-    console.log('itemsOnCategory ', itemsOnCategory);
     for (let subcategory in itemsOnCategory) {
       subCats = [...subCats, subcategory];
       this.getItemsObjectOnCategSubCategory(category, subcategory);
     }
-    console.log('list ', category, subCats);
     this.subCategoriesWithCategory[category] = subCats;
-    console.log('sub categ ', this.subCategoriesWithCategory);
   }
 
   private getItemsObjectOnCategSubCategory(category, subcategory) {

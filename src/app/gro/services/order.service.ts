@@ -31,6 +31,6 @@ export class OrderService {
   }
 
   cancelOrder(id: string) {
-    return this._http.delete(`${ApiConfig.orderURL}/${id}/delete`);
+    return this._http.put(`${ApiConfig.orderURL}/${id}/orderStatus/CUSTOMER_CANCELLED`, null);
   }
 }

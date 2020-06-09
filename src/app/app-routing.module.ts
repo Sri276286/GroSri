@@ -8,19 +8,18 @@ import { AuthGuard } from './common/guards/auth.guard';
 import { SignupComponent } from './common/components/signup/signup.component';
 import { LoginComponent } from './common/components/login/login.component';
 import { GroStoreDetailComponent } from './gro/components/store/store-details/store-detail.component';
-import { StoreDashboardComponent } from './store/components/dashboard/dashboard.component';
-import { ViewOrderComponent } from './store/components/view-order/view-order.component';
 import { GroCategoryStoreComponent } from './gro/components/category/category-stores/category-store.component';
 import { FavoriteStoreComponent } from './gro/components/store/favorite-store/favorite-store.component';
 import { AddressListComponent } from './gro/components/address/address-list.component';
 import { AddressDetailComponent } from './gro/components/address/address-detail/address-detail.component';
 import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 import { UserComponent } from './gro/components/user/user.component';
+import { ForgotPwdComponent } from './common/components/forgot-pwd/forgot-pwd.component';
 
 const routes: Routes = [
   { path: 'home', component: GroHomeComponent },
-  { path: 'address', component: AddressListComponent },
-  { path: 'address/:id', component: AddressDetailComponent },
+  { path: 'address', component: AddressListComponent, canActivate: [AuthGuard] },
+  { path: 'address/:id', component: AddressDetailComponent, canActivate: [AuthGuard] },
   { path: 'category/:id', component: GroCategoryStoreComponent },
   { path: 'store/:id', component: GroStoreDetailComponent },
   { path: 'fav-stores', component: FavoriteStoreComponent, canActivate: [AuthGuard] },
@@ -38,13 +37,10 @@ const routes: Routes = [
     path: 'signup', component: SignupComponent
   },
   {
-    path: 'store-dashboard', component: StoreDashboardComponent
+    path: 'forgot_password', component: ForgotPwdComponent
   },
   {
-    path: 'store-view-order', component: ViewOrderComponent
-  },
-  {
-    path: 'user', component: UserComponent
+    path: 'user', component: UserComponent, canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

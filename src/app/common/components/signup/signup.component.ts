@@ -33,7 +33,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSignUpSubmit() {
-    console.log('form ', this.mySignUpForm);
     this._signupService.doSignUp(this.mySignUpForm).subscribe(
       res => {
         console.error("success!!");

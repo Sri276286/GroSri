@@ -26,7 +26,6 @@ export class LocationComponent {
         location: searchKey,
         data: result
       });
-      console.log('get stores ', this.stores);
       this._activeModal.dismiss();
     }, () => {
       this._activeModal.dismiss();

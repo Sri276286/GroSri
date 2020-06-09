@@ -5,6 +5,7 @@ import { CartService } from 'src/app/gro/services/cart.service';
 import { CommonService } from 'src/app/gro/services/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../../../common/services/toast.service';
+import { OrderConstants } from 'src/app/gro/constants/order.constants';
 
 @Component({
   selector: 'gro-order-details',
@@ -17,6 +18,7 @@ export class GroOrderDetailsComponent implements OnInit {
   orderEntity;
   orderDetails;
   storeDetails;
+  placedStatus = OrderConstants.PLACED;
   constructor(public _service: OrderService,
     private _route: ActivatedRoute,
     private _cartService: CartService,
@@ -31,10 +33,7 @@ export class GroOrderDetailsComponent implements OnInit {
       const id = paramMap.get('id');
       this._service.getOrderById(id).subscribe((res: any) => {
         this.orderEntity = res.orders.length && res.orders[0];
-        // this.orderDetails = this._commonService.getOrderDetailsFromId(res.orderId);
-        console.log('res ', this.orderEntity);
         this.storeDetails = this.orderEntity && this.orderEntity.store;
-        console.log('store details ', this.storeDetails);
         this.items = this.orderEntity.orderProducts;
       });
     });
@@ -46,7 +45,6 @@ export class GroOrderDetailsComponent implements OnInit {
       total: this.orderEntity.billTotal,
       items: this.orderEntity.orderProductLstDTO
     };
-    console.log('itemssss ', cartEntity);
     let cart = localStorage.getItem('cartEntity');
     if (cart) {
       this._cartService.showAlert();

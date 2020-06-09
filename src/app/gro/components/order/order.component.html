@@ -49,8 +49,14 @@
   <div class="card" style="padding: 10px; margin-bottom: 10px;">
     <div [routerLink]="['/order', order.id]">
       <div class="d-flex justify-content-between">
-        <span class="h5">#{{ order.id }}</span>
-        <span class="h6">{{ order.orderStatus }}</span>
+        <span class="text-primary h5">#{{ order.id }}</span>
+        <span class="h6">{{
+          order.orderStatus === (placedStatus || deliveredStatus)
+            ? (order.orderStatus | titlecase)
+            : order.orderStatus === cancelledStatus
+            ? "Cancelled"
+            : "Cancelled by store"
+        }}</span>
       </div>
       <div class="row">
         <div class="col-8">
@@ -95,20 +101,30 @@
         </div>
       </div>
     </div>
-    <hr class="hr_dashed" />
+    <hr class="hr_dashed" *ngIf="order.orderStatus !== cancelledStatus" />
     <div class="row" style="align-items: center;">
-      <!-- <div class="col" style="padding-left: 40px;">
-      <a class="reorder_report_a report_a" style="color: white;">REPORT</a>
-    </div> -->
-      <div class="col" *ngIf="order.orderStatus.toLowerCase() !== 'placed'">
-        <a class="reorder_report_a">REORDER</a>
+      <div class="col" *ngIf="order.orderStatus !== placedStatus">
+        <button
+          class="btn btn-primary"
+          (click)="rateStore(rateStoreDialog)"
+          *ngIf="order.orderStatus !== cancelledStatus && !isStoreRated"
+        >
+          Rate Store
+        </button>
+        <button
+          class="btn btn-primary"
+          (click)="rateDelivery(rateStoreDialog)"
+          *ngIf="isStoreRated"
+        >
+          Rate Delivery
+        </button>
       </div>
-      <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'placed'">
+      <div class="col" *ngIf="order.orderStatus === placedStatus">
         <button class="btn btn-success" (click)="trackOrder(trackOrderDialog)">
           TRACK
         </button>
       </div>
-      <div class="col" *ngIf="order.orderStatus.toLowerCase() === 'placed'">
+      <div class="col" *ngIf="order.orderStatus === placedStatus">
         <button class="btn btn-danger" (click)="cancelOrder(cancelDialog)">
           CANCEL
         </button>

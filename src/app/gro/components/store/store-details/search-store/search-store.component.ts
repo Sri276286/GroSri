@@ -22,7 +22,6 @@ export class SearchStoreComponent implements OnInit {
         if (result && result.length) {
           this._storeService.searchStore(result)
             .subscribe((response: any[]) => {
-              console.log('resp ', response);
               this.results = response;
             })
         } else {

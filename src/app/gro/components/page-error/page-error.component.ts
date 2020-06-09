@@ -10,6 +10,5 @@ export class PageErrorComponent {
 @Input('actiontext') actiontext;
 
 constructor() {
-  console.log('message ', this.displayMessage);
 }
 }

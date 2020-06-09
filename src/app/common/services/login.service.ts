@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ApiConfig } from 'src/app/config/api.config';
 import { CommonService } from '../../gro/services/common.service';
 import { CartService } from 'src/app/gro/services/cart.service';
@@ -13,7 +13,7 @@ import { CartService } from 'src/app/gro/services/cart.service';
 export class LoginService {
 
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser$: Observable<User>;
+  private currentUser$: Observable<User>;
 
   constructor(private _http: HttpClient,
     private _commonService: CommonService,
@@ -31,14 +31,21 @@ export class LoginService {
     return this.currentUser$;
   }
 
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
-  }
-
+  /**
+   * Save/Update user details
+   */
   saveUserDetails(user) {
-    return this._http.post(ApiConfig.userUpdateURL, user);
+    return this._http.post(ApiConfig.userUpdateURL, user)
+      .pipe(tap(() => {
+        this._mapUser(user);
+      }));
   }
 
+  /**
+   * Do Login and get user details
+   * Also post if any items added in cart
+   * @param loginform
+   */
   doLogin(loginform: any): Observable<any> {
     let httpHeaders = new HttpHeaders().set("Content-Type", "application/json");
     let options = {
@@ -71,33 +78,51 @@ export class LoginService {
     return this._http.get(ApiConfig.userDetailsURL)
       .pipe(map((res: any) => {
         const user = res && res.data;
-        console.log('user ', user);
         // login successful if there's a jwt token in the response
         if (user) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          if (user && user.pincode) {
-            this._commonService.userLocation = user.pincode;
-            localStorage.setItem('userLocation', JSON.stringify(user.pincode));
-          }
-          this.currentUserSubject.next(user);
+          this._mapUser(user);
         }
         return user;
       }));
+  }
+
+  private _mapUser(user) {
+    // store user details and jwt token in local storage to keep user logged in between page refreshes
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    if (user && user.pincode) {
+      this._commonService.userLocation = user.pincode;
+      localStorage.setItem('userLocation', JSON.stringify(user.pincode));
+    }
+    this.currentUserSubject.next(user);
   }
 
   private postToCart() {
     const cartEntity = localStorage.getItem('cartEntity');
     if (cartEntity) {
       const cart = JSON.parse(cartEntity);
-      const items = cart && cart.items ? cart.items : [];
+      let items = cart && cart.orderProducts ? cart.orderProducts : [];
       if (items.length) {
-        items.forEach(element => {
-          this._cartService.postToCart(element);
+        // items.forEach(element => {
+        //   this._cartService.postToCart(element);
+        // });
+        console.log('items ', items);
+        items = this._mapBulkItems(items);
+        this._cartService.postBulkItems(items).subscribe(() => {
+          localStorage.removeItem('cartEntity');
+        }, () => {
+          console.log('Bulk update failed');
         });
-        localStorage.removeItem('cartEntity');
       }
     }
+  }
+
+  private _mapBulkItems(items) {
+    return items.map((t) => {
+      return {
+        quantity: t.quantity,
+        storeInventoryProductUnitId: t.storeInventoryProductUnitId
+      }
+    });
   }
 
   /**

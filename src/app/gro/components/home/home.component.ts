@@ -44,7 +44,6 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     const profile = JSON.parse(this.user);
     const location = profile && profile.location || localStorage.getItem('userLocation');
-    console.log('location ', location);
     if (!location) {
       this._modal.open(this.pincodeModal, { centered: true });
     } else {
@@ -64,15 +63,12 @@ export class GroHomeComponent implements OnInit, AfterViewInit {
   }
 
   getStores(searchKey, result) {
-    console.log('search key ', searchKey);
-    console.log('rrrr ', result);
     this._commonService.userLocation = searchKey;
     if (this.user) {
       this._commonService.handleUserStorage('location', searchKey);
     }
     localStorage.setItem('userLocation', searchKey);
     this.stores = result && result.storeLst ? result.storeLst : [];
-    console.log('get stores ', this.stores);
   }
 
   detect() {

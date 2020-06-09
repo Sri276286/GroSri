@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --port 4300 --proxy-config proxy.conf.json",
     "build": "ng build --prod --base-href https://sri276286.github.io/GroSri",
     "test": "ng test",
     "lint": "ng lint",

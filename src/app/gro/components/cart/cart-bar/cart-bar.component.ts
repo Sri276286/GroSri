@@ -15,7 +15,6 @@ export class CartBarComponent implements OnInit {
 
   ngOnInit() {
     this._cartService.cartEntity$.subscribe((cart) => {
-      console.log('rrrr cart ', cart);
       this.cartTotal = cart && (cart.billTotal || cart.total);
       this.quantity = cart && cart.orderProducts && cart.orderProducts.length;
       if (this.quantity === 1) {

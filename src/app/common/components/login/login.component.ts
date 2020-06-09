@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
     console.error(this.myLoginForm.value);
     this._loginService.doLogin(this.myLoginForm).subscribe(
       (res) => {
-        console.log('res ', res, Role.Seller);
         if (res && res.storeKeeper) {
           this.route.navigate(['/store-dashboard']);
         } else {

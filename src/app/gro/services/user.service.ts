@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiConfig } from 'src/app/config/api.config';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class UserService {
    * Get user address list
    */
   getAddressList() {
-    return this._http.get(ApiConfig.userAddressListURL);
+    return this._http.get(ApiConfig.userAddressListURL)
+      .pipe(map((res: any) => {
+        return this._mapAddressList(res && res.data);
+      }));
   }
 
   /**
@@ -29,5 +33,22 @@ export class UserService {
    */
   updateAddress(address) {
     return this._http.post(ApiConfig.userAddressUpdateURL, address);
+  }
+
+  /**
+   * Map primary address to top list
+   * @param addressList
+   */
+  private _mapAddressList(addressList) {
+    // find primary address
+    const primary = addressList.find(t => t.primaryAddress);
+    if (primary) {
+      const index = addressList.indexOf(primary);
+      // add to beginning
+      addressList.unshift(primary);
+      // remove from list
+      addressList.splice(index, 1);
+    }
+    return addressList;
   }
 }

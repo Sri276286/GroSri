@@ -40,12 +40,10 @@ export class CommonService {
   }
 
   getStoreDetailsFromId(id: string) {
-    console.log('stores listed ', this.storesListed);
     return this.storesListed.find(t => t.id === +id);
   }
 
   getOrderDetailsFromId(id: string) {
-    console.log('orders placed ', this.ordersPlaced);
     return this.ordersPlaced.find(t => t.orderId === id);
   }
 

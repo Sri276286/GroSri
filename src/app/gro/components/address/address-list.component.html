@@ -28,15 +28,15 @@
             class="input-sm mr-3"
             type="radio"
             name="default_address"
-            [(ngModel)]="user_address.default_address"
-            [value]="user_address.default_address"
+            [(ngModel)]="user_address.primaryAddress"
+            [value]="user_address.primaryAddress"
           />
           <span>{{ user_address.address_type | titlecase }}</span>
         </div>
         <div>
           <i
             class="fas fa-edit mr-3"
-            [routerLink]="['/address', user_address.id]"
+            [routerLink]="['/address', user_address.addressId]"
           ></i>
           <i class="far fa-trash-alt"></i>
         </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="card-body">
       <h6>{{ user_address.name }}</h6>
-      <h6>{{ user_address.doorNo }}</h6>
+      <h6>{{ user_address.flatNo }}</h6>
       <h6>{{ user_address.street }}</h6>
       <h6>{{ user_address.landmark }}</h6>
       <h6>{{ user_address.area }}</h6>

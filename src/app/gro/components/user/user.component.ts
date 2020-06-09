@@ -28,7 +28,6 @@ export class UserComponent implements OnInit {
       promotions_ok: [true]
     });
     this._loginService.getUser().subscribe((user: any) => {
-      console.log('useeee ', user);
       const userObj = {
         name: user.name,
         mobileNumber: user.mobileNumber,
@@ -39,7 +38,6 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(user, valid) {
-    console.log('uuuuu ', user);
     if (valid) {
       this._loginService.saveUserDetails(user.value).subscribe(() => {
         this.toasts.show('Profile updated successfully');

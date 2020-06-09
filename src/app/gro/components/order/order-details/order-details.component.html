@@ -3,29 +3,23 @@
   <div style="background-color: #f8f9f9; padding: 10px; padding-top: 5px;">
     <div class="text-center">
       <button
-        class="btn btn-danger"
+        class="btn btn-secondary"
         (click)="reorder()"
-        *ngIf="
-          orderEntity && orderEntity.orderStatus.toLowerCase() === 'delivered'
-        "
+        *ngIf="orderEntity && orderEntity.orderStatus !== placedStatus"
       >
         Reorder
       </button>
       <button
         class="btn btn-success mr-1"
         (click)="trackOrder(trackOrderDialog)"
-        *ngIf="
-          orderEntity && orderEntity.orderStatus.toLowerCase() === 'placed'
-        "
+        *ngIf="orderEntity && orderEntity.orderStatus === placedStatus"
       >
         Track Order
       </button>
       <button
         class="btn btn-danger"
         (click)="cancelOrder(cancelDialog)"
-        *ngIf="
-          orderEntity && orderEntity.orderStatus.toLowerCase() === 'placed'
-        "
+        *ngIf="orderEntity && orderEntity.orderStatus === placedStatus"
       >
         Cancel
       </button>

@@ -4,21 +4,26 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppToastsComponent } from './components/toasts/toasts.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   declarations: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AppToastsComponent
   ],
   exports: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AppToastsComponent
   ]
 })
-export class GrosriCommonModule {}
+export class GrosriCommonModule { }

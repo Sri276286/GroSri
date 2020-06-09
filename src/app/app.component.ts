@@ -16,13 +16,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // when session expires
-    // this._commonService.checkForSession().subscribe((isTimeout) => {
-    //   if (isTimeout) {
-    //     console.log('session expired');
-    //     this._cartService.getFromLocalStorage();
-    //   }
-    // });
     this.init();
   }
 

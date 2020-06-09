@@ -26,12 +26,12 @@ import { CartBarComponent } from './components/cart/cart-bar/cart-bar.component'
 import { FavoriteStoreComponent } from './components/store/favorite-store/favorite-store.component';
 import { GroFavoriteComponent } from './components/favorite/favorite.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppToastsComponent } from '../common/components/toasts/toasts.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddressListComponent } from './components/address/address-list.component';
 import { AddressDetailComponent } from './components/address/address-detail/address-detail.component';
 import { PageNotFoundComponent } from '../common/components/page-not-found/page-not-found.component';
 import { UserComponent } from './components/user/user.component';
+import { ForgotPwdComponent } from '../common/components/forgot-pwd/forgot-pwd.component';
 
 @NgModule({
   declarations: [
@@ -57,40 +57,11 @@ import { UserComponent } from './components/user/user.component';
     CartBarComponent,
     FavoriteStoreComponent,
     GroFavoriteComponent,
-    AppToastsComponent,
     AddressListComponent,
     AddressDetailComponent,
     PageNotFoundComponent,
-    UserComponent
-  ],
-  exports: [
-    GroComponent,
-    HeaderComponent,
-    GroHomeComponent,
-    GroStoreComponent,
-    GroStoreDetailComponent,
-    GroCartComponent,
-    GroOrderComponent,
-    GroOrderDetailsComponent,
-    LocationComponent,
-    MenuComponent,
-    CategoryComponent,
-    FooterComponent,
-    SearchComponent,
-    PageErrorComponent,
-    GroContactComponent,
-    CartReplaceDialogComponent,
-    GroCategoryStoreComponent,
-    SearchStoreComponent,
-    StoreListComponent,
-    CartBarComponent,
-    FavoriteStoreComponent,
-    GroFavoriteComponent,
-    AppToastsComponent,
-    AddressListComponent,
-    AddressDetailComponent,
-    PageNotFoundComponent,
-    UserComponent
+    UserComponent,
+    ForgotPwdComponent
   ],
   entryComponents: [
     CartReplaceDialogComponent,

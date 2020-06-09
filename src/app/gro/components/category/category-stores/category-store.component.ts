@@ -17,9 +17,7 @@ export class GroCategoryStoreComponent implements OnInit {
   ngOnInit() {
     this._route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
-      console.log('id ', id);
       this._categoryService.getStoresByCategory(id).subscribe((res: any) => {
-        console.log('res ', res);
         this.categoryName = res && res.categoryName;
         this.categoryStores = res && res.storeLst;
       })

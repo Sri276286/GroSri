@@ -37,11 +37,11 @@ export class CartService {
     if (isLoggedIn) {
       return this._http.get(`${ApiConfig.commonCartAndOrderURL}/IN_CART`)
         .pipe(map((res: any) => {
-          console.log('res cart yyyyyy', res);
+          console.log('get cart items ', res);
           const cart = res && res.orders && res.orders.length && res.orders[0];
-          console.log('cart yyyyyyy', cart);
           this.storeCartDetails = cart;
           if (cart && cart.billTotal && cart.orderProducts) {
+            this.cartEntity.total = cart.billTotal;
             let cloneCart = _.cloneDeep(cart);
             this.cartEntityMap.set(cart.store.id, cloneCart);
             this.manageCart(cart.orderProducts.length, cloneCart);
@@ -73,13 +73,19 @@ export class CartService {
   postToCart(item) {
     const entity = {
       storeInventoryProductUnitId: item.storeInventoryProductUnitId,
-      quantity: item.quantity,
-      customerId: "1"
+      quantity: item.quantity
     };
-    console.log('eeeeeeee ', entity);
     this._http.put(ApiConfig.cartUpdateURL, entity).subscribe(() => {
       this.updateCart(item);
     });
+  }
+
+  /**
+   * Post bulk items in cart before login
+   * @param items
+   */
+  postBulkItems(items) {
+    return this._http.put(ApiConfig.cartUpdateBulkURL, items);
   }
 
   /**
@@ -106,7 +112,6 @@ export class CartService {
   addItems(item) {
     item.quantity++;
     const isLoggedIn = this._commonService.isLogin();
-    console.log('is logged in ', isLoggedIn);
     if (isLoggedIn) {
       this.postToCart(item);
     } else {
@@ -125,11 +130,8 @@ export class CartService {
   }
 
   private updateCart(item) {
-    console.log('cartEntity ', JSON.stringify(this.cartEntity));
-    console.log('item ', item);
     // check if already items presnt in cart (same or different store)
     let cartEntityFromMap = this.checkCartByStoreId(item.storeId);
-    console.log('checkCartWithStore ', JSON.stringify(cartEntityFromMap));
     const cloneCartMap = _.cloneDeep(cartEntityFromMap);
     if (cartEntityFromMap) {
       this.cartEntity = cloneCartMap;
@@ -137,7 +139,6 @@ export class CartService {
     } else {
       // check if any store are in cart
       let cartMapLength = this.cartEntityMap.size;
-      console.log('cart map length ', cartMapLength);
       if (cartMapLength) {
         this._commonService.canProceedUpdatingCart = false;
         // show an alert to proceed
@@ -159,15 +160,12 @@ export class CartService {
   }
 
   private handleCartEntity(item) {
-    console.log('item handle ', item);
-    console.log('cart eeeeee ', JSON.stringify(this.cartEntity));
     let isItemInCart = this.cartEntity && this.cartEntity.orderProducts.find(t => t.storeInventoryProductUnitId === item.storeInventoryProductUnitId);
     let itemIndex = isItemInCart && this.cartEntity && this.cartEntity.orderProducts.indexOf(isItemInCart);
-    console.log('item index ', itemIndex);
-    console.log('isItemInCart ', isItemInCart);
+    console.log('is item ', isItemInCart);
+    console.log('cart eee ', JSON.stringify(this.cartEntity));
     if (!isItemInCart) {
       this.cartEntity.orderProducts = [...this.cartEntity.orderProducts, item];
-      console.log('here ', this.cartEntity.orderProducts);
       this.cartEntity.total += item.price;
       this.cartQuantity++;
     } else {
@@ -180,6 +178,7 @@ export class CartService {
         this.cartQuantity--;
       }
     }
+    console.log('cart ', this.cartEntity.total);
     // Add store id
     this.cartEntity.storeId = item.storeId;
     let cloneCartEntity = _.cloneDeep(this.cartEntity);
@@ -190,12 +189,10 @@ export class CartService {
     if (!isLoggedIn) {
       this.setInLocalStorage();
     }
-    console.log('cart entity end ', JSON.stringify(cloneCartEntity));
     this.manageCart(this.cartQuantity, cloneCartEntity);
   }
 
   private getRequiredItem(item) {
-    console.log('item => ', item);
     return {
       "storeInventoryProductId": item.storeInventoryProductId,
       "quantity": item.quantity || 0,
@@ -229,7 +226,6 @@ export class CartService {
 
   getFromLocalStorage() {
     let cart = this.getCart();
-    console.log('cart ', cart);
     if (cart && cart.orderProducts && cart.orderProducts.length) {
       cart.orderProducts = this.mapCart(cart.orderProducts);
       this.postToCart(cart);
@@ -251,6 +247,7 @@ export class CartService {
   }
 
   private manageCart(cartQuantity: number, cartEntity: any) {
+    console.log('cart entity ', cartEntity);
     this.cartEntity$.next(cartEntity);
     this.cartQuantity$.next(cartQuantity);
   }

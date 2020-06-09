@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { GroModule } from './gro/gro.module';
-import { StoreModule } from './store/store.module';
 import { GrosriCommonModule } from './common/common.module';
 import { ApiInterceptor } from './common/interceptors/api.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +22,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     GrosriCommonModule,
     GroModule,
-    StoreModule,
     AppRoutingModule,
     NgbModule,
     NgxSpinnerModule

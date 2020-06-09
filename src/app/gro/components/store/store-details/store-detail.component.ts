@@ -45,7 +45,6 @@ export class GroStoreDetailComponent implements OnInit {
       this._subscriptions.push(
         this._storeItemsService.getItems(id)
           .subscribe((store: any) => {
-            console.log('storeeee ', store);
             if (store.store) {
               this.storeName = store.store.storeName;
               this.isFavoriteStore = store.store.mark_favorite ? true : false;
@@ -96,10 +95,8 @@ export class GroStoreDetailComponent implements OnInit {
       storeId: id,
       mark_favorite: (this.isFavoriteStore ? 0 : 1)
     }
-    console.log('favorite ', favorite);
     this._storeService.markFavorite(favorite).subscribe(() => {
       this.isFavoriteStore = !this.isFavoriteStore;
-      console.log('is faaa ', this.isFavoriteStore);
     });
   }
 

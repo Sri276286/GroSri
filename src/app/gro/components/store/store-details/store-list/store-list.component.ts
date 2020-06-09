@@ -13,12 +13,9 @@ export class StoreListComponent {
   }
 
   onWeightChange(val, item) {
-    console.log('val ', val);
-    console.log('wwwqqqq item ', item);
     // map quantity for already selected weights
     item = this._mapItemOnWeightChange(item);
     let weightEntity = item.storeInventoryProductUnit.find(t => t.weight === val);
-    console.log('weight ', weightEntity);
     item.weight = weightEntity.weight;
     item.price = weightEntity.price;
     item.storeInventoryProductUnitId = weightEntity.id;
@@ -26,8 +23,6 @@ export class StoreListComponent {
   }
 
   addItems(item) {
-    console.log('from adddddd ', JSON.stringify(this._cartService.cartEntity));
-    console.log('wwwww item ', item);
     this._cartService.addItems(item);
   }
 

@@ -18,9 +18,8 @@ export class MenuComponent {
     private spinner: NgxSpinnerService,
     private toast: ToastService,
     private _commonService: CommonService) {
-    // this.user = this._loginService.currentUserValue;
     this._loginService.getCurrentUser().subscribe((user) => {
-      console.log('login user ', user);
+      console.log('current user ', user);
       this.user = user;
     });
     this.isLoggedIn = this._loginService.isLogin();
@@ -35,7 +34,6 @@ export class MenuComponent {
       this.spinner.hide();
       // this.toast.show('Failed to logout');
       this.logoutReset();
-      console.log('Logout failed');
     });
   }
 

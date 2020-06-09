@@ -27,26 +27,23 @@ export class GroCartComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.isLoggedIn = this._commonService.isLogin();
-    console.log('is loggedin ', this.isLoggedIn);
     if (this.isLoggedIn) {
       this._cartService.getCartItems().subscribe((res: any) => {
         this.spinner.hide();
-        console.log('res cart from login ', res);
         this.cartTotal = res && res.billTotal || 0;
         this.items = res && res.orderProducts || [];
         this.storeId = res && res.store && res.store.id;
       });
     }
     this._cartService.cartEntity$.subscribe((res) => {
+      console.log('abc ', res);
       this.spinner.hide();
-      console.log('res cart from cart component ', res)
       this.cartTotal = res && res.billTotal || 0;
       this.items = res && res.orderProducts || [];
     });
   }
 
   addItems(item) {
-    console.log('item adddddd ', item);
     this._cartService.addItems(item);
   }
 
